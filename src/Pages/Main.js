@@ -20,7 +20,9 @@ export default function Main() {
 
   useEffect(() => {
     axios
-      .get("http://localhost:3001/api/account", { withCredentials: true })
+      .get(`${process.env.REACT_APP_API_HOST}/api/account`, {
+        withCredentials: true,
+      })
       .then((res) => {
         setAccount(res.data);
       })
@@ -74,7 +76,12 @@ export default function Main() {
     if (e.target.value === "") return;
     if (e.target.value === account.email) return setEmailColor("green");
     axios
-      .get(`http://localhost:3001/api/account/validate/email/${e.target.value}`)
+      .get(
+        `http://localhost:3001/api/account/validate/email/${e.target.value}`,
+        {
+          withCredentials: true,
+        }
+      )
       .then((res) => {
         setEmailColor(res.data ? "green" : "red");
       })
@@ -110,7 +117,7 @@ export default function Main() {
   function logout() {
     if (window.confirm("Are you sure you want to logout?"))
       axios
-        .get("http://localhost:3001/api/account/logout", {
+        .get(`${process.env.REACT_APP_API_HOST}/api/account/logout`, {
           withCredentials: true,
         })
         .then((res) => {

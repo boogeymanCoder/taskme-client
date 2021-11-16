@@ -16,7 +16,7 @@ export default function Login() {
 
     axios
       .post(
-        "http://localhost:3001/api/account/login",
+        `${process.env.REACT_APP_API_HOST}/api/account/login`,
         {
           username: username,
           password: password,
@@ -29,7 +29,9 @@ export default function Login() {
         }
         console.log("Received after login:", res);
         axios
-          .get("http://localhost:3001/api/account", { withCredentials: true })
+          .get(`${process.env.REACT_APP_API_HOST}/api/account`, {
+            withCredentials: true,
+          })
           .then((res) => {
             console.log(res);
 

@@ -70,15 +70,21 @@ export default function Register() {
   function register(e) {
     e.preventDefault();
     axios
-      .post("http://localhost:3001/api/account", {
-        username: username,
-        password: password,
-        email: email,
-        fullname: fullname,
-        address: address,
-        contact: contact,
-        gender: gender,
-      })
+      .post(
+        `${process.env.REACT_APP_API_HOST}/api/account`,
+        {
+          username: username,
+          password: password,
+          email: email,
+          fullname: fullname,
+          address: address,
+          contact: contact,
+          gender: gender,
+        },
+        {
+          withCredentials: true,
+        }
+      )
       .then((res) => {
         console.log("Registered!");
         navigate("/login");
