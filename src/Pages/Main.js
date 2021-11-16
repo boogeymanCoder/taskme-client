@@ -94,7 +94,7 @@ export default function Main() {
     e.preventDefault();
     axios
       .patch(
-        `http://localhost:3001/api/account/${account._id}`,
+        `${process.env.REACT_APP_API_HOST}/api/account/${account._id}`,
         {
           password: password ? password : null,
           email: email,
