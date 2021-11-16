@@ -22,7 +22,7 @@ export default function Register() {
     if (e.target.value === "") return;
     axios
       .get(
-        `http://localhost:3001/api/account/validate/username/${e.target.value}`,
+        `${process.env.REACT_APP_API_HOST}/api/account/validate/username/${e.target.value}`,
         { withCredentials: true }
       )
       .then((res) => {
@@ -56,7 +56,7 @@ export default function Register() {
     if (e.target.value === "") return;
     axios
       .get(
-        `http://localhost:3001/api/account/validate/email/${e.target.value}`,
+        `${process.env.REACT_APP_API_HOST}/api/account/validate/email/${e.target.value}`,
         { withCredentials: true }
       )
       .then((res) => {

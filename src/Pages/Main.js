@@ -77,7 +77,7 @@ export default function Main() {
     if (e.target.value === account.email) return setEmailColor("green");
     axios
       .get(
-        `http://localhost:3001/api/account/validate/email/${e.target.value}`,
+        `${process.env.REACT_APP_API_HOST}/api/account/validate/email/${e.target.value}`,
         {
           withCredentials: true,
         }
