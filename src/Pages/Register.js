@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useAuthCheck } from "../hooks/auth";
 import { useNavigate } from "react-router";
+import { Link } from "react-router-dom";
 
 export default function Register() {
   const navigate = useNavigate();
@@ -100,6 +101,9 @@ export default function Register() {
   return (
     <>
       <h1>Register</h1>
+      <p>
+        Already a member? <Link to="/login">Login</Link>
+      </p>
       <form onSubmit={register}>
         <input
           style={{ color: usrColor }}

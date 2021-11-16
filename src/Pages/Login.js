@@ -1,6 +1,7 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useAuthCheck } from "../hooks/auth";
+import { Link } from "react-router-dom";
 
 export default function Login() {
   const [username, setUsername] = useState("");
@@ -50,29 +51,35 @@ export default function Login() {
   useEffect(loginAuthCheck, []);
 
   return (
-    <form onSubmit={login}>
-      <input
-        type="text"
-        onChange={(e) => setUsername(e.target.value)}
-        placeholder="Username/Email"
-        required
-      />
-      <br />
-      <input
-        type={showPassword ? "text" : "password"}
-        onChange={(e) => setPassword(e.target.value)}
-        placeholder="Password"
-        required
-      />
-      <br />
-      <input
-        type="checkbox"
-        onChange={(e) => setShowPassword(e.target.checked)}
-        checked={showPassword}
-      />
-      <span>Show Password</span>
-      <br />
-      <input type="submit" value="Login" />
-    </form>
+    <>
+      <h1>Login</h1>
+      <p>
+        New to this site? <Link to="/register">Register</Link>
+      </p>
+      <form onSubmit={login}>
+        <input
+          type="text"
+          onChange={(e) => setUsername(e.target.value)}
+          placeholder="Username/Email"
+          required
+        />
+        <br />
+        <input
+          type={showPassword ? "text" : "password"}
+          onChange={(e) => setPassword(e.target.value)}
+          placeholder="Password"
+          required
+        />
+        <br />
+        <input
+          type="checkbox"
+          onChange={(e) => setShowPassword(e.target.checked)}
+          checked={showPassword}
+        />
+        <span>Show Password</span>
+        <br />
+        <input type="submit" value="Login" />
+      </form>
+    </>
   );
 }
