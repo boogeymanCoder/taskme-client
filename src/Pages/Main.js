@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import { useAuthCheck } from "../hooks/auth";
 
 export default function Main() {
   const [name, setName] = useState("");
@@ -9,6 +10,9 @@ export default function Main() {
   const [tag, setTag] = useState("");
   const [currency, setCurrency] = useState("");
   const [price, setPrice] = useState(0);
+
+  // eslint-disable-next-line
+  useEffect(useAuthCheck("/", "/login"), []);
 
   function handleTags(e) {
     if (e.nativeEvent.data === " ") {
