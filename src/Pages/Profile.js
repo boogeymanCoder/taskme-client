@@ -1,38 +1,55 @@
-import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { useAuthCheck } from "../hooks/auth";
-import { useNavigate } from "react-router";
-import { Link } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { useNonAuthCheck } from "../hooks/auth";
 
-export default function Register() {
-  const navigate = useNavigate();
+export default function Main() {
+  const nonAuthCheck = useNonAuthCheck("/login");
+  const [account, setAccount] = useState();
   const [username, setUsername] = useState("");
-  const [usrColor, setUsrColor] = useState("red");
   const [password, setPassword] = useState("");
   const [passColor, setPassColor] = useState("red");
   const [showPassword, setShowPassword] = useState(false);
   const [email, setEmail] = useState("");
-  const [emailColor, setEmailColor] = useState("red");
+  const [emailColor, setEmailColor] = useState("green");
   const [fullname, setFullname] = useState("");
   const [address, setAddress] = useState("");
   const [contact, setContact] = useState("");
   const [gender, setGender] = useState("");
 
-  function usernameChange(e) {
-    setUsername(e.target.value);
-    if (e.target.value === "") return;
+  useEffect(() => {
     axios
-      .get(
-        `${process.env.REACT_APP_API_HOST}/api/account/validate/username/${e.target.value}`,
-        { withCredentials: true }
-      )
+      .get(`${process.env.REACT_APP_API_HOST}/api/account`, {
+        withCredentials: true,
+      })
       .then((res) => {
-        setUsrColor(res.data ? "green" : "red");
+        setAccount(res.data);
       })
       .catch((err) => {
-        console.log("Something Went Wrong, Cause", err);
+        console.log(err);
       });
-  }
+  }, []);
+
+  useEffect(() => {
+    if (account) {
+      console.log("Account: " + JSON.stringify(account));
+      setUsername(account.username);
+      setEmail(account.email);
+      setFullname(account.fullname);
+      setAddress(account.address);
+      setContact(account.contact);
+      setGender(account.gender);
+    }
+  }, [account]);
+  console.log("username:" + username);
+  console.log("password:" + password);
+  console.log("email:" + email);
+  console.log("fullname:" + fullname);
+  console.log("address:" + address);
+  console.log("contact:" + contact);
+  console.log("gender:" + gender);
+
+  // eslint-disable-next-line
+  useEffect(nonAuthCheck, []);
 
   function passwordChange(e) {
     setPassword(e.target.value);
@@ -55,10 +72,13 @@ export default function Register() {
   function emailChange(e) {
     setEmail(e.target.value);
     if (e.target.value === "") return;
+    if (e.target.value === account.email) return setEmailColor("green");
     axios
       .get(
         `${process.env.REACT_APP_API_HOST}/api/account/validate/email/${e.target.value}`,
-        { withCredentials: true }
+        {
+          withCredentials: true,
+        }
       )
       .then((res) => {
         setEmailColor(res.data ? "green" : "red");
@@ -68,60 +88,67 @@ export default function Register() {
       });
   }
 
-  function register(e) {
+  function update(e) {
     e.preventDefault();
     axios
-      .post(
-        `${process.env.REACT_APP_API_HOST}/api/account`,
+      .patch(
+        `${process.env.REACT_APP_API_HOST}/api/account/${account._id}`,
         {
-          username: username,
-          password: password,
+          password: password ? password : null,
           email: email,
           fullname: fullname,
           address: address,
           contact: contact,
           gender: gender,
         },
-        {
-          withCredentials: true,
-        }
+        { withCredentials: true }
       )
       .then((res) => {
-        console.log("Registered!");
-        navigate("/login");
+        console.log("Updated!");
+        // navigate("/login");
       })
       .catch((err) => {
         console.log("Error:", err);
       });
   }
 
-  // eslint-disable-next-line
-  useEffect(useAuthCheck("/"), []);
+  function logout() {
+    if (window.confirm("Are you sure you want to logout?"))
+      axios
+        .get(`${process.env.REACT_APP_API_HOST}/api/account/logout`, {
+          withCredentials: true,
+        })
+        .then((res) => {
+          if (res.data.message) {
+            nonAuthCheck();
+            alert(res.data.message);
+          }
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+  }
 
-  // TODO use redux to save account and check before rendering jsx
+  if (!account) {
+    return <h1>Loading....</h1>;
+  }
+
   return (
-    <>
-      <h1>Register</h1>
-      <p>
-        Already a member? <Link to="/login">Login</Link>
-      </p>
-      <form onSubmit={register}>
-        <input
-          style={{ color: usrColor }}
-          type="text"
-          onChange={usernameChange}
-          value={username}
-          placeholder="Username"
-          required
-        />
+    <div>
+      <h1>Profile</h1>
+      <input type="button" value="Logout" onClick={logout} />
+      <br />
+      <br />
+
+      <form onSubmit={update}>
+        <span>{username}</span>
         <br />
         <input
           style={{ color: passColor }}
           type={showPassword ? "text" : "password"}
           onChange={passwordChange}
           value={password}
-          placeholder="New Password"
-          required
+          placeholder="Password"
         />
         <br />
         <input
@@ -177,8 +204,8 @@ export default function Register() {
           <option value="Female">Female</option>
         </select>
         <br />
-        <input type="submit" value="Register" />
+        <input type="submit" value="Update" />
       </form>
-    </>
+    </div>
   );
 }

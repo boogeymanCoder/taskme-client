@@ -47,9 +47,10 @@ export default function Login() {
       });
   }
 
-  // // eslint-disable-next-line
+  // eslint-disable-next-line
   useEffect(loginAuthCheck, []);
 
+  // TODO use redux to save account and check before rendering jsx
   return (
     <>
       <h1>Login</h1>
