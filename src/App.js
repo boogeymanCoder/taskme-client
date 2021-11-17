@@ -4,6 +4,7 @@ import Login from "./Pages/Login";
 import Register from "./Pages/Register";
 import Profile from "./Pages/Profile";
 import Main from "./Pages/Main";
+import Inbox from "./Pages/Inbox";
 
 function App() {
   return (
@@ -12,6 +13,7 @@ function App() {
         <Route path="/register" element={<Register />} />
         <Route path="/login" element={<Login />} />
         <Route path="/profile" element={<Profile />} />
+        <Route path="/inbox" element={<Inbox />} />
         <Route path="/" element={<Main />} />
       </Routes>
     </Router>
