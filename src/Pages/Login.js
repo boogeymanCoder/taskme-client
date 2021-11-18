@@ -4,14 +4,14 @@ import { useAuthCheck } from "../hooks/auth";
 import { Link } from "react-router-dom";
 
 export default function Login() {
-  const [username, setUsername] = useState("");
+  const [usernameOrEmail, setUsernameOrEmail] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
 
   const loginAuthCheck = useAuthCheck("/", "/login");
 
   function login(e) {
-    console.log("Username: " + username);
+    console.log("Username: " + usernameOrEmail);
     console.log("Password: " + password);
     e.preventDefault();
 
@@ -19,7 +19,7 @@ export default function Login() {
       .post(
         `${process.env.REACT_APP_API_HOST}/api/account/login`,
         {
-          username: username,
+          usernameOrEmail: usernameOrEmail,
           password: password,
         },
         { withCredentials: true }
@@ -60,7 +60,7 @@ export default function Login() {
       <form onSubmit={login}>
         <input
           type="text"
-          onChange={(e) => setUsername(e.target.value)}
+          onChange={(e) => setUsernameOrEmail(e.target.value)}
           placeholder="Username/Email"
           required
         />
