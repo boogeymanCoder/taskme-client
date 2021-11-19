@@ -14,6 +14,7 @@ export const login = createAsyncThunk(
   }
 );
 
+// TODO add wrong username or email and  password warnings
 export const logout = createAsyncThunk(
   "accountLog/logout",
   async (action, thunkAPI) => {
