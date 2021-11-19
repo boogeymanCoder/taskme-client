@@ -1,69 +1,65 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
 
-var reqUser = null;
-axios
-  .get(`${process.env.REACT_APP_API_HOST}/api/account`, {
-    withCredentials: true,
-  })
-  .then((res) => {
-    reqUser = res.data;
-  })
-  .catch((err) => {
-    console.log(err);
-  });
+export const login = createAsyncThunk(
+  "accountLog/login",
+  async (credentials, thunkAPI) => {
+    return (
+      await axios.post(
+        `${process.env.REACT_APP_API_HOST}/api/account/login`,
+        credentials,
+        { withCredentials: true }
+      )
+    ).data;
+  }
+);
+
+export const logout = createAsyncThunk(
+  "accountLog/logout",
+  async (action, thunkAPI) => {
+    return (
+      await axios.get(`${process.env.REACT_APP_API_HOST}/api/account/logout`, {
+        withCredentials: true,
+      })
+    ).data;
+  }
+);
+
+export const update = createAsyncThunk(
+  "accountLog/update",
+  async (updates, thunkAPI) => {
+    return (
+      await axios.patch(
+        `${process.env.REACT_APP_API_HOST}/api/account/${updates._id}`,
+        updates,
+        {
+          withCredentials: true,
+        }
+      )
+    ).data;
+  }
+);
 
 const accountLog = createSlice({
   name: "accountLog",
   initialState: {
-    account: reqUser,
+    account: null,
   },
-  reducers: {
-    login: (state, action) => {
-      axios
-        .post(
-          `${process.env.REACT_APP_API_HOST}/api/account/login`,
-          {
-            usernameOrEmail: action.payload.usernameOrEmail,
-            password: action.payload.password,
-          },
-          {
-            withCredentials: true,
-          }
-        )
-        .then((res) => {
-          state.account = res.data;
-        })
-        .catch((err) => {
-          console.log(err);
-        });
-    },
-    update: (state, action) => {
-      axios
-        .patch(
-          `${process.env.REACT_APP_API_HOST}/api/account`,
-          action.payload,
-          { withCredentials: true }
-        )
-        .then((res) => {
-          state.account = res.data;
-        })
-        .catch((err) => {
-          console.log(err);
-        });
-    },
-    logout: (state) => {
-      axios
-        .get(`${process.env.REACT_APP_API_HOST}/api/account/logout`)
-        .then((res) => {
-          state.account = null;
-        })
-        .catch((err) => {
-          console.log(err);
-        });
-    },
+  reducers: {},
+  extraReducers: (builder) => {
+    builder.addCase(login.fulfilled, (state, action) => {
+      if (!action.payload.message) state.account = action.payload;
+    });
+
+    builder.addCase(logout.fulfilled, (state, action) => {
+      state.account = null;
+    });
+
+    builder.addCase(update.fulfilled, (state, action) => {
+      console.log("Update:", action.payload);
+      state.account = action.payload;
+    });
   },
 });
 
-export const { login, update, logout } = accountLog.actions;
 export default accountLog.reducer;

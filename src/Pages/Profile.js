@@ -1,10 +1,11 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { useNonAuthCheck } from "../hooks/auth";
+import { useDispatch, useSelector } from "react-redux";
+import { useAuthCheck } from "../hooks/auth";
+import { logout, update } from "../redux/reducers/accountLog";
 
-export default function Main() {
-  const nonAuthCheck = useNonAuthCheck("/login");
-  const [account, setAccount] = useState();
+export default function Profile() {
+  const account = useSelector((state) => state.accountLog.account);
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [passColor, setPassColor] = useState("red");
@@ -15,19 +16,9 @@ export default function Main() {
   const [address, setAddress] = useState("");
   const [contact, setContact] = useState("");
   const [gender, setGender] = useState("");
+  const dispatch = useDispatch();
 
-  useEffect(() => {
-    axios
-      .get(`${process.env.REACT_APP_API_HOST}/api/account`, {
-        withCredentials: true,
-      })
-      .then((res) => {
-        setAccount(res.data);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  }, []);
+  useAuthCheck("/profile", "/login");
 
   useEffect(() => {
     if (account) {
@@ -40,16 +31,6 @@ export default function Main() {
       setGender(account.gender);
     }
   }, [account]);
-  console.log("username:" + username);
-  console.log("password:" + password);
-  console.log("email:" + email);
-  console.log("fullname:" + fullname);
-  console.log("address:" + address);
-  console.log("contact:" + contact);
-  console.log("gender:" + gender);
-
-  // eslint-disable-next-line
-  useEffect(nonAuthCheck, []);
 
   function passwordChange(e) {
     setPassword(e.target.value);
@@ -88,45 +69,25 @@ export default function Main() {
       });
   }
 
-  function update(e) {
+  function updateHandler(e) {
     e.preventDefault();
-    axios
-      .patch(
-        `${process.env.REACT_APP_API_HOST}/api/account/${account._id}`,
-        {
-          password: password ? password : null,
-          email: email,
-          fullname: fullname,
-          address: address,
-          contact: contact,
-          gender: gender,
-        },
-        { withCredentials: true }
-      )
-      .then((res) => {
-        console.log("Updated!");
-        // navigate("/login");
+    dispatch(
+      update({
+        _id: account._id,
+        password: password ? password : null,
+        email: email,
+        fullname: fullname,
+        address: address,
+        contact: contact,
+        gender: gender,
       })
-      .catch((err) => {
-        console.log("Error:", err);
-      });
+    );
   }
 
-  function logout() {
-    if (window.confirm("Are you sure you want to logout?"))
-      axios
-        .get(`${process.env.REACT_APP_API_HOST}/api/account/logout`, {
-          withCredentials: true,
-        })
-        .then((res) => {
-          if (res.data.message) {
-            nonAuthCheck();
-            alert(res.data.message);
-          }
-        })
-        .catch((err) => {
-          console.log(err);
-        });
+  function logoutHandler() {
+    if (window.confirm("Are you sure you want to logout?")) {
+      dispatch(logout());
+    }
   }
 
   if (!account) {
@@ -136,11 +97,11 @@ export default function Main() {
   return (
     <div>
       <h1>Profile</h1>
-      <input type="button" value="Logout" onClick={logout} />
+      <input type="button" value="Logout" onClick={logoutHandler} />
       <br />
       <br />
 
-      <form onSubmit={update}>
+      <form onSubmit={updateHandler}>
         <span>{username}</span>
         <br />
         <input

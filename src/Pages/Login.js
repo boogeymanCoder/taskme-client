@@ -1,63 +1,29 @@
-import axios from "axios";
-import React, { useEffect, useState } from "react";
-import { useAuthCheck } from "../hooks/auth";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { login } from "../redux/reducers/accountLog";
+import { useAuthCheck } from "../hooks/auth";
 
 export default function Login() {
   const [usernameOrEmail, setUsernameOrEmail] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
+  const dispatch = useDispatch();
+  useAuthCheck("/", "/login");
 
-  const loginAuthCheck = useAuthCheck("/", "/login");
-
-  function login(e) {
-    console.log("Username: " + usernameOrEmail);
-    console.log("Password: " + password);
+  async function loginHandler(e) {
     e.preventDefault();
 
-    axios
-      .post(
-        `${process.env.REACT_APP_API_HOST}/api/account/login`,
-        {
-          usernameOrEmail: usernameOrEmail,
-          password: password,
-        },
-        { withCredentials: true }
-      )
-      .then((res) => {
-        if (res.data.message) {
-          return alert(res.data.message);
-        }
-        console.log("Received after login:", res);
-        axios
-          .get(`${process.env.REACT_APP_API_HOST}/api/account`, {
-            withCredentials: true,
-          })
-          .then((res) => {
-            console.log(res);
-
-            loginAuthCheck();
-          })
-          .catch((err) => {
-            console.log(err);
-          });
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+    dispatch(login({ usernameOrEmail: usernameOrEmail, password: password }));
   }
 
-  // eslint-disable-next-line
-  useEffect(loginAuthCheck, []);
-
-  // TODO use redux to save account and check before rendering jsx
   return (
     <>
       <h1>Login</h1>
       <p>
         New to this site? <Link to="/register">Register</Link>
       </p>
-      <form onSubmit={login}>
+      <form onSubmit={loginHandler}>
         <input
           type="text"
           onChange={(e) => setUsernameOrEmail(e.target.value)}

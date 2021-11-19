@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import axios from "axios";
-import { useAuthCheck } from "../hooks/auth";
+// import { useAuthCheck } from "../hooks/auth";
 import { useNavigate } from "react-router";
 import { Link } from "react-router-dom";
 
@@ -96,7 +96,7 @@ export default function Register() {
   }
 
   // eslint-disable-next-line
-  useEffect(useAuthCheck("/"), []);
+  // useEffect(useAuthCheck("/"), []);
 
   // TODO use redux to save account and check before rendering jsx
   return (
