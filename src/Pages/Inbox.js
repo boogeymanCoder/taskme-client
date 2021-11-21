@@ -51,7 +51,6 @@ export default function Inbox() {
 
   function handleMembersBlur(e) {
     addMember();
-    // setMember(e.target.value);
   }
 
   async function createMessage() {

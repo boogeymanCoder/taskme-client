@@ -1,10 +1,16 @@
 import React, { useState } from "react";
+import { useSelector } from "react-redux";
+import { createConversation } from "../api/conversation";
+import { createMessage } from "../api/message";
+import { createTask } from "../api/task";
 import { useAuthCheck } from "../hooks/auth";
 
 export default function Main() {
+  const account = useSelector((state) => state.accountLog.account);
   const [name, setName] = useState("");
   const [location, setLocation] = useState("");
   const [skill, setSkill] = useState("");
+  const [date, setDate] = useState("");
   const [details, setDetails] = useState("");
   const [tags, setTags] = useState([]);
   const [tag, setTag] = useState("");
@@ -13,10 +19,21 @@ export default function Main() {
 
   useAuthCheck("/", "/login");
 
+  function addTag() {
+    const newTag = tag.trim();
+    if (newTag !== "") {
+      if (!tags.includes(newTag)) setTags([...tags, newTag]);
+    }
+    setTag(" ");
+  }
+
+  function handleTagsBlur(e) {
+    addTag();
+  }
+
   function handleTags(e) {
     if (e.nativeEvent.data === " ") {
-      setTags([...tags, tag.trim()]);
-      setTag(" ");
+      addTag();
       return;
     } else if (
       e.nativeEvent.data === null &&
@@ -31,13 +48,45 @@ export default function Main() {
     setTag(e.target.value);
   }
 
+  function handleSubmit(e) {
+    e.preventDefault();
+
+    // create conversation
+    createMessage({
+      replyTo: null,
+      sender: account._id,
+      message: `Welcome to ${name}`,
+      date: new Date(),
+    }).then((response) => {
+      createConversation({
+        name: name,
+        members: [account._id],
+        messages: [response.data],
+      }).then((response) => {
+        createTask({
+          employer: account._id,
+          name: name,
+          details: details,
+          tags: tags,
+          location: location,
+          skill: skill,
+          date: new Date(date),
+          open: true,
+          currency: currency,
+          price: price,
+          ups: [],
+          taskConversation: response.data,
+        });
+      });
+    });
+  }
+
   return (
     <>
       <h2>New Task</h2>
-      <form>
+      <form onSubmit={handleSubmit}>
         <input
           type="text"
-          name="name"
           value={name}
           onChange={(e) => setName(e.target.value)}
           placeholder="Title"
@@ -46,7 +95,6 @@ export default function Main() {
         <br />
         <input
           type="text"
-          name="location"
           value={location}
           onChange={(e) => setLocation(e.target.value)}
           placeholder="Location"
@@ -55,16 +103,25 @@ export default function Main() {
         <br />
         <input
           type="text"
-          name="skill"
           value={skill}
           onChange={(e) => setSkill(e.target.value)}
           placeholder="Skill"
           required
         />
         <br />
+        <input
+          type="datetime-local"
+          value={date}
+          onChange={(e) => {
+            console.log(e.target.value);
+            setDate(e.target.value);
+          }}
+          placeholder="Date"
+          required
+        />
+        <br />
         <textarea
           type="text"
-          name="details"
           value={details}
           onChange={(e) => setDetails(e.target.value)}
           placeholder="Details"
@@ -75,14 +132,13 @@ export default function Main() {
         <br />
         <input
           type="text"
-          name="tags"
           value={tag}
           onInput={handleTags}
+          onBlur={handleTagsBlur}
           placeholder="tag1 tag2 ..."
         />
         <br />
         <select
-          name="currency"
           value={currency}
           onChange={(e) => setCurrency(e.target.value)}
           required
@@ -95,7 +151,6 @@ export default function Main() {
         </select>
         <input
           type="number"
-          name="price"
           value={price}
           onChange={(e) => setPrice(e.target.value)}
           placeholder="Price"
