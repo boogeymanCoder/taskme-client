@@ -22,12 +22,18 @@ export default function Inbox() {
 
   useAuthCheck("/inbox", "/login");
 
-  function handleMembers(e) {
+  function addMember() {
+    const newMem = member.trim();
+    if (newMem !== "") {
+      if (!members.includes(newMem) && newMem !== account.username)
+        setMembers([...members, newMem]);
+    }
+    setMember(" ");
+  }
+
+  function handleMembersInput(e) {
     if (e.nativeEvent.data === " ") {
-      if (member.trim() !== "") {
-        setMembers([...members, member.trim()]);
-      }
-      setMember(" ");
+      addMember();
       return;
     } else if (
       e.nativeEvent.data === null &&
@@ -43,6 +49,11 @@ export default function Inbox() {
     setMember(e.target.value);
   }
 
+  function handleMembersBlur(e) {
+    addMember();
+    // setMember(e.target.value);
+  }
+
   async function createMessage() {
     return axios.post(`${process.env.REACT_APP_API_HOST}/api/message/`, {
       replyTo: null,
@@ -55,7 +66,7 @@ export default function Inbox() {
   async function findMembers() {
     return new Promise(async (resolve, reject) => {
       if (members.length < 1) {
-        return resolve(null);
+        return reject({ response: { data: "No Recipient" } });
       }
       const memberIds = [];
       for (var memberToFind of members) {
@@ -81,26 +92,30 @@ export default function Inbox() {
   async function createConversation(sentMessage, memberIds) {
     return axios.post(`${process.env.REACT_APP_API_HOST}/api/conversation/`, {
       name: name ? name : members.toString(),
-      members: memberIds,
+      members: [...memberIds, account._id],
       messages: [sentMessage],
     });
   }
 
   function sendMessage(e) {
     e.preventDefault();
+    if (members.length < 1) {
+      return alert("Invalid Recipient, No Recipient");
+    }
     createMessage()
       .then((res) => {
         const sentMessage = res.data;
         findMembers()
           .then((memberIds) => {
+            console.log(memberIds);
             createConversation(sentMessage, memberIds)
               .then((res) => {
                 dispatch(fetchInbox(account));
                 console.log(res.data);
               })
               .catch((err) => {
-                alert(err.response.data.message);
-                console.log("conversation error:", err.response);
+                alert(err.response);
+                console.log("conversation error:", err);
               });
           })
           .catch((err) => {
@@ -120,6 +135,8 @@ export default function Inbox() {
           </Link>
         </div>
       ));
+    } else {
+      return <h2>No Messages Yet</h2>;
     }
   }
 
@@ -133,7 +150,8 @@ export default function Inbox() {
           type="text"
           name="members"
           value={member}
-          onInput={handleMembers}
+          onInput={handleMembersInput}
+          onBlur={handleMembersBlur}
           placeholder="Recipient1 Recipient2 ..."
           required
         />
