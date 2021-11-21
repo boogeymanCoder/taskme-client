@@ -1,8 +1,9 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { createConversation } from "../api/conversation";
 import { createMessage } from "../api/message";
-import { createTask } from "../api/task";
+import { createTask, findTaskBatch } from "../api/task";
+import Task from "../Components/Task";
 import { useAuthCheck } from "../hooks/auth";
 
 export default function Main() {
@@ -16,8 +17,16 @@ export default function Main() {
   const [tag, setTag] = useState("");
   const [currency, setCurrency] = useState("");
   const [price, setPrice] = useState(0);
+  const [taskBatch, setTaskBatch] = useState(1);
+  const [tasks, setTasks] = useState([]);
 
   useAuthCheck("/", "/login");
+
+  useEffect(() => {
+    findTaskBatch(20, taskBatch).then((response) => {
+      setTasks(response.data);
+    });
+  }, []);
 
   function addTag() {
     const newTag = tag.trim();
@@ -76,8 +85,17 @@ export default function Main() {
           price: price,
           ups: [],
           taskConversation: response.data,
+        }).then((response) => {
+          setTasks([...tasks, response.data]);
         });
       });
+    });
+  }
+
+  function renderTasks() {
+    return tasks.map((task) => {
+      console.log(task);
+      return <Task task={task} />;
     });
   }
 
@@ -159,6 +177,7 @@ export default function Main() {
         <br />
         <input type="submit" value="Post" />
       </form>
+      {renderTasks()}
     </>
   );
 }
