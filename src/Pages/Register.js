@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import axios from "axios";
-// import { useAuthCheck } from "../hooks/auth";
 import { useNavigate } from "react-router";
 import { Link } from "react-router-dom";
+import { useNonAuthCheck } from "../hooks/auth";
 
 export default function Register() {
   const navigate = useNavigate();
@@ -17,6 +17,8 @@ export default function Register() {
   const [address, setAddress] = useState("");
   const [contact, setContact] = useState("");
   const [gender, setGender] = useState("");
+
+  useNonAuthCheck("/register", "/");
 
   function usernameChange(e) {
     setUsername(e.target.value);
