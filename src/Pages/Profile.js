@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useAuthCheck } from "../hooks/auth";
 import { logout, update } from "../redux/reducers/accountLog";
+import { forgetInbox } from "../redux/reducers/inbox";
 
 export default function Profile() {
   const account = useSelector((state) => state.accountLog.account);
@@ -87,6 +88,7 @@ export default function Profile() {
   function logoutHandler() {
     if (window.confirm("Are you sure you want to logout?")) {
       dispatch(logout());
+      dispatch(forgetInbox());
     }
   }
 
