@@ -31,8 +31,6 @@ export default function Main() {
     setTag(e.target.value);
   }
 
-  // TODO function post()
-
   return (
     <>
       <h2>New Task</h2>

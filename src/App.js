@@ -8,6 +8,8 @@ import Inbox from "./Pages/Inbox";
 import Conversation from "./Pages/Conversation";
 import Navbar from "./Components/Navbar";
 
+// TODO create folder for api calls
+
 function App() {
   return (
     <Router>
