@@ -2,18 +2,17 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { login } from "../redux/reducers/accountLog";
-import { useAuthCheck } from "../hooks/auth";
+import { useNonAuthCheck } from "../hooks/auth";
 
 export default function Login() {
   const [usernameOrEmail, setUsernameOrEmail] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const dispatch = useDispatch();
-  useAuthCheck("/", "/login");
+  useNonAuthCheck("/login", "/");
 
-  async function loginHandler(e) {
+  function loginHandler(e) {
     e.preventDefault();
-
     dispatch(login({ usernameOrEmail: usernameOrEmail, password: password }));
   }
 
