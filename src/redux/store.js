@@ -12,9 +12,11 @@ import { combineReducers } from "redux";
 import { configureStore } from "@reduxjs/toolkit";
 import accountLogReducer from "./reducers/accountLog";
 import { encryptTransform } from "redux-persist-transform-encrypt";
+import inboxReducer from "./reducers/inbox";
 
 const reducers = combineReducers({
   accountLog: accountLogReducer,
+  inbox: inboxReducer,
 });
 
 const persistConfig = {

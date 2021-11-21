@@ -50,6 +50,7 @@ const accountLog = createSlice({
   extraReducers: (builder) => {
     builder.addCase(login.fulfilled, (state, action) => {
       if (!action.payload.message) state.account = action.payload;
+      else alert(action.payload.message);
     });
 
     builder.addCase(logout.fulfilled, (state, action) => {
