@@ -26,9 +26,13 @@ const inbox = createSlice({
     },
   },
   extraReducers: (builder) => {
-    builder.addCase(fetchInbox.fulfilled, (state, action) => {
-      state.inbox = action.payload;
-    });
+    builder
+      .addCase(fetchInbox.fulfilled, (state, action) => {
+        state.inbox = action.payload;
+      })
+      .addCase(fetchInbox.rejected, (state) => {
+        state.inbox = null;
+      });
   },
 });
 
