@@ -2,22 +2,9 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 
 export default function Task({ task }) {
-  const [employer, setEmployer] = useState("");
-
-  useEffect(() => {
-    axios
-      .get(
-        `${process.env.REACT_APP_API_HOST}/api/account/id/${task.employer}`,
-        { withCredentials: true }
-      )
-      .then((response) => {
-        setEmployer(response.data.username);
-      });
-  });
-
   return (
     <p>
-      <span>{`employer: ${employer}`}</span>
+      <span>{`employer: ${task.employer.username}`}</span>
       <br />
       <span>{`name: ${task.name}`}</span>
       <br />
