@@ -16,7 +16,7 @@ export default function Task({ task }) {
   });
 
   return (
-    <p key={task._id}>
+    <p>
       <span>{`employer: ${employer}`}</span>
       <br />
       <span>{`name: ${task.name}`}</span>
@@ -29,7 +29,7 @@ export default function Task({ task }) {
       <br />
       <span>{`skill: ${task.skill}`}</span>
       <br />
-      <span>{`date: ${task.date.toString()}`}</span>
+      <span>{`date: ${task.date}`}</span>
       <br />
       <span>{`open: ${task.open}`}</span>
       <br />

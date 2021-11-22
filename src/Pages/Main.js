@@ -95,7 +95,7 @@ export default function Main() {
   function renderTasks() {
     return tasks.map((task) => {
       console.log(task);
-      return <Task task={task} />;
+      return <Task key={task._id} task={task} />;
     });
   }
 
