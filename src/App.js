@@ -7,6 +7,7 @@ import Main from "./Pages/Main";
 import Inbox from "./Pages/Inbox";
 import Conversation from "./Pages/Conversation";
 import Navbar from "./Components/Navbar";
+import Forum from "./Pages/Forum";
 
 // TODO create folder for api calls
 
@@ -25,6 +26,7 @@ function App() {
             <Route path=":conversationId" element={<Conversation />} />
           </Route>
         </Route>
+        <Route path="/forum" element={<Forum />} />
       </Routes>
     </Router>
   );

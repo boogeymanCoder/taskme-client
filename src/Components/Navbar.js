@@ -20,6 +20,9 @@ export default function Navbar() {
         <li>
           <Link to="/inbox">Inbox</Link>
         </li>
+        <li>
+          <Link to="/forum">Forum</Link>
+        </li>
       </ul>
     </div>
   );
