@@ -16,7 +16,7 @@ export default function Task({ task }) {
       <br />
       <span>{`skill: ${task.skill}`}</span>
       <br />
-      <span>{`date: ${task.date}`}</span>
+      <span>{`date: ${new Date(task.date).toLocaleString()}`}</span>
       <br />
       <span>{`open: ${task.open}`}</span>
       <br />
