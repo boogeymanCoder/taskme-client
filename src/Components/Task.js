@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 
 export default function Task({ task }) {
   return (
-    <p>
+    <div>
       <span>{`employer: ${task.employer.username}`}</span>
       <br />
       <span>{`name: ${task.name}`}</span>
@@ -26,6 +26,6 @@ export default function Task({ task }) {
       <br />
       <span>{`ups: ${task.ups.length}`}</span>
       <br />
-    </p>
+    </div>
   );
 }

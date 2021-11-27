@@ -1,4 +1,6 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { findTaskBatch } from "../api/task";
+import Task from "./Task";
 
 export default function TaskList() {
   const [taskBatch, setTaskBatch] = useState(1);
@@ -10,15 +12,17 @@ export default function TaskList() {
     });
   }, []);
 
-  return tasks.map((task, index) => {
-    console.log(task);
-    return (
-      <span key={task._id}>
-        <p>{`${index}, ${task._id}`}</p>
-        <Task task={task} />
-      </span>
-    );
-  });
+  return (
+    <>
+      {tasks.map((task, index) => {
+        console.log(task);
+        return (
+          <div key={task._id}>
+            <Task task={task} />
+            <br />
+          </div>
+        );
+      })}
+    </>
+  );
 }
-
-// TODO continue 2021-11-22 21:59:58
