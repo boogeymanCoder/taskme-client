@@ -21,6 +21,7 @@ export default function Profile() {
 
   useAuthCheck("/profile", "/login");
 
+  // TODO add task timeline
   useEffect(() => {
     if (account) {
       console.log("Account: " + JSON.stringify(account));

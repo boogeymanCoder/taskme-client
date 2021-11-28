@@ -1,12 +1,34 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
+import { Link } from "react-router-dom";
+import { upToggle } from "../api/task";
 
-export default function Task({ task }) {
+export default function Task({ taskData }) {
+  const account = useSelector((state) => state.accountLog.account);
+  const [task, setTask] = useState(taskData);
+
+  useEffect(() => {
+    for (var property in task) {
+      taskData[property] = task[property];
+    }
+  }, [task]);
+
+  function handleUp(e) {
+    e.target.disabled = true;
+    upToggle(task._id, account._id)
+      .then((response) => {
+        setTask(response.data);
+        e.target.disabled = false;
+      })
+      .catch((error) => console.log("Up Failed"));
+  }
+
   return (
     <div>
-      <span>{`employer: ${task.employer.username}`}</span>
+      <Link to={`/task/${task._id}`}>{task.name}</Link>
       <br />
-      <span>{`name: ${task.name}`}</span>
+      <span>{`employer: ${task.employer.username}`}</span>
       <br />
       <span>{`details: ${task.details}`}</span>
       <br />
@@ -26,6 +48,12 @@ export default function Task({ task }) {
       <br />
       <span>{`ups: ${task.ups.length}`}</span>
       <br />
+      <input
+        type="button"
+        value="up"
+        color={task.ups.includes(account._id) ? "green" : "default"}
+        onClick={handleUp}
+      />
     </div>
   );
 }

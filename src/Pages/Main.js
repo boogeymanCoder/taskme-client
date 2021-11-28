@@ -24,6 +24,7 @@ export default function Main() {
     <>
       <h2>New Task</h2>
       <NewTask tasks={tasks} setTasks={setTasks} />
+      <br />
       <TaskList tasks={tasks} />
     </>
   );

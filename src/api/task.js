@@ -13,3 +13,16 @@ export async function findTaskBatch(batchLimit, batchNum) {
     { withCredentials: true }
   );
 }
+
+export async function findTask(task) {
+  return axios.get(`${process.env.REACT_APP_API_HOST}/api/task/id/${task}`, {
+    withCredentials: true,
+  });
+}
+
+export async function upToggle(task, user) {
+  return axios.put(
+    `${process.env.REACT_APP_API_HOST}/api/task/${task}/up/${user}`,
+    { withCredentials: true }
+  );
+}
