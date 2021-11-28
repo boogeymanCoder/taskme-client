@@ -23,6 +23,9 @@ export default function Navbar() {
         <li>
           <Link to="/forum">Forum</Link>
         </li>
+        <li>
+          <Link to="/appointment">Appointment</Link>
+        </li>
       </ul>
     </div>
   );

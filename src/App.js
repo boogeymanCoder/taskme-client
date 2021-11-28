@@ -8,6 +8,7 @@ import Inbox from "./Pages/Inbox";
 import Conversation from "./Pages/Conversation";
 import Navbar from "./Components/Navbar";
 import Forum from "./Pages/Forum";
+import Appointment from "./Pages/Appointment";
 
 // TODO create folder for api calls
 
@@ -27,6 +28,7 @@ function App() {
           </Route>
         </Route>
         <Route path="/forum" element={<Forum />} />
+        <Route path="/appointment" element={<Appointment />} />
       </Routes>
     </Router>
   );
