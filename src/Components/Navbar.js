@@ -26,6 +26,9 @@ export default function Navbar() {
         <li>
           <Link to="/appointment">Appointment</Link>
         </li>
+        <li>
+          <Link to="/notification">Notification</Link>
+        </li>
       </ul>
     </div>
   );
