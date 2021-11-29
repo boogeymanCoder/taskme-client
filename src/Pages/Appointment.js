@@ -1,9 +1,12 @@
 import React, { useState } from "react";
 import NewSchedule from "../Components/NewSchedule";
 import ScheduleList from "../Components/ScheduleList";
+import { useAuthCheck } from "../hooks/auth";
 
 export default function Appointment() {
   const [date, setDate] = useState("");
+
+  useAuthCheck("/appointment", "/login");
 
   return (
     <div>

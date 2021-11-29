@@ -5,12 +5,16 @@ import {
   getNotificationByOwner,
   notificationRemoveConversation,
 } from "../api/notification";
+import { useAuthCheck } from "../hooks/auth";
 
 export default function Notification() {
   const account = useSelector((state) => state.accountLog.account);
   const [notification, setNotification] = useState();
 
+  useAuthCheck("/notification", "/login");
+
   useEffect(() => {
+    if (!account) return;
     getNotificationByOwner(account._id)
       .then((response) => {
         setNotification(response.data);
