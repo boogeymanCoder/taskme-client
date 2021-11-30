@@ -20,7 +20,7 @@ export async function findTask(task) {
   });
 }
 
-export async function upToggle(task, user) {
+export async function upToggleTask(task, user) {
   return axios.put(
     `${process.env.REACT_APP_API_HOST}/api/task/${task}/up/${user}`,
     { withCredentials: true }

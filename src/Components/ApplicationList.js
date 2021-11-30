@@ -1,28 +1,28 @@
 import React, { useEffect, useState } from "react";
 import { findTaskApplications } from "../api/application";
+import Application from "./Application";
 
-export default function ApplicationList({ task }) {
-  const [applications, setApplications] = useState();
-
-  useEffect(() => {
-    findTaskApplications(task)
-      .then((response) => setApplications(response.data))
-      .catch((error) => console.log(error));
-  }, []);
-
+export default function ApplicationList({
+  task,
+  applications,
+  setApplications,
+}) {
+  console.log("ApplicationList Applications:", applications);
   function renderApplications() {
+    if (applications.length < 1) return <span>No applications</span>;
     return applications.map((application) => {
       return (
-        <div key={application._id}>
-          <span>{`Employee: ${application.employee.username}`}</span> <br />
-          <span>{`Message: ${application.message}`}</span> <br />
-          <span>{`Date: ${new Date(application.date).toUTCString()}`}</span>{" "}
-          <br />
-          <span>{`Accepted: ${application.accepted}`}</span> <br /> <br />
-        </div>
+        <Application
+          key={application._id}
+          task={task}
+          applicationData={application}
+          setApplications={setApplications}
+        />
       );
     });
   }
+
+  console.log(applications);
 
   if (!applications) return <h2>Loading...</h2>;
 

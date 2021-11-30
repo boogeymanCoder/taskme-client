@@ -2,7 +2,7 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import { upToggle } from "../api/task";
+import { upToggleTask } from "../api/task";
 
 export default function Task({ taskData }) {
   const account = useSelector((state) => state.accountLog.account);
@@ -16,7 +16,7 @@ export default function Task({ taskData }) {
 
   function handleUp(e) {
     e.target.disabled = true;
-    upToggle(task._id, account._id)
+    upToggleTask(task._id, account._id)
       .then((response) => {
         setTask(response.data);
         e.target.disabled = false;

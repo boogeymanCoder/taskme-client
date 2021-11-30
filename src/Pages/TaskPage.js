@@ -1,13 +1,31 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router";
+import { findTaskApplications } from "../api/application";
 import { findTask } from "../api/task";
 import ApplicationList from "../Components/ApplicationList";
 import NewApplication from "../Components/NewApplication";
 import Task from "../Components/Task";
+import { useAuthCheck } from "../hooks/auth";
 
 export default function TaskPage() {
   const { taskId } = useParams();
   const [task, setTask] = useState();
+  const [applications, setApplications] = useState();
+
+  useAuthCheck("", "/login");
+
+  useEffect(() => {
+    if (!task) return;
+    console.log(task);
+    findTaskApplications(task._id)
+      .then((response) => {
+        setApplications(response.data);
+      })
+      .catch((error) => {
+        if (error.response.status === 404) setApplications([]);
+        console.log(error);
+      });
+  }, [task]);
 
   useEffect(() => {
     findTask(taskId)
@@ -22,8 +40,16 @@ export default function TaskPage() {
   return (
     <div>
       <Task taskData={task} />
-      <NewApplication task={task} />
-      <ApplicationList task={task._id} />
+      <NewApplication
+        task={task}
+        applications={applications}
+        setApplications={setApplications}
+      />
+      <ApplicationList
+        task={task}
+        applications={applications}
+        setApplications={setApplications}
+      />
     </div>
   );
 }
