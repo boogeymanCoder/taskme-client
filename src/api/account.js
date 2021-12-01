@@ -6,3 +6,9 @@ export async function findAccountByUsername(username) {
     { withCredentials: true }
   );
 }
+
+export async function findAccountById(id) {
+  return axios.get(`${process.env.REACT_APP_API_HOST}/api/account/id/${id}`, {
+    withCredentials: true,
+  });
+}

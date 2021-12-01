@@ -1,7 +1,9 @@
 import React from "react";
+import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 
 export default function Navbar() {
+  const account = useSelector((state) => state.accountLog.account);
   return (
     <div>
       <ul>
@@ -15,7 +17,7 @@ export default function Navbar() {
           <Link to="/">Home</Link>
         </li>
         <li>
-          <Link to="/profile">Profile</Link>
+          <Link to={`/profile/${account._id}`}>Profile</Link>
         </li>
         <li>
           <Link to="/inbox">Inbox</Link>

@@ -28,7 +28,12 @@ export default function Task({ taskData }) {
     <div>
       <Link to={`/task/${task._id}`}>{task.name}</Link>
       <br />
-      <span>{`employer: ${task.employer.username}`}</span>
+      <span>
+        employer:{" "}
+        <Link to={`/profile/${task.employer._id}`}>
+          {task.employer.username}
+        </Link>
+      </span>
       <br />
       <span>{`details: ${task.details}`}</span>
       <br />

@@ -1,11 +1,14 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { useParams } from "react-router";
+import ProfileView from "../Components/ProfileView";
 import { useAuthCheck } from "../hooks/auth";
 import { logout, update } from "../redux/reducers/accountLog";
 import { forgetInbox } from "../redux/reducers/inbox";
 
 export default function Profile() {
+  const { id } = useParams();
   const account = useSelector((state) => state.accountLog.account);
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
@@ -19,7 +22,7 @@ export default function Profile() {
   const [gender, setGender] = useState("");
   const dispatch = useDispatch();
 
-  useAuthCheck("/profile", "/login");
+  useAuthCheck("/login");
 
   // TODO add task timeline
   useEffect(() => {
@@ -96,6 +99,8 @@ export default function Profile() {
   if (!account) {
     return <h1>Loading....</h1>;
   }
+
+  if (id !== account._id) return <ProfileView profile={id} />;
 
   return (
     <div>

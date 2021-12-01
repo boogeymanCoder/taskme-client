@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 import {
   deleteApplication,
   editApplicationMessage,
@@ -89,7 +90,13 @@ export default function Application({
 
   return (
     <div>
-      <span>{`Employee: ${application.employee.username}`}</span> <br />
+      <span>
+        Employee:{" "}
+        <Link to={`/profile/${application.employee._id}`}>
+          {application.employee.username}
+        </Link>
+      </span>
+      <br />
       <span>{`Message: ${application.message}`}</span> <br />
       <span>{`Date: ${new Date(application.date).toLocaleString()}`}</span>{" "}
       <br />
