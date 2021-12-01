@@ -17,7 +17,7 @@ export default function PostList() {
       {posts.map((post, index) => {
         return (
           <div key={post._id}>
-            <Post post={post} />
+            <Post postData={post} />
             <br />
           </div>
         );

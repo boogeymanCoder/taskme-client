@@ -9,6 +9,7 @@ export default function Forum() {
     <div>
       <h1>Forum</h1>
       <NewPost />
+      <br />
       <PostList />
     </div>
   );
