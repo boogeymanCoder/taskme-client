@@ -12,7 +12,7 @@ export default function Main() {
   const [taskBatch, setTaskBatch] = useState(1);
   const [tasks, setTasks] = useState([]);
 
-  useAuthCheck("/", "/login");
+  useAuthCheck("/login");
 
   useEffect(() => {
     findTaskBatch(20, taskBatch).then((response) => {

@@ -9,7 +9,7 @@ export default function Login() {
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const dispatch = useDispatch();
-  useNonAuthCheck("/login", "/");
+  useNonAuthCheck("/");
 
   function loginHandler(e) {
     e.preventDefault();

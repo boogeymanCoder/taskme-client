@@ -23,7 +23,7 @@ export default function Inbox() {
     // TODO change to be triggered by webhook
   }, [account, dispatch]);
 
-  useAuthCheck("/inbox", "/login");
+  useAuthCheck("/login");
 
   // TODO search message
 

@@ -11,7 +11,7 @@ export default function Notification() {
   const account = useSelector((state) => state.accountLog.account);
   const [notification, setNotification] = useState();
 
-  useAuthCheck("/notification", "/login");
+  useAuthCheck("/login");
 
   useEffect(() => {
     if (!account) return;

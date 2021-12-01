@@ -6,7 +6,7 @@ import { useAuthCheck } from "../hooks/auth";
 export default function Appointment() {
   const [date, setDate] = useState("");
 
-  useAuthCheck("/appointment", "/login");
+  useAuthCheck("/login");
 
   return (
     <div>

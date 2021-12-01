@@ -12,7 +12,7 @@ export default function TaskPage() {
   const [task, setTask] = useState();
   const [applications, setApplications] = useState();
 
-  useAuthCheck("", "/login");
+  useAuthCheck("/login");
 
   useEffect(() => {
     if (!task) return;

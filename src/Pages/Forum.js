@@ -4,7 +4,8 @@ import PostList from "../Components/PostList";
 import { useAuthCheck } from "../hooks/auth";
 
 export default function Forum() {
-  useAuthCheck("/forum", "/login");
+  useAuthCheck("/login");
+
   return (
     <div>
       <h1>Forum</h1>

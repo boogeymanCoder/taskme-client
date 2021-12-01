@@ -4,10 +4,13 @@ import { findPost } from "../api/post";
 import CommentList from "../Components/CommentList";
 import NewComment from "../Components/NewComment";
 import Post from "../Components/Post";
+import { useAuthCheck } from "../hooks/auth";
 
 export default function PostPage() {
   const { postId } = useParams();
   const [post, setPost] = useState();
+
+  useAuthCheck("/login");
 
   useEffect(() => {
     findPost(postId)

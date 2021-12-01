@@ -18,7 +18,7 @@ export default function Register() {
   const [contact, setContact] = useState("");
   const [gender, setGender] = useState("");
 
-  useNonAuthCheck("/register", "/");
+  useNonAuthCheck("/");
 
   function usernameChange(e) {
     setUsername(e.target.value);

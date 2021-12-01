@@ -16,9 +16,11 @@ export default function Navbar() {
         <li>
           <Link to="/">Home</Link>
         </li>
-        <li>
-          <Link to={`/profile/${account._id}`}>Profile</Link>
-        </li>
+        {account !== null && (
+          <li>
+            <Link to={`/profile/${account._id}`}>Profile</Link>
+          </li>
+        )}
         <li>
           <Link to="/inbox">Inbox</Link>
         </li>

@@ -3,11 +3,14 @@ import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { useParams } from "react-router";
 import MessageInput from "../Components/MessageInput";
+import { useAuthCheck } from "../hooks/auth";
 
 export default function Conversation() {
   const account = useSelector((state) => state.accountLog.account);
   const { conversationId } = useParams();
   const [conversation, setConversation] = useState(null);
+
+  useAuthCheck("/login");
 
   async function getConversation() {
     return axios.get(
