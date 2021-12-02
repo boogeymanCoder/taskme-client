@@ -1,16 +1,13 @@
 import React, { useEffect, useState } from "react";
-import { findTaskBatch } from "../api/task";
 import Task from "./Task";
 
-export default function TaskList() {
-  const [taskBatch, setTaskBatch] = useState(1);
-  const [tasks, setTasks] = useState();
+export default function TaskList({ taskList }) {
+  const [tasks, setTasks] = useState(taskList);
 
   useEffect(() => {
-    findTaskBatch(20, taskBatch).then((response) => {
-      setTasks(response.data);
-    });
-  }, []);
+    console.log("rerendered:", taskList);
+    setTasks(taskList);
+  }, [taskList]);
 
   if (!tasks) return <h2>Loading...</h2>;
 

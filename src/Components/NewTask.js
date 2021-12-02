@@ -73,7 +73,10 @@ export default function NewTask({ tasks, setTasks }) {
           ups: [],
           taskConversation: response.data,
         }).then((response) => {
-          setTasks([...tasks, response.data]);
+          const updatedTasks = [...tasks, response.data];
+          updatedTasks.sort((a, b) => new Date(b.date) - new Date(a.date));
+
+          setTasks(updatedTasks);
           console.log("conversation created");
         });
       });

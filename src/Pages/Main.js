@@ -1,4 +1,3 @@
-import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { createConversation } from "../api/conversation";
@@ -11,22 +10,27 @@ import { useAuthCheck } from "../hooks/auth";
 
 export default function Main() {
   const [taskBatch, setTaskBatch] = useState(1);
-  const [tasks, setTasks] = useState([]);
+  const [tasks, setTasks] = useState();
 
   useAuthCheck("/login");
 
   useEffect(() => {
     findTaskBatch(20, taskBatch).then((response) => {
+      console.log("tasklist:", response.data);
       setTasks(response.data);
     });
   }, []);
+
+  useEffect(() => {
+    console.log("tasks changed");
+  }, [tasks]);
 
   return (
     <>
       <h2>New Task</h2>
       <NewTask tasks={tasks} setTasks={setTasks} />
       <br />
-      <TaskList tasks={tasks} />
+      <TaskList taskList={tasks} />
     </>
   );
 }
