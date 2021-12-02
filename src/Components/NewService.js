@@ -23,7 +23,7 @@ export default function NewService({ services, setServices }) {
     })
       .then((response) => {
         const updatedServices = [...services, response.data];
-        updatedServices.sort((a, b) => a.name.compareTo(b.name));
+        updatedServices.sort((a, b) => a.name.localeCompare(b.name));
         setServices(updatedServices);
       })
       .catch((error) => console.log(error));
