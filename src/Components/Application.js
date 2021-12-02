@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import {
@@ -18,6 +18,21 @@ export default function Application({
 }) {
   const account = useSelector((state) => state.accountLog.account);
   const [application, setApplication] = useState(applicationData);
+  const [disableAccept, setDisableAccept] = useState(false);
+
+  useEffect(() => {
+    if (application.accepted === false) {
+      if (account._id === task.employer._id) {
+        return setDisableAccept(false);
+      }
+      return setDisableAccept(true);
+    } else {
+      if (account._id === application.employee._id) {
+        return setDisableAccept(false);
+      }
+      return setDisableAccept(true);
+    }
+  }, [application]);
 
   function editHandler(e) {
     const newMessage = prompt("New Message", application.message);
@@ -50,8 +65,27 @@ export default function Application({
   }
 
   function acceptHandler(e) {
-    e.target.disabled = true;
-    toggleAcceptApplication(application._id, !application.accepted)
+    if (application.accepted === false) {
+      if (account._id === task.employer._id) {
+        e.target.disabled = true;
+        acceptToggle(true);
+        e.target.disabled = false;
+        return;
+      }
+      return alert("Only Employers Accept");
+    } else {
+      if (account._id === application.employee._id) {
+        e.target.disabled = true;
+        acceptToggle(false);
+        e.target.disabled = false;
+        return;
+      }
+      return alert("Only Applicant Can Abandon");
+    }
+  }
+
+  function acceptToggle(accepted) {
+    toggleAcceptApplication(application._id, accepted)
       .then((response) => {
         const newApplication = response.data;
         if (newApplication.accepted) {
@@ -60,8 +94,6 @@ export default function Application({
               console.log(response.data);
               setApplication(newApplication);
               console.log("Application Accepted");
-
-              e.target.disabled = false;
             })
             .catch((error) => {
               console.log("Employee Not Added to Task Conversation:", error);
@@ -73,8 +105,6 @@ export default function Application({
               console.log(response.data);
               setApplication(newApplication);
               console.log("Application Rejected");
-
-              e.target.disabled = false;
             })
             .catch((error) => {
               console.log("Employee Not Removed to Task Conversation:", error);
@@ -85,8 +115,6 @@ export default function Application({
         console.log("Application Acceptance Failed:", error);
       });
   }
-
-  if (!application) return null;
 
   return (
     <div>
@@ -100,28 +128,21 @@ export default function Application({
       <span>{`Message: ${application.message}`}</span> <br />
       <span>{`Date: ${new Date(application.date).toLocaleString()}`}</span>{" "}
       <br />
-      {account._id === task.employer._id && (
-        <>
-          <label>Accepted: </label>
-          <input
-            type="checkbox"
-            checked={application.accepted}
-            onChange={acceptHandler}
-          />
-        </>
-      )}
-      {account._id !== task.employer._id && (
-        <>
-          <span>{`Accepted: ${application.accepted}`}</span> <br />
-        </>
-      )}
+      <label>Accepted: </label>
+      <input
+        type="checkbox"
+        checked={application.accepted}
+        onChange={acceptHandler}
+        disabled={disableAccept}
+      />
+      <br />
       {account && account._id === application.employee._id && (
         <>
           <input type="button" value="edit" onClick={editHandler} />
           <input type="button" value="cancel" onClick={cancelHandler} />
+          <br />
         </>
       )}
-      <br />
       <br />
     </div>
   );

@@ -9,7 +9,6 @@ export default function NewTask({ tasks, setTasks }) {
   const [name, setName] = useState("");
   const [location, setLocation] = useState("");
   const [skill, setSkill] = useState("");
-  const [date, setDate] = useState("");
   const [details, setDetails] = useState("");
   const [tags, setTags] = useState([]);
   const [tag, setTag] = useState("");
@@ -67,7 +66,7 @@ export default function NewTask({ tasks, setTasks }) {
           tags: tags,
           location: location,
           skill: skill,
-          date: new Date(date),
+          date: new Date(),
           open: true,
           currency: currency,
           price: price,
@@ -105,17 +104,6 @@ export default function NewTask({ tasks, setTasks }) {
           value={skill}
           onChange={(e) => setSkill(e.target.value)}
           placeholder="Skill"
-          required
-        />
-        <br />
-        <input
-          type="datetime-local"
-          value={date}
-          onChange={(e) => {
-            console.log(e.target.value);
-            setDate(e.target.value);
-          }}
-          placeholder="Date"
           required
         />
         <br />

@@ -13,6 +13,8 @@ export default function NewApplication({
   function applicationHandler(e) {
     e.preventDefault();
 
+    if (!task.open) return alert("Task was Closed");
+
     for (var application of applications) {
       if (application.employee._id === account._id) {
         return alert("Applied Already");
@@ -28,7 +30,7 @@ export default function NewApplication({
       date: new Date(),
       employee: account._id,
       message: message,
-      task: task,
+      task: task._id,
     })
       .then((response) => {
         console.log(response.data);

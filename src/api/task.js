@@ -26,3 +26,12 @@ export async function upToggleTask(task, user) {
     { withCredentials: true }
   );
 }
+
+export async function toggleOpenTask(task, open) {
+  console.log("open:", open);
+  return axios.patch(
+    `${process.env.REACT_APP_API_HOST}/api/task/${task}`,
+    { open: open },
+    { withCredentials: true }
+  );
+}

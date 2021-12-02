@@ -8,6 +8,7 @@ export async function findAccountByUsername(username) {
 }
 
 export async function findAccountById(id) {
+  console.log("api caller received:", id);
   return axios.get(`${process.env.REACT_APP_API_HOST}/api/account/id/${id}`, {
     withCredentials: true,
   });

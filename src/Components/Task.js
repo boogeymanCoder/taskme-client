@@ -2,7 +2,7 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import { upToggleTask } from "../api/task";
+import { toggleOpenTask, upToggleTask } from "../api/task";
 
 export default function Task({ taskData }) {
   const account = useSelector((state) => state.accountLog.account);
@@ -22,6 +22,12 @@ export default function Task({ taskData }) {
         e.target.disabled = false;
       })
       .catch((error) => console.log("Up Failed"));
+  }
+
+  function handleOpen(e) {
+    toggleOpenTask(task._id, !task.open)
+      .then((response) => setTask(response.data))
+      .catch((error) => console.log(error));
   }
 
   return (
@@ -56,9 +62,16 @@ export default function Task({ taskData }) {
       <input
         type="button"
         value="up"
-        color={task.ups.includes(account._id) ? "green" : "default"}
+        style={{ color: task.ups.includes(account._id) ? "green" : "initial" }}
         onClick={handleUp}
       />
+      <br />
+      {account._id === task.employer._id && (
+        <>
+          <span>open: </span>
+          <input type="checkbox" checked={task.open} onChange={handleOpen} />
+        </>
+      )}
     </div>
   );
 }

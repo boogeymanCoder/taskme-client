@@ -33,6 +33,9 @@ export default function Navbar() {
         <li>
           <Link to="/notification">Notification</Link>
         </li>
+        <li>
+          <Link to="/service">Service</Link>
+        </li>
       </ul>
     </div>
   );

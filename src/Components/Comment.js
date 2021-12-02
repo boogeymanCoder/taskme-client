@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import { findComment } from "../api/comment";
 
 export default function Comment({ commentId }) {
@@ -14,7 +15,12 @@ export default function Comment({ commentId }) {
 
   return (
     <div>
-      <span>{`${comment.owner.username}: ${comment.body}`}</span>
+      <span>
+        <Link to={`/profile/${comment.owner._id}`}>
+          {comment.owner.username}
+        </Link>
+        : {comment.body}
+      </span>
       <br />
       <span>{`date: ${comment.date.toLocaleString()}`}</span>
     </div>

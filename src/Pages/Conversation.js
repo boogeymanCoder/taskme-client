@@ -2,6 +2,7 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { useParams } from "react-router";
+import { Link } from "react-router-dom";
 import MessageInput from "../Components/MessageInput";
 import { useAuthCheck } from "../hooks/auth";
 
@@ -35,7 +36,10 @@ export default function Conversation() {
           (member) => member._id == message.sender
         );
         return (
-          <p key={message._id}>{`${sender.username}: ${message.message}`}</p>
+          <p key={message._id}>
+            <Link to={`/profile/${sender._id}`}>{sender.username}</Link>:{" "}
+            {message.message}
+          </p>
         );
       });
     }
