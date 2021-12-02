@@ -12,6 +12,7 @@ import Appointment from "./Pages/Appointment";
 import Notification from "./Pages/Notification";
 import TaskPage from "./Pages/TaskPage";
 import PostPage from "./Pages/PostPage";
+import ServicePage from "./Pages/ServicePage";
 
 // TODO create folder for api calls
 
@@ -35,6 +36,7 @@ function App() {
         <Route path="/notification" element={<Notification />} />
         <Route path="/task/:taskId" element={<TaskPage />} />
         <Route path="/post/:postId" element={<PostPage />} />
+        <Route path="/service" element={<ServicePage />} />
       </Routes>
     </Router>
   );

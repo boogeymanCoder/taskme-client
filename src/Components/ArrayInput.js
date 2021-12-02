@@ -1,7 +1,13 @@
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
 
-export default function ArrayInput({ array, setArray, exempt, placeholder }) {
+export default function ArrayInput({
+  array,
+  setArray,
+  exempt,
+  placeholder,
+  title,
+}) {
   const [element, setElement] = useState("");
 
   function addMember() {
@@ -38,8 +44,10 @@ export default function ArrayInput({ array, setArray, exempt, placeholder }) {
   }
 
   return (
-    <div>
-      <span>To: {array.length > 0 ? array.toString() : "None"}</span>
+    <span>
+      <span>
+        {title}: {array.length > 0 ? array.toString() : "None"}
+      </span>
       <br />
       <input
         type="text"
@@ -50,6 +58,6 @@ export default function ArrayInput({ array, setArray, exempt, placeholder }) {
         placeholder={placeholder}
         required
       />
-    </div>
+    </span>
   );
 }
