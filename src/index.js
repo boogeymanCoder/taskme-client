@@ -25,6 +25,7 @@ function disableReactDevTools() {
   }
 }
 
+console.log("Environment:", process.env.NODE_ENV);
 if (process.env.NODE_ENV === "production") disableReactDevTools();
 
 ReactDOM.render(
