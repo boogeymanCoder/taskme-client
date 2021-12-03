@@ -22,8 +22,6 @@ export default function ProfileUpdate() {
   const [gender, setGender] = useState("");
   const dispatch = useDispatch();
 
-  useAuthCheck("/login");
-
   // TODO add task timeline
   useEffect(() => {
     if (account) {
