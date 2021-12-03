@@ -26,6 +26,8 @@ function disableReactDevTools() {
 }
 
 console.log("Environment:", process.env.NODE_ENV);
+
+console.log("Secret:", process.env.REACT_APP_SECRET);
 if (process.env.NODE_ENV === "production") disableReactDevTools();
 
 ReactDOM.render(
