@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import { findServiceBatch } from "../api/service";
 import NewService from "../Components/NewService";
 import ServiceList from "../Components/ServiceList";
-import { devLog } from "../dev/log";
 import { useAuthCheck } from "../hooks/auth";
 
 export default function ServicesPage() {
@@ -14,7 +13,7 @@ export default function ServicesPage() {
   useEffect(() => {
     findServiceBatch(20, serviceBatch)
       .then((response) => setServices(response.data))
-      .catch((error) => devLog(error));
+      .catch((error) => console.log(error));
 
     return () => setServices(null);
   }, [serviceBatch]);

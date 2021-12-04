@@ -1,5 +1,4 @@
 import axios from "axios";
-import { devLog } from "../dev/log";
 
 export async function createApplication(body) {
   return axios.post(`${process.env.REACT_APP_API_HOST}/api/application`, body, {
@@ -29,7 +28,7 @@ export async function editApplicationMessage(application, message) {
 }
 
 export async function toggleAcceptApplication(application, accepted) {
-  devLog("accepted:", accepted);
+  console.log("accepted:", accepted);
   return axios.patch(
     `${process.env.REACT_APP_API_HOST}/api/application/${application}`,
     { accepted: accepted },

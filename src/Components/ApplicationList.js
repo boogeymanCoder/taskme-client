@@ -1,5 +1,4 @@
 import React from "react";
-import { devLog } from "../dev/log";
 import Application from "./Application";
 
 export default function ApplicationList({
@@ -7,7 +6,7 @@ export default function ApplicationList({
   applications,
   setApplications,
 }) {
-  devLog("ApplicationList Applications:", applications);
+  console.log("ApplicationList Applications:", applications);
   function renderApplications() {
     if (applications.length < 1) return <span>No applications</span>;
     return applications.map((application) => {
@@ -22,7 +21,7 @@ export default function ApplicationList({
     });
   }
 
-  devLog(applications);
+  console.log(applications);
 
   if (!applications) return <h2>Loading...</h2>;
 

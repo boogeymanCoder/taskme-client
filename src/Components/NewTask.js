@@ -3,7 +3,6 @@ import { useSelector } from "react-redux";
 import { createConversation } from "../api/conversation";
 import { createMessage } from "../api/message";
 import { createTask } from "../api/task";
-import { devLog } from "../dev/log";
 
 export default function NewTask({ tasks, setTasks }) {
   const account = useSelector((state) => state.accountLog.account);
@@ -78,7 +77,7 @@ export default function NewTask({ tasks, setTasks }) {
           updatedTasks.sort((a, b) => new Date(b.date) - new Date(a.date));
 
           setTasks(updatedTasks);
-          devLog("conversation created");
+          console.log("conversation created");
         });
       });
     });

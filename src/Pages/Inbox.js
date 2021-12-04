@@ -3,7 +3,6 @@ import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
 import ConversationList from "../Components/ConversationList";
 import NewConversation from "../Components/NewConversation";
-import { devLog } from "../dev/log";
 import { useAuthCheck } from "../hooks/auth";
 import { fetchInbox } from "../redux/reducers/inbox";
 
@@ -14,7 +13,7 @@ export default function Inbox() {
   useAuthCheck("/login");
 
   useEffect(() => {
-    devLog("Fetching Inbox");
+    console.log("Fetching Inbox");
     dispatch(fetchInbox(account));
     // TODO change to be triggered by webhook
   }, [account, dispatch]);

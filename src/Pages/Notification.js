@@ -5,7 +5,6 @@ import {
   getNotificationByOwner,
   notificationRemoveConversation,
 } from "../api/notification";
-import { devLog } from "../dev/log";
 import { useAuthCheck } from "../hooks/auth";
 
 export default function Notification() {
@@ -19,10 +18,10 @@ export default function Notification() {
     getNotificationByOwner(account._id)
       .then((response) => {
         setNotification(response.data);
-        devLog(response.data);
+        console.log(response.data);
       })
       .catch((error) => {
-        devLog(error);
+        console.log(error);
       });
   }, [account]);
 
@@ -35,10 +34,10 @@ export default function Notification() {
           onClick={(e) => {
             notificationRemoveConversation(notification._id, conversation)
               .then((response) =>
-                devLog("Notification Conversation Remove Successful")
+                console.log("Notification Conversation Remove Successful")
               )
               .catch((error) =>
-                devLog("Notification Conversation Remove Failed")
+                console.log("Notification Conversation Remove Failed")
               );
           }}
         >

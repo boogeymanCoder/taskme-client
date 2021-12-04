@@ -3,7 +3,6 @@ import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { createOffer } from "../api/offer";
 import { findTask } from "../api/task";
-import { devLog } from "../dev/log";
 
 // TODO add ups
 
@@ -36,7 +35,7 @@ export default function Service({ service, setOffers }) {
           })
           .catch((error) => {
             alert(error.response.data);
-            devLog(error);
+            console.log(error);
           });
       })
       .catch((error) => {

@@ -3,7 +3,6 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router";
 import ProfileView from "../Components/ProfileView";
-import { devLog } from "../dev/log";
 import { logout, update } from "../redux/reducers/accountLog";
 import { forgetInbox } from "../redux/reducers/inbox";
 
@@ -25,7 +24,7 @@ export default function ProfileUpdate() {
   // TODO add task timeline
   useEffect(() => {
     if (account) {
-      devLog("Account: " + JSON.stringify(account));
+      console.log("Account: " + JSON.stringify(account));
       setUsername(account.username);
       setEmail(account.email);
       setFullname(account.fullname);
@@ -68,7 +67,7 @@ export default function ProfileUpdate() {
         setEmailColor(res.data ? "green" : "red");
       })
       .catch((err) => {
-        devLog("Something Went Wrong, Cause", err);
+        console.log("Something Went Wrong, Cause", err);
       });
   }
 

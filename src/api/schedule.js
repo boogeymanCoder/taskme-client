@@ -1,5 +1,4 @@
 import axios from "axios";
-import { devLog } from "../dev/log";
 
 export async function createSchedule(body) {
   return axios.post(`${process.env.REACT_APP_API_HOST}/api/schedule`, body, {
@@ -8,7 +7,7 @@ export async function createSchedule(body) {
 }
 
 export async function findScheduleBatch(batchLimit, batchNum, from, to) {
-  devLog(
+  console.log(
     "schedule link:",
     `${
       process.env.REACT_APP_API_HOST

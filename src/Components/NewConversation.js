@@ -3,7 +3,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { findAccountByUsername } from "../api/account";
 import { createConversation } from "../api/conversation";
 import { createMessage } from "../api/message";
-import { devLog } from "../dev/log";
 import { fetchInbox } from "../redux/reducers/inbox";
 
 export default function NewConversation() {
@@ -52,14 +51,14 @@ export default function NewConversation() {
       }
       const memberIds = [];
       for (var memberToFind of members) {
-        devLog("finding members");
+        console.log("finding members");
         await findAccountByUsername(memberToFind)
           .then((res) => {
             memberIds.push(res.data._id);
-            devLog("found:", res.data._id);
+            console.log("found:", res.data._id);
           })
           .catch((err) => {
-            devLog(err);
+            console.log(err);
             reject(err);
           });
       }
@@ -82,7 +81,7 @@ export default function NewConversation() {
         const sentMessage = res.data;
         findMembers()
           .then((memberIds) => {
-            devLog(memberIds);
+            console.log(memberIds);
             createConversation({
               name: name ? name : members.toString(),
               members: [...memberIds, account._id],
@@ -90,19 +89,19 @@ export default function NewConversation() {
             })
               .then((res) => {
                 dispatch(fetchInbox(account));
-                devLog(res.data);
+                console.log(res.data);
               })
               .catch((err) => {
                 alert(err.response);
-                devLog("conversation error:", err);
+                console.log("conversation error:", err);
               });
           })
           .catch((err) => {
             alert("Invalid Recipient, " + err.response.data);
-            devLog("members error:", err.response);
+            console.log("members error:", err.response);
           });
       })
-      .catch((err) => devLog("message error:", err));
+      .catch((err) => console.log("message error:", err));
   }
 
   return (

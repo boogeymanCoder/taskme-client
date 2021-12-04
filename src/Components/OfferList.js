@@ -1,10 +1,9 @@
 import React from "react";
-import { devLog } from "../dev/log";
 import Offer from "./Offer";
 
 export default function OfferList({ offers, setOffers }) {
   function renderList() {
-    devLog(offers);
+    console.log(offers);
     return offers.map((offer) => {
       return (
         <span key={offer._id}>

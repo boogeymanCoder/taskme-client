@@ -1,5 +1,4 @@
 import axios from "axios";
-import { devLog } from "../dev/log";
 
 export async function createConversation(body) {
   return axios.post(
@@ -25,7 +24,7 @@ export async function addConversationMember(conversation, member) {
 }
 
 export async function deleteConversationMember(conversation, member) {
-  devLog(member);
+  console.log(member);
   return axios.patch(
     `${process.env.REACT_APP_API_HOST}/api/conversation/${conversation}/members`,
     { member: member },

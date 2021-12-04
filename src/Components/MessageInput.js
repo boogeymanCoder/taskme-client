@@ -1,7 +1,6 @@
 import axios from "axios";
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
-import { devLog } from "../dev/log";
 
 export default function MessageInput({ conversation, setConversation }) {
   const account = useSelector((state) => state.accountLog.account);
@@ -30,16 +29,16 @@ export default function MessageInput({ conversation, setConversation }) {
       .then((res) => {
         putMessage(res.data)
           .then((res) => {
-            devLog(res.data);
+            console.log(res.data);
             setConversation(res.data);
             setMessage("");
           })
           .catch((err) => {
-            devLog("putMessage error:", err);
+            console.log("putMessage error:", err);
           });
       })
       .catch((err) => {
-        devLog("createMessage error:", err);
+        console.log("createMessage error:", err);
       });
   }
 

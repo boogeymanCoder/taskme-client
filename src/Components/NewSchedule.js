@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import { createSchedule } from "../api/schedule";
-import { devLog } from "../dev/log";
 
 export default function NewSchedule() {
   const account = useSelector((state) => state.accountLog.account);
@@ -13,8 +12,8 @@ export default function NewSchedule() {
     e.preventDefault();
 
     createSchedule({ owner: account._id, start: start, end: end, label: label })
-      .then((response) => devLog(response.data))
-      .catch((err) => devLog(err));
+      .then((response) => console.log(response.data))
+      .catch((err) => console.log(err));
   }
 
   return (

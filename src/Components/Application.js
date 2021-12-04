@@ -10,7 +10,6 @@ import {
   addConversationMember,
   deleteConversationMember,
 } from "../api/conversation";
-import { devLog } from "../dev/log";
 
 export default function Application({
   task,
@@ -45,7 +44,7 @@ export default function Application({
         setApplication(response.data);
         e.target.disabled = false;
       })
-      .catch((error) => devLog(error));
+      .catch((error) => console.log(error));
   }
 
   function cancelHandler(e) {
@@ -53,12 +52,12 @@ export default function Application({
       e.target.disabled = true;
       deleteApplication(application._id)
         .then((response) => {
-          devLog("Application Cancelled");
+          console.log("Application Cancelled");
           setApplications((lastState) =>
             lastState.splice(lastState.indexOf(application), 1)
           );
         })
-        .catch((error) => devLog("Application Cancellation Failed"))
+        .catch((error) => console.log("Application Cancellation Failed"))
         .finally(() => {
           e.target.disabled = false;
         });
@@ -92,28 +91,28 @@ export default function Application({
         if (newApplication.accepted) {
           addConversationMember(task.taskConversation, application.employee)
             .then((response) => {
-              devLog(response.data);
+              console.log(response.data);
               setApplication(newApplication);
-              devLog("Application Accepted");
+              console.log("Application Accepted");
             })
             .catch((error) => {
-              devLog("Employee Not Added to Task Conversation:", error);
+              console.log("Employee Not Added to Task Conversation:", error);
             });
         } else {
-          devLog(application.employee);
+          console.log(application.employee);
           deleteConversationMember(task.taskConversation, application.employee)
             .then((response) => {
-              devLog(response.data);
+              console.log(response.data);
               setApplication(newApplication);
-              devLog("Application Rejected");
+              console.log("Application Rejected");
             })
             .catch((error) => {
-              devLog("Employee Not Removed to Task Conversation:", error);
+              console.log("Employee Not Removed to Task Conversation:", error);
             });
         }
       })
       .catch((error) => {
-        devLog("Application Acceptance Failed:", error);
+        console.log("Application Acceptance Failed:", error);
       });
   }
 

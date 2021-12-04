@@ -1,9 +1,8 @@
 import React from "react";
-import { devLog } from "../dev/log";
 import Post from "./Post";
 
 export default function PostList({ posts }) {
-  devLog("PostList rendered");
+  console.log("PostList rendered");
   return (
     <>
       {posts.map((post, index) => {

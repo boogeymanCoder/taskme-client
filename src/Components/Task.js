@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { toggleOpenTask, upToggleTask } from "../api/task";
-import { devLog } from "../dev/log";
 
 export default function Task({ taskData }) {
   const account = useSelector((state) => state.accountLog.account);
@@ -21,13 +20,13 @@ export default function Task({ taskData }) {
         setTask(response.data);
         e.target.disabled = false;
       })
-      .catch((error) => devLog("Up Failed"));
+      .catch((error) => console.log("Up Failed"));
   }
 
   function handleOpen(e) {
     toggleOpenTask(task._id, !task.open)
       .then((response) => setTask(response.data))
-      .catch((error) => devLog(error));
+      .catch((error) => console.log(error));
   }
 
   return (

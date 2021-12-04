@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { findScheduleBatch } from "../api/schedule";
-import { devLog } from "../dev/log";
 import Schedule from "./Schedule";
 
 export default function ScheduleList({ from, to }) {
@@ -9,25 +8,25 @@ export default function ScheduleList({ from, to }) {
   const [enableNext, setEnableNext] = useState(true);
   const [enablePrevious, setEnablePrevious] = useState(true);
 
-  devLog("From:", from);
-  devLog("To:", to);
-  devLog(isNaN(Date.parse(from)) && isNaN(Date.parse(to)));
+  console.log("From:", from);
+  console.log("To:", to);
+  console.log(isNaN(Date.parse(from)) && isNaN(Date.parse(to)));
 
   useEffect(() => {
     // if (isNaN(Date.parse(from)) && isNaN(Date.parse(to)))
-    //   return devLog("both date was NaN");
-    devLog("date not NaN");
+    //   return console.log("both date was NaN");
+    console.log("date not NaN");
     findScheduleBatch(20, scheduleBatch, from, to)
       .then((response) => {
         if (response.data.length < 1) setEnableNext(false);
         else setEnableNext(true);
         setSchedules(response.data);
       })
-      .catch((error) => devLog(error));
+      .catch((error) => console.log(error));
   }, [from, to, scheduleBatch]);
 
   useEffect(() => {
-    devLog("reset batch");
+    console.log("reset batch");
     setScheduleBatch(1);
   }, [from, to]);
 
@@ -36,7 +35,7 @@ export default function ScheduleList({ from, to }) {
     else setEnablePrevious(true);
   }, [scheduleBatch]);
 
-  devLog("Schedules:", schedules);
+  console.log("Schedules:", schedules);
 
   return (
     <div>

@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { upTogglePost } from "../api/post";
-import { devLog } from "../dev/log";
 
 export default function Post({ postData }) {
   const account = useSelector((state) => state.accountLog.account);
@@ -21,7 +20,7 @@ export default function Post({ postData }) {
         setPost(response.data);
         e.target.disabled = false;
       })
-      .catch((error) => devLog("Up Failed"));
+      .catch((error) => console.log("Up Failed"));
   }
 
   return (

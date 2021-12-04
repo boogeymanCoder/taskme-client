@@ -1,6 +1,5 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
-import { devLog } from "../../dev/log";
 
 export const login = createAsyncThunk(
   "accountLog/login",
@@ -59,7 +58,7 @@ const accountLog = createSlice({
     });
 
     builder.addCase(update.fulfilled, (state, action) => {
-      devLog("Update:", action.payload);
+      console.log("Update:", action.payload);
       state.account = action.payload;
     });
   },

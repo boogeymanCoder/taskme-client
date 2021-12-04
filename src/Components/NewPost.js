@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import { createPost } from "../api/post";
-import { devLog } from "../dev/log";
 import ArrayInput from "./ArrayInput";
 
 export default function NewPost({ posts, setPosts }) {
@@ -23,14 +22,14 @@ export default function NewPost({ posts, setPosts }) {
       ups: [],
     })
       .then((response) => {
-        devLog(response.data);
+        console.log(response.data);
         const updatedPosts = [...posts, response.data];
         updatedPosts.sort((a, b) => new Date(b.date) - new Date(a.date));
 
         setPosts(updatedPosts);
       })
       .catch((err) => {
-        devLog(err);
+        console.log(err);
       });
   }
 

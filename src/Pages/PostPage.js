@@ -4,7 +4,6 @@ import { findPost } from "../api/post";
 import CommentList from "../Components/CommentList";
 import NewComment from "../Components/NewComment";
 import Post from "../Components/Post";
-import { devLog } from "../dev/log";
 import { useAuthCheck } from "../hooks/auth";
 
 export default function PostPage() {
@@ -18,7 +17,7 @@ export default function PostPage() {
       .then((response) => {
         setPost(response.data);
       })
-      .catch((error) => devLog(error));
+      .catch((error) => console.log(error));
   }, [postId]);
 
   if (!post) return <h2>Loading...</h2>;
