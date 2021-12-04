@@ -8,6 +8,13 @@ import store from "./redux/store";
 
 const persistor = persistStore(store);
 
+if (
+  process.env.NODE_ENV === "production" ||
+  process.env.REACT_APP_ENABLE_LOG === "false"
+) {
+  console.log = () => {};
+}
+
 function disableReactDevTools() {
   if (typeof window.__REACT_DEVTOOLS_GLOBAL_HOOK__ !== "object") {
     return;
