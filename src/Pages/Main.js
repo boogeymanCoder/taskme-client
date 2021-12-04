@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { findTaskBatch } from "../api/task";
 import NewTask from "../Components/NewTask";
+import Pagination from "../Components/Pagination";
 import TaskList from "../Components/TaskList";
 import { useAuthCheck } from "../hooks/auth";
 
@@ -42,29 +43,13 @@ export default function Main() {
       <br />
       <h2>Task List</h2>
       <TaskList taskList={tasks} />
-      <input
-        type="button"
-        value="Previous"
-        onClick={(e) => {
-          setTaskBatch((lastState) =>
-            lastState > 1 ? lastState - 1 : lastState
-          );
-          setTasks();
-          setEnableNext(false);
-          setEnablePrevious(false);
-        }}
-        disabled={!enablePrevious}
-      />
-      <input
-        type="button"
-        value="Next"
-        onClick={(e) => {
-          setTaskBatch((lastState) => lastState + 1);
-          setTasks();
-          setEnableNext(false);
-          setEnablePrevious(false);
-        }}
-        disabled={!enableNext}
+      <Pagination
+        setPage={setTasks}
+        setPageBatch={setTaskBatch}
+        enablePrevious={enablePrevious}
+        setEnablePrevious={setEnablePrevious}
+        enableNext={enableNext}
+        setEnableNext={setEnableNext}
       />
     </>
   );

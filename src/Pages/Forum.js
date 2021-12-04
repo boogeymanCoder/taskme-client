@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { findPostBatch } from "../api/post";
 import NewPost from "../Components/NewPost";
+import Pagination from "../Components/Pagination";
 import PostList from "../Components/PostList";
 import { useAuthCheck } from "../hooks/auth";
 
@@ -20,7 +21,7 @@ export default function Forum() {
 
       setPosts(response.data);
 
-      if (response.data.length > 0) setEnableNext(true);
+      if (response.data.length === 20) setEnableNext(true);
       else setEnableNext(false);
 
       if (postBatch <= 1) setEnablePrevious(false);
@@ -36,29 +37,13 @@ export default function Forum() {
       <NewPost posts={posts} setPosts={setPosts} />
       <br />
       <PostList posts={posts} />
-      <input
-        type="button"
-        value="Previous"
-        onClick={(e) => {
-          setPostBatch((lastState) =>
-            lastState > 1 ? lastState - 1 : lastState
-          );
-          setPosts();
-          setEnableNext(false);
-          setEnablePrevious(false);
-        }}
-        disabled={!enablePrevious}
-      />
-      <input
-        type="button"
-        value="Next"
-        onClick={(e) => {
-          setPostBatch((lastState) => lastState + 1);
-          setPosts();
-          setEnableNext(false);
-          setEnablePrevious(false);
-        }}
-        disabled={!enableNext}
+      <Pagination
+        setPage={setPosts}
+        setPageBatch={setPostBatch}
+        enablePrevious={enablePrevious}
+        setEnablePrevious={setEnablePrevious}
+        enableNext={enableNext}
+        setEnableNext={setEnableNext}
       />
     </div>
   );

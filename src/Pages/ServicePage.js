@@ -3,6 +3,7 @@ import { useParams } from "react-router";
 import { findServiceOffersBatch } from "../api/offer";
 import { findService } from "../api/service";
 import OfferList from "../Components/OfferList";
+import Pagination from "../Components/Pagination";
 import Service from "../Components/Service";
 import { useAuthCheck } from "../hooks/auth";
 
@@ -11,6 +12,8 @@ export default function ServicePage() {
   const [offerBatch, setOfferBatch] = useState(1);
   const [service, setService] = useState();
   const [offers, setOffers] = useState();
+  const [enableNext, setEnableNext] = useState(false);
+  const [enablePrevious, setEnablePrevious] = useState(false);
 
   useAuthCheck("/login");
 
@@ -35,6 +38,12 @@ export default function ServicePage() {
       .then((response) => {
         if (cancel) return;
         setOffers(response.data);
+
+        if (response.data.length === 20) setEnableNext(true);
+        else setEnableNext(false);
+
+        if (offerBatch <= 1) setEnablePrevious(false);
+        else setEnablePrevious(true);
       })
       .catch((error) => console.log(error));
 
@@ -50,6 +59,14 @@ export default function ServicePage() {
       <h1>Service Page</h1>
       <Service service={service} setOffers={setOffers} />
       <OfferList offers={offers} setOffers={setOffers} />
+      <Pagination
+        setPage={setOffers}
+        setPageBatch={setOfferBatch}
+        enablePrevious={enablePrevious}
+        setEnablePrevious={setEnablePrevious}
+        enableNext={enableNext}
+        setEnableNext={setEnableNext}
+      />
     </div>
   );
 }
