@@ -4,7 +4,8 @@ import ScheduleList from "../Components/ScheduleList";
 import { useAuthCheck } from "../hooks/auth";
 
 export default function Appointment() {
-  const [date, setDate] = useState("");
+  const [from, setFrom] = useState("");
+  const [to, setTo] = useState("");
 
   useAuthCheck("/login");
 
@@ -13,8 +14,13 @@ export default function Appointment() {
       <h1>Appointment</h1>
       <NewSchedule />
       <br />
-      <input type="date" onChange={(e) => setDate(e.target.value)} />
-      <ScheduleList date={date} />
+      <span>From:</span> <br />
+      <input type="date" onChange={(e) => setFrom(e.target.value)} />
+      <br />
+      <span>to:</span> <br />
+      <input type="date" onChange={(e) => setTo(e.target.value)} /> <br />
+      <br />
+      <ScheduleList from={from} to={to} />
     </div>
   );
 }
