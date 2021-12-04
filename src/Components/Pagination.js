@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 
 export default function Pagination({
   setPageBatch,
@@ -7,6 +7,7 @@ export default function Pagination({
   setEnablePrevious,
   enableNext,
   setEnableNext,
+  reverse,
 }) {
   return (
     <span>
@@ -14,9 +15,10 @@ export default function Pagination({
         type="button"
         value="Previous"
         onClick={(e) => {
-          setPageBatch((lastState) =>
-            lastState > 1 ? lastState - 1 : lastState
-          );
+          setPageBatch((lastState) => {
+            if (!reverse) return lastState > 1 ? lastState - 1 : lastState;
+            else return lastState + 1;
+          });
           setPage();
           setEnableNext(false);
           setEnablePrevious(false);
@@ -27,7 +29,10 @@ export default function Pagination({
         type="button"
         value="Next"
         onClick={(e) => {
-          setPageBatch((lastState) => lastState + 1);
+          setPageBatch((lastState) => {
+            if (!reverse) return lastState + 1;
+            else return lastState > 1 ? lastState - 1 : lastState;
+          });
           setPage();
           setEnableNext(false);
           setEnablePrevious(false);
