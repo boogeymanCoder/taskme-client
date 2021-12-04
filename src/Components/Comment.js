@@ -22,7 +22,7 @@ export default function Comment({ commentId }) {
         : {comment.body}
       </span>
       <br />
-      <span>{`date: ${comment.date.toLocaleString()}`}</span>
+      <span>{`date: ${new Date(comment.date).toLocaleString()}`}</span>
     </div>
   );
 }
