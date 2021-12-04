@@ -7,7 +7,10 @@ export function useAuthCheck(alternative) {
   const navigate = useNavigate();
 
   return useEffect(() => {
-    if (!account) navigate(alternative);
+    if (!account) {
+      console.log("navigating to login");
+      navigate(alternative);
+    }
   }, [account]);
 }
 

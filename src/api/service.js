@@ -12,3 +12,9 @@ export async function findServiceBatch(batchLimit, batchNum) {
     { withCredentials: true }
   );
 }
+
+export async function findService(id) {
+  return axios.get(`${process.env.REACT_APP_API_HOST}/api/service/${id}`, {
+    withCredentials: true,
+  });
+}

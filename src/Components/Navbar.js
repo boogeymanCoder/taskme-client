@@ -34,7 +34,7 @@ export default function Navbar() {
           <Link to="/notification">Notification</Link>
         </li>
         <li>
-          <Link to="/service">Service</Link>
+          <Link to="/services">Services</Link>
         </li>
       </ul>
     </div>

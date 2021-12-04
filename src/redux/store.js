@@ -27,7 +27,7 @@ const persistConfig = {
     encryptTransform({
       secretKey: process.env.REACT_APP_SECRET,
       onError: function (error) {
-        // Handle the error.
+        console.log("Encryption Error:", error);
       },
     }),
   ],
