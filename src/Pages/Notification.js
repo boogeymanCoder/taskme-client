@@ -14,15 +14,22 @@ export default function Notification() {
   useAuthCheck("/login");
 
   useEffect(() => {
+    var cancel = false;
+
     if (!account) return;
     getNotificationByOwner(account._id)
       .then((response) => {
+        if (cancel) return;
         setNotification(response.data);
         console.log(response.data);
       })
       .catch((error) => {
         console.log(error);
       });
+
+    return () => {
+      cancel = true;
+    };
   }, [account]);
 
   function renderConversations(conversations) {

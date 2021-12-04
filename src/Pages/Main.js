@@ -13,9 +13,9 @@ export default function Main() {
   useAuthCheck("/login");
 
   useEffect(() => {
-    var subscribe = true;
+    var cancel = false;
     findTaskBatch(20, taskBatch).then((response) => {
-      if (!subscribe) return;
+      if (cancel) return;
       console.log("taskList:", response.data);
       setTasks(response.data);
 
@@ -27,7 +27,7 @@ export default function Main() {
     });
 
     return () => {
-      subscribe = false;
+      cancel = true;
     };
   }, [taskBatch]);
 

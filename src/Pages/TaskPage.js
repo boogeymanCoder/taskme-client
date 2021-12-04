@@ -17,22 +17,34 @@ export default function TaskPage() {
   useEffect(() => {
     if (!task) return;
     console.log(task);
+    var cancel = false;
     findTaskApplications(task._id)
       .then((response) => {
+        if (cancel) return;
         setApplications(response.data);
       })
       .catch((error) => {
         if (error.response.status === 404) setApplications([]);
         console.log(error);
       });
+
+    return () => {
+      cancel = true;
+    };
   }, [task]);
 
   useEffect(() => {
+    var cancel = false;
     findTask(taskId)
       .then((response) => {
+        if (cancel) return;
         setTask(response.data);
       })
       .catch((error) => console.log(error));
+
+    return () => {
+      cancel = true;
+    };
   }, [taskId]);
 
   if (!task) return <h2>Loading...</h2>;

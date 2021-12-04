@@ -14,9 +14,9 @@ export default function Forum() {
   console.log("Forum rendered");
 
   useEffect(() => {
-    var subscribe = true;
+    var cancel = false;
     findPostBatch(20, postBatch).then((response) => {
-      if (!subscribe) return;
+      if (cancel) return;
 
       setPosts(response.data);
 
@@ -27,7 +27,7 @@ export default function Forum() {
       else setEnablePrevious(true);
     });
 
-    return () => (subscribe = false);
+    return () => (cancel = true);
   }, [postBatch]);
 
   return (

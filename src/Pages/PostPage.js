@@ -13,11 +13,17 @@ export default function PostPage() {
   useAuthCheck("/login");
 
   useEffect(() => {
+    var cancel = false;
     findPost(postId)
       .then((response) => {
+        if (cancel) return;
         setPost(response.data);
       })
       .catch((error) => console.log(error));
+
+    return () => {
+      cancel = true;
+    };
   }, [postId]);
 
   if (!post) return <h2>Loading...</h2>;

@@ -97,9 +97,6 @@ export default function Register() {
       });
   }
 
-  // eslint-disable-next-line
-  // useEffect(useAuthCheck("/"), []);
-
   // TODO use redux to save account and check before rendering jsx
   return (
     <>

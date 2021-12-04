@@ -15,14 +15,20 @@ export default function ScheduleList({ from, to }) {
   useEffect(() => {
     // if (isNaN(Date.parse(from)) && isNaN(Date.parse(to)))
     //   return console.log("both date was NaN");
+    var cancel = false;
     console.log("date not NaN");
     findScheduleBatch(20, scheduleBatch, from, to)
       .then((response) => {
+        if (cancel) return;
         if (response.data.length < 1) setEnableNext(false);
         else setEnableNext(true);
         setSchedules(response.data);
       })
       .catch((error) => console.log(error));
+
+    return () => {
+      cancel = true;
+    };
   }, [from, to, scheduleBatch]);
 
   useEffect(() => {

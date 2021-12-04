@@ -6,9 +6,16 @@ export default function Comment({ commentId }) {
   const [comment, setComment] = useState();
 
   useEffect(() => {
+    var cancel = false;
     findComment(commentId)
-      .then((response) => setComment(response.data))
+      .then((response) => {
+        if (cancel) return;
+        setComment(response.data);
+      })
       .catch((error) => console.log(error));
+    return () => {
+      cancel = true;
+    };
   }, [commentId]);
 
   if (!comment) return <h2>Loading...</h2>;

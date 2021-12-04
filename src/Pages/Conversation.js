@@ -12,12 +12,18 @@ export default function Conversation() {
   useAuthCheck("/login");
 
   useEffect(() => {
+    var cancel = false;
     console.log("getConversation called");
     findConversation(conversationId)
       .then((res) => {
+        if (cancel) return;
         setConversation(res.data);
       })
       .catch((err) => console.log(err));
+
+    return () => {
+      cancel = true;
+    };
   }, [conversationId]);
 
   function renderConversation() {

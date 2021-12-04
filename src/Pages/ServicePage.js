@@ -15,16 +15,32 @@ export default function ServicePage() {
   useAuthCheck("/login");
 
   useEffect(() => {
+    var cancel = false;
     findService(serviceId)
-      .then((response) => setService(response.data))
+      .then((response) => {
+        if (cancel) return;
+        setService(response.data);
+      })
       .catch((error) => console.log(error));
+
+    return () => {
+      cancel = true;
+    };
   }, [serviceId]);
 
   useEffect(() => {
     if (!service) return null;
+    var cancel = false;
     findServiceOffersBatch(20, offerBatch, service._id)
-      .then((response) => setOffers(response.data))
+      .then((response) => {
+        if (cancel) return;
+        setOffers(response.data);
+      })
       .catch((error) => console.log(error));
+
+    return () => {
+      cancel = true;
+    };
   }, [service, offerBatch]);
 
   if (!service) return <h2>Loading...</h2>;

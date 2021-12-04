@@ -11,11 +11,17 @@ export default function ServicesPage() {
   useAuthCheck("/login");
 
   useEffect(() => {
+    var cancel = false;
     findServiceBatch(20, serviceBatch)
-      .then((response) => setServices(response.data))
+      .then((response) => {
+        if (cancel) return;
+        setServices(response.data);
+      })
       .catch((error) => console.log(error));
 
-    return () => setServices(null);
+    return () => {
+      cancel = true;
+    };
   }, [serviceBatch]);
 
   return (
