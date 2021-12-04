@@ -1,12 +1,10 @@
-import React, { useState } from "react";
+import React from "react";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import { createApplication } from "../api/application";
-import { deleteOffer, toggleAcceptOffer } from "../api/offer";
+import { deleteOffer } from "../api/offer";
 
-export default function Offer({ offerData, setOffers }) {
+export default function Offer({ offer, setOffers }) {
   const account = useSelector((state) => state.accountLog.account);
-  const [offer, setOffer] = useState(offerData);
 
   function deleteHandler(e) {
     if (
@@ -20,7 +18,7 @@ export default function Offer({ offerData, setOffers }) {
           setOffers((lastState) => {
             const updatedOffers = [...lastState];
             console.log("before remove:", updatedOffers);
-            updatedOffers.splice(updatedOffers.indexOf(offerData), 1);
+            updatedOffers.splice(updatedOffers.indexOf(offer), 1);
             console.log("after remove:", updatedOffers);
             return [...updatedOffers];
           });

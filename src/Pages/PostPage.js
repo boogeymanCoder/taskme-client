@@ -18,7 +18,7 @@ export default function PostPage() {
         setPost(response.data);
       })
       .catch((error) => console.log(error));
-  }, []);
+  }, [postId]);
 
   if (!post) return <h2>Loading...</h2>;
 

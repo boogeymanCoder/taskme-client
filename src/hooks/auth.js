@@ -11,7 +11,7 @@ export function useAuthCheck(alternative) {
       console.log("navigating to login");
       navigate(alternative);
     }
-  }, [account]);
+  }, [account, alternative, navigate]);
 }
 
 export function useNonAuthCheck(alternative) {

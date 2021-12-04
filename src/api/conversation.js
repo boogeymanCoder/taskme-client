@@ -8,6 +8,13 @@ export async function createConversation(body) {
   );
 }
 
+export async function findConversation(conversationId) {
+  return axios.get(
+    `${process.env.REACT_APP_API_HOST}/api/conversation/id/${conversationId}`,
+    { withCredentials: true }
+  );
+}
+
 export async function addConversationMember(conversation, member) {
   return axios.put(
     `${process.env.REACT_APP_API_HOST}/api/conversation/${conversation}/members`,

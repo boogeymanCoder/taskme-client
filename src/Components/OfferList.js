@@ -1,5 +1,4 @@
-import React, { useEffect, useState } from "react";
-import { findServiceOffers } from "../api/offer";
+import React from "react";
 import Offer from "./Offer";
 
 export default function OfferList({ offers, setOffers }) {
@@ -8,7 +7,7 @@ export default function OfferList({ offers, setOffers }) {
     return offers.map((offer) => {
       return (
         <span key={offer._id}>
-          <Offer offerData={offer} setOffers={setOffers} />
+          <Offer offer={offer} setOffers={setOffers} />
           <br />
         </span>
       );

@@ -11,7 +11,7 @@ export default function ScheduleList({ date }) {
     findScheduleBatch(20, scheduleBatch, date).then((response) => {
       setSchedules(response.data);
     });
-  }, [date]);
+  }, [date, scheduleBatch]);
 
   return (
     <div>

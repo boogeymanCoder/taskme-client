@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import { findCommentBatch } from "../api/comment";
 import Comment from "./Comment";
 
 export default function CommentList({ post }) {

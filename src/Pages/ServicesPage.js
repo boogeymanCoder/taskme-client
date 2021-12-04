@@ -14,6 +14,8 @@ export default function ServicesPage() {
     findServiceBatch(20, serviceBatch)
       .then((response) => setServices(response.data))
       .catch((error) => console.log(error));
+
+    return () => setServices(null);
   }, [serviceBatch]);
 
   return (

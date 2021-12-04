@@ -11,7 +11,7 @@ export default function Post({ postData }) {
     for (var property in post) {
       postData[property] = post[property];
     }
-  }, [post]);
+  }, [post, postData]);
 
   function upHandler(e) {
     e.target.disabled = true;

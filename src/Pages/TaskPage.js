@@ -33,7 +33,7 @@ export default function TaskPage() {
         setTask(response.data);
       })
       .catch((error) => console.log(error));
-  }, []);
+  }, [taskId]);
 
   if (!task) return <h2>Loading...</h2>;
 

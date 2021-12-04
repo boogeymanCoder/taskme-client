@@ -1,4 +1,3 @@
-import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
@@ -12,7 +11,7 @@ export default function Task({ taskData }) {
     for (var property in task) {
       taskData[property] = task[property];
     }
-  }, [task]);
+  }, [task, taskData]);
 
   function handleUp(e) {
     e.target.disabled = true;

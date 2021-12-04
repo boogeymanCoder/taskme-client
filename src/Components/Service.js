@@ -1,7 +1,7 @@
 import React from "react";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import { createOffer, findOffer } from "../api/offer";
+import { createOffer } from "../api/offer";
 import { findTask } from "../api/task";
 
 // TODO add ups

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router";
-import { findServiceOffers, findServiceOffersBatch } from "../api/offer";
+import { findServiceOffersBatch } from "../api/offer";
 import { findService } from "../api/service";
 import OfferList from "../Components/OfferList";
 import Service from "../Components/Service";
@@ -18,14 +18,14 @@ export default function ServicePage() {
     findService(serviceId)
       .then((response) => setService(response.data))
       .catch((error) => console.log(error));
-  }, []);
+  }, [serviceId]);
 
   useEffect(() => {
     if (!service) return null;
     findServiceOffersBatch(20, offerBatch, service._id)
       .then((response) => setOffers(response.data))
       .catch((error) => console.log(error));
-  }, [service]);
+  }, [service, offerBatch]);
 
   if (!service) return <h2>Loading...</h2>;
 

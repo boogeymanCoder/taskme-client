@@ -32,7 +32,7 @@ export default function Application({
       }
       return setDisableAccept(true);
     }
-  }, [application]);
+  }, [application, account._id, task.employer._id]);
 
   function editHandler(e) {
     const newMessage = prompt("New Message", application.message);

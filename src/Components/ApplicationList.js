@@ -1,5 +1,4 @@
-import React, { useEffect, useState } from "react";
-import { findTaskApplications } from "../api/application";
+import React from "react";
 import Application from "./Application";
 
 export default function ApplicationList({

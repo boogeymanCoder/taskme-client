@@ -15,8 +15,6 @@ import PostPage from "./Pages/PostPage";
 import ServicesPage from "./Pages/ServicesPage";
 import ServicePage from "./Pages/ServicePage";
 
-// TODO create folder for api calls
-
 function App() {
   return (
     <Router>

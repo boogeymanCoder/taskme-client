@@ -15,7 +15,9 @@ export default function Forum() {
     findPostBatch(20, postBatch).then((response) => {
       setPosts(response.data);
     });
-  }, []);
+
+    return () => setPosts(null);
+  }, [postBatch]);
 
   return (
     <div>

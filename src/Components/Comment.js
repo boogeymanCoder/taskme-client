@@ -9,7 +9,7 @@ export default function Comment({ commentId }) {
     findComment(commentId)
       .then((response) => setComment(response.data))
       .catch((error) => console.log(error));
-  }, []);
+  }, [commentId]);
 
   if (!comment) return <h2>Loading...</h2>;
 

@@ -1,10 +1,6 @@
 import React, { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
-import { createConversation } from "../api/conversation";
-import { createMessage } from "../api/message";
-import { createTask, findTaskBatch } from "../api/task";
+import { findTaskBatch } from "../api/task";
 import NewTask from "../Components/NewTask";
-import Task from "../Components/Task";
 import TaskList from "../Components/TaskList";
 import { useAuthCheck } from "../hooks/auth";
 
@@ -16,10 +12,12 @@ export default function Main() {
 
   useEffect(() => {
     findTaskBatch(20, taskBatch).then((response) => {
-      console.log("tasklist:", response.data);
+      console.log("taskList:", response.data);
       setTasks(response.data);
     });
-  }, []);
+
+    return () => setTasks(null);
+  }, [taskBatch]);
 
   useEffect(() => {
     console.log("tasks changed");

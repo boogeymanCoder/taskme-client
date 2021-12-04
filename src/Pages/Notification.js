@@ -23,7 +23,7 @@ export default function Notification() {
       .catch((error) => {
         console.log(error);
       });
-  }, []);
+  }, [account]);
 
   function renderConversations(conversations) {
     return conversations.map((conversation) => {
