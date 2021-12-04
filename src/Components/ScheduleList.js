@@ -39,6 +39,16 @@ export default function ScheduleList({ from, to }) {
 
   return (
     <div>
+      {schedules.length < 1 && <h2>No Schedule Found</h2>}
+      {schedules.map((schedule, index) => {
+        return (
+          <span key={schedule._id}>
+            <Schedule schedule={schedule} />
+            <br />
+          </span>
+        );
+      })}
+
       <input
         type="button"
         value="<Previous"
@@ -56,16 +66,6 @@ export default function ScheduleList({ from, to }) {
         onClick={(e) => setScheduleBatch((lastBatch) => lastBatch + 1)}
         disabled={!enableNext}
       />
-
-      {schedules.length < 1 && <h2>No Schedule Found</h2>}
-      {schedules.map((schedule, index) => {
-        return (
-          <span key={schedule._id}>
-            <Schedule schedule={schedule} />
-            <br />
-          </span>
-        );
-      })}
     </div>
   );
 }
