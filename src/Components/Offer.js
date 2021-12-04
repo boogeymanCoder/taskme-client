@@ -2,6 +2,7 @@ import React from "react";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { deleteOffer } from "../api/offer";
+import { devLog } from "../dev/log";
 
 export default function Offer({ offer, setOffers }) {
   const account = useSelector((state) => state.accountLog.account);
@@ -14,16 +15,16 @@ export default function Offer({ offer, setOffers }) {
     )
       deleteOffer(offer._id)
         .then(() => {
-          console.log("Deleted Offer");
+          devLog("Deleted Offer");
           setOffers((lastState) => {
             const updatedOffers = [...lastState];
-            console.log("before remove:", updatedOffers);
+            devLog("before remove:", updatedOffers);
             updatedOffers.splice(updatedOffers.indexOf(offer), 1);
-            console.log("after remove:", updatedOffers);
+            devLog("after remove:", updatedOffers);
             return [...updatedOffers];
           });
         })
-        .catch((error) => console.log(error));
+        .catch((error) => devLog(error));
   }
 
   return (

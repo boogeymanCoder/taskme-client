@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import MessageInput from "../Components/MessageInput";
 import { useAuthCheck } from "../hooks/auth";
 import { findConversation } from "../api/conversation";
+import { devLog } from "../dev/log";
 
 export default function Conversation() {
   const { conversationId } = useParams();
@@ -12,12 +13,12 @@ export default function Conversation() {
   useAuthCheck("/login");
 
   useEffect(() => {
-    console.log("getConversation called");
+    devLog("getConversation called");
     findConversation(conversationId)
       .then((res) => {
         setConversation(res.data);
       })
-      .catch((err) => console.log(err));
+      .catch((err) => devLog(err));
   }, [conversationId]);
 
   function renderConversation() {

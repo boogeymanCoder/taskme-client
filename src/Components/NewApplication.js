@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import { createApplication } from "../api/application";
+import { devLog } from "../dev/log";
 
 export default function NewApplication({
   task,
@@ -33,12 +34,12 @@ export default function NewApplication({
       task: task._id,
     })
       .then((response) => {
-        console.log(response.data);
+        devLog(response.data);
         setApplications((lastState) => {
           return [...lastState, response.data];
         });
       })
-      .catch((error) => console.log("Application Failed"));
+      .catch((error) => devLog("Application Failed"));
   }
 
   return (

@@ -1,4 +1,5 @@
 import axios from "axios";
+import { devLog } from "../dev/log";
 
 export async function createPost(body) {
   return axios.post(`${process.env.REACT_APP_API_HOST}/api/post`, body, {
@@ -27,7 +28,7 @@ export async function findPost(post) {
 }
 
 export async function addPostComment(id, comment) {
-  console.log("api caller received: ", comment);
+  devLog("api caller received: ", comment);
   return axios.put(
     `${process.env.REACT_APP_API_HOST}/api/post/${id}/comments`,
     { comment: comment },

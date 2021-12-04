@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router";
+import { devLog } from "../dev/log";
 
 export function useAuthCheck(alternative) {
   const account = useSelector((state) => state.accountLog.account);
@@ -8,7 +9,7 @@ export function useAuthCheck(alternative) {
 
   return useEffect(() => {
     if (!account) {
-      console.log("navigating to login");
+      devLog("navigating to login");
       navigate(alternative);
     }
   }, [account, alternative, navigate]);

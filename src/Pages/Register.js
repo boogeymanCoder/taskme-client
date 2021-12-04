@@ -3,6 +3,7 @@ import axios from "axios";
 import { useNavigate } from "react-router";
 import { Link } from "react-router-dom";
 import { useNonAuthCheck } from "../hooks/auth";
+import { devLog } from "../dev/log";
 
 export default function Register() {
   const navigate = useNavigate();
@@ -32,7 +33,7 @@ export default function Register() {
         setUsrColor(res.data ? "green" : "red");
       })
       .catch((err) => {
-        console.log("Something Went Wrong, Cause", err);
+        devLog("Something Went Wrong, Cause", err);
       });
   }
 
@@ -66,7 +67,7 @@ export default function Register() {
         setEmailColor(res.data ? "green" : "red");
       })
       .catch((err) => {
-        console.log("Something Went Wrong, Cause", err);
+        devLog("Something Went Wrong, Cause", err);
       });
   }
 
@@ -89,11 +90,11 @@ export default function Register() {
         }
       )
       .then((res) => {
-        console.log("Registered!");
+        devLog("Registered!");
         navigate("/login");
       })
       .catch((err) => {
-        console.log("Error:", err);
+        devLog("Error:", err);
       });
   }
 

@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from "react";
+import { devLog } from "../dev/log";
 import Task from "./Task";
 
 export default function TaskList({ taskList }) {
   const [tasks, setTasks] = useState(taskList);
 
   useEffect(() => {
-    console.log("rerendered:", taskList);
+    devLog("rerendered:", taskList);
     setTasks(taskList);
   }, [taskList]);
 
@@ -14,7 +15,7 @@ export default function TaskList({ taskList }) {
   return (
     <>
       {tasks.map((task, index) => {
-        console.log(task);
+        devLog(task);
         return (
           <div key={task._id}>
             <Task taskData={task} />

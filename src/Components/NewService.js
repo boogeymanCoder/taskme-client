@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import { createService } from "../api/service";
+import { devLog } from "../dev/log";
 import ArrayInput from "./ArrayInput";
 
 export default function NewService({ services, setServices }) {
@@ -26,7 +27,7 @@ export default function NewService({ services, setServices }) {
         updatedServices.sort((a, b) => a.name.localeCompare(b.name));
         setServices(updatedServices);
       })
-      .catch((error) => console.log(error));
+      .catch((error) => devLog(error));
   }
 
   return (

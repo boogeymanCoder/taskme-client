@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { findComment } from "../api/comment";
+import { devLog } from "../dev/log";
 
 export default function Comment({ commentId }) {
   const [comment, setComment] = useState();
@@ -8,7 +9,7 @@ export default function Comment({ commentId }) {
   useEffect(() => {
     findComment(commentId)
       .then((response) => setComment(response.data))
-      .catch((error) => console.log(error));
+      .catch((error) => devLog(error));
   }, [commentId]);
 
   if (!comment) return <h2>Loading...</h2>;

@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { findPostBatch } from "../api/post";
 import NewPost from "../Components/NewPost";
 import PostList from "../Components/PostList";
+import { devLog } from "../dev/log";
 import { useAuthCheck } from "../hooks/auth";
 
 export default function Forum() {
@@ -9,7 +10,7 @@ export default function Forum() {
   const [posts, setPosts] = useState([]);
   useAuthCheck("/login");
 
-  console.log("Forum rendered");
+  devLog("Forum rendered");
 
   useEffect(() => {
     findPostBatch(20, postBatch).then((response) => {

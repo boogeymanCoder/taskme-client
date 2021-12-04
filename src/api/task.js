@@ -1,4 +1,5 @@
 import axios from "axios";
+import { devLog } from "../dev/log";
 
 export async function createTask(body) {
   return axios.post(`${process.env.REACT_APP_API_HOST}/api/task`, body, {
@@ -28,7 +29,7 @@ export async function upToggleTask(task, user) {
 }
 
 export async function toggleOpenTask(task, open) {
-  console.log("open:", open);
+  devLog("open:", open);
   return axios.patch(
     `${process.env.REACT_APP_API_HOST}/api/task/${task}`,
     { open: open },

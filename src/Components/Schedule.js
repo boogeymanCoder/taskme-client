@@ -1,5 +1,6 @@
 import React from "react";
 import { deleteSchedule } from "../api/schedule";
+import { devLog } from "../dev/log";
 
 export default function Schedule({ schedule }) {
   function deleteHandler(e) {
@@ -9,8 +10,8 @@ export default function Schedule({ schedule }) {
       )
     )
       deleteSchedule(schedule._id)
-        .then((response) => console.log("Schedule Deleted"))
-        .catch((error) => console.log(error));
+        .then((response) => devLog("Schedule Deleted"))
+        .catch((error) => devLog(error));
   }
 
   return (

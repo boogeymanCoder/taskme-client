@@ -2,12 +2,13 @@ import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import { createComment } from "../api/comment";
 import { addPostComment } from "../api/post";
+import { devLog } from "../dev/log";
 
 export default function NewComment({ post, setPost }) {
   const account = useSelector((state) => state.accountLog.account);
   const [body, setBody] = useState("");
 
-  console.log("New Comment Received:", post);
+  devLog("New Comment Received:", post);
 
   function commentHandler(e) {
     e.preventDefault();
@@ -20,16 +21,16 @@ export default function NewComment({ post, setPost }) {
       ups: [],
     })
       .then((response) => {
-        console.log("Created Comment:", response.data);
+        devLog("Created Comment:", response.data);
         addPostComment(post._id, response.data)
           .then((response) => {
-            console.log("Comment Added:", response.data);
+            devLog("Comment Added:", response.data);
 
             setPost(response.data);
           })
-          .catch((error) => console.log("Comment Adding Failed"));
+          .catch((error) => devLog("Comment Adding Failed"));
       })
-      .catch((error) => console.log(error));
+      .catch((error) => devLog(error));
   }
 
   return (

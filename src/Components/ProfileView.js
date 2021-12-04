@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { findAccountById } from "../api/account";
+import { devLog } from "../dev/log";
 
 export default function ProfileView({ id }) {
   const [profile, setProfile] = useState();
@@ -7,7 +8,7 @@ export default function ProfileView({ id }) {
   useState(() => {
     findAccountById(id)
       .then((response) => setProfile(response.data))
-      .catch((error) => console.log(error));
+      .catch((error) => devLog(error));
   }, [id]);
 
   if (!profile) return <h2>Loading...</h2>;

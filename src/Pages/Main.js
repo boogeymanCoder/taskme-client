@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { findTaskBatch } from "../api/task";
 import NewTask from "../Components/NewTask";
 import TaskList from "../Components/TaskList";
+import { devLog } from "../dev/log";
 import { useAuthCheck } from "../hooks/auth";
 
 export default function Main() {
@@ -12,7 +13,7 @@ export default function Main() {
 
   useEffect(() => {
     findTaskBatch(20, taskBatch).then((response) => {
-      console.log("taskList:", response.data);
+      devLog("taskList:", response.data);
       setTasks(response.data);
     });
 
@@ -20,7 +21,7 @@ export default function Main() {
   }, [taskBatch]);
 
   useEffect(() => {
-    console.log("tasks changed");
+    devLog("tasks changed");
   }, [tasks]);
 
   return (
