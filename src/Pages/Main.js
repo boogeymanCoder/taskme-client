@@ -19,7 +19,7 @@ export default function Main() {
       console.log("taskList:", response.data);
       setTasks(response.data);
 
-      if (response.data.length > 0) setEnableNext(true);
+      if (response.data.length === 20) setEnableNext(true);
       else setEnableNext(false);
 
       if (taskBatch <= 1) setEnablePrevious(false);
@@ -37,9 +37,10 @@ export default function Main() {
 
   return (
     <>
-      <h2>New Task</h2>
+      <h1>New Task</h1>
       <NewTask tasks={tasks} setTasks={setTasks} />
       <br />
+      <h2>Task List</h2>
       <TaskList taskList={tasks} />
       <input
         type="button"

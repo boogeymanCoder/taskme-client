@@ -10,6 +10,7 @@ export default function TaskList({ taskList }) {
   }, [taskList]);
 
   if (!tasks) return <h2>Loading...</h2>;
+  else if (tasks.length < 1) return <h2>No Tasks Found</h2>;
 
   return (
     <>
