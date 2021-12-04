@@ -7,16 +7,28 @@ import { useAuthCheck } from "../hooks/auth";
 export default function Main() {
   const [taskBatch, setTaskBatch] = useState(1);
   const [tasks, setTasks] = useState();
+  const [enableNext, setEnableNext] = useState(false);
+  const [enablePrevious, setEnablePrevious] = useState(false);
 
   useAuthCheck("/login");
 
   useEffect(() => {
+    var subscribe = true;
     findTaskBatch(20, taskBatch).then((response) => {
+      if (!subscribe) return;
       console.log("taskList:", response.data);
       setTasks(response.data);
+
+      if (response.data.length > 0) setEnableNext(true);
+      else setEnableNext(false);
+
+      if (taskBatch <= 1) setEnablePrevious(false);
+      else setEnablePrevious(true);
     });
 
-    return () => setTasks(null);
+    return () => {
+      subscribe = false;
+    };
   }, [taskBatch]);
 
   useEffect(() => {
@@ -29,6 +41,30 @@ export default function Main() {
       <NewTask tasks={tasks} setTasks={setTasks} />
       <br />
       <TaskList taskList={tasks} />
+      <input
+        type="button"
+        value="Previous"
+        onClick={(e) => {
+          setTaskBatch((lastState) =>
+            lastState > 1 ? lastState - 1 : lastState
+          );
+          setTasks();
+          setEnableNext(false);
+          setEnablePrevious(false);
+        }}
+        disabled={!enablePrevious}
+      />
+      <input
+        type="button"
+        value="Next"
+        onClick={(e) => {
+          setTaskBatch((lastState) => lastState + 1);
+          setTasks();
+          setEnableNext(false);
+          setEnablePrevious(false);
+        }}
+        disabled={!enableNext}
+      />
     </>
   );
 }
