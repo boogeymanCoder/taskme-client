@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { findAccountById } from "../api/account";
+import { findAccountById } from "../../api/account";
 
 export default function Comment({ comment }) {
   const [owner, setOwner] = useState();

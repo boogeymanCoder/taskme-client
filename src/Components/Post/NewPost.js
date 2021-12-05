@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
-import { createPost } from "../api/post";
-import ArrayInput from "./ArrayInput";
+import { createPost } from "../../api/post";
+import ArrayInput from "../ArrayInput";
 
 export default function NewPost({ posts, setPosts }) {
   const [title, setTitle] = useState("");

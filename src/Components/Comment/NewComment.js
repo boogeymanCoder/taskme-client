@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
-import { createComment } from "../api/comment";
-import { addPostComment } from "../api/post";
+import { createComment } from "../../api/comment";
+import { addPostComment } from "../../api/post";
 
 export default function NewComment({ post, setPost }) {
   const account = useSelector((state) => state.accountLog.account);

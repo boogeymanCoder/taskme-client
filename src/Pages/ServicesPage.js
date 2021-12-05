@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { findServiceBatch } from "../api/service";
-import NewService from "../Components/NewService";
+import NewService from "../Components/Service/NewService";
 import Pagination from "../Components/Pagination";
-import ServiceList from "../Components/ServiceList";
+import ServiceList from "../Components/Service/ServiceList";
 import { useAuthCheck } from "../hooks/auth";
 
 export default function ServicesPage() {

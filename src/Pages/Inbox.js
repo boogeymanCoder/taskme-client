@@ -1,8 +1,8 @@
 import React, { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
-import ConversationList from "../Components/ConversationList";
-import NewConversation from "../Components/NewConversation";
+import ConversationList from "../Components/Conversation/ConversationList";
+import NewConversation from "../Components/Conversation/NewConversation";
 import { useAuthCheck } from "../hooks/auth";
 import { fetchInbox } from "../redux/reducers/inbox";
 

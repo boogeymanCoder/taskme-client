@@ -1,5 +1,5 @@
 import React from "react";
-import { deleteSchedule } from "../api/schedule";
+import { deleteSchedule } from "../../api/schedule";
 
 export default function Schedule({ schedule }) {
   function deleteHandler(e) {

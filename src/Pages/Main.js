@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { findTaskBatch } from "../api/task";
-import NewTask from "../Components/NewTask";
+import NewTask from "../Components/Task/NewTask";
 import Pagination from "../Components/Pagination";
-import TaskList from "../Components/TaskList";
+import TaskList from "../Components/Task/TaskList";
 import { useAuthCheck } from "../hooks/auth";
 
 export default function Main() {

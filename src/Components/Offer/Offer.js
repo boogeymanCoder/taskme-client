@@ -1,7 +1,7 @@
 import React from "react";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import { deleteOffer } from "../api/offer";
+import { deleteOffer } from "../../api/offer";
 
 export default function Offer({ offer, setOffers }) {
   const account = useSelector((state) => state.accountLog.account);

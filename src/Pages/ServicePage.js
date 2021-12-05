@@ -2,9 +2,9 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router";
 import { findServiceOffersBatch } from "../api/offer";
 import { findService } from "../api/service";
-import OfferList from "../Components/OfferList";
+import OfferList from "../Components/Offer/OfferList";
 import Pagination from "../Components/Pagination";
-import Service from "../Components/Service";
+import Service from "../Components/Service/Service";
 import { useAuthCheck } from "../hooks/auth";
 
 export default function ServicePage() {

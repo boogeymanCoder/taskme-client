@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router";
 import { findPost } from "../api/post";
-import CommentList from "../Components/CommentList";
-import NewComment from "../Components/NewComment";
+import CommentList from "../Components/Comment/CommentList";
+import NewComment from "../Components/Comment/NewComment";
 import Pagination from "../Components/Pagination";
-import Post from "../Components/Post";
+import Post from "../Components/Post/Post";
 import { useAuthCheck } from "../hooks/auth";
 
 export default function PostPage() {

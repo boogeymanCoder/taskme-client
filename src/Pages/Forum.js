@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { findPostBatch } from "../api/post";
-import NewPost from "../Components/NewPost";
+import NewPost from "../Components/Post/NewPost";
 import Pagination from "../Components/Pagination";
-import PostList from "../Components/PostList";
+import PostList from "../Components/Post/PostList";
 import { useAuthCheck } from "../hooks/auth";
 
 export default function Forum() {

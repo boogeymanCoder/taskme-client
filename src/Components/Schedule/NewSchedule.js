@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
-import { createSchedule } from "../api/schedule";
+import { createSchedule } from "../../api/schedule";
 
 export default function NewSchedule() {
   const account = useSelector((state) => state.accountLog.account);

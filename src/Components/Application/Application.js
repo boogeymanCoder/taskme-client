@@ -5,11 +5,11 @@ import {
   deleteApplication,
   editApplicationMessage,
   toggleAcceptApplication,
-} from "../api/application";
+} from "../../api/application";
 import {
   addConversationMember,
   deleteConversationMember,
-} from "../api/conversation";
+} from "../../api/conversation";
 
 export default function Application({
   task,

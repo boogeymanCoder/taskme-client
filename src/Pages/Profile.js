@@ -1,8 +1,8 @@
 import React from "react";
 import { useSelector } from "react-redux";
 import { useParams } from "react-router";
-import ProfileUpdate from "../Components/ProfileUpdate";
-import ProfileView from "../Components/ProfileView";
+import ProfileUpdate from "../Components/Profile/ProfileUpdate";
+import ProfileView from "../Components/Profile/ProfileView";
 import { useAuthCheck } from "../hooks/auth";
 
 export default function Profile() {

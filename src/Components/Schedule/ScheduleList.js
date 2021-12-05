@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { findScheduleBatch } from "../api/schedule";
+import { findScheduleBatch } from "../../api/schedule";
 import Schedule from "./Schedule";
 
 export default function ScheduleList({ from, to }) {

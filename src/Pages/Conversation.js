@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router";
-import MessageInput from "../Components/MessageInput";
+import MessageInput from "../Components/Message/MessageInput";
 import { useAuthCheck } from "../hooks/auth";
 import { findConversation } from "../api/conversation";
 import Pagination from "../Components/Pagination";
-import MessageList from "../Components/MessageList";
+import MessageList from "../Components/Message/MessageList";
 
 export default function Conversation() {
   const { conversationId } = useParams();

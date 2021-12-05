@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import Pagination from "./Pagination";
+import Pagination from "../Pagination";
 
 export default function ConversationList() {
   const inbox = useSelector((state) => state.inbox.inbox);

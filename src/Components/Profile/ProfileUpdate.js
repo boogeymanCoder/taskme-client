@@ -1,13 +1,10 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useParams } from "react-router";
-import ProfileView from "../Components/ProfileView";
-import { logout, update } from "../redux/reducers/accountLog";
-import { forgetInbox } from "../redux/reducers/inbox";
+import { logout, update } from "../../redux/reducers/accountLog";
+import { forgetInbox } from "../../redux/reducers/inbox";
 
 export default function ProfileUpdate() {
-  const { id } = useParams();
   const account = useSelector((state) => state.accountLog.account);
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
@@ -96,8 +93,6 @@ export default function ProfileUpdate() {
   if (!account) {
     return <h1>Loading....</h1>;
   }
-
-  if (id !== account._id) return <ProfileView id={id} />;
 
   return (
     <div>

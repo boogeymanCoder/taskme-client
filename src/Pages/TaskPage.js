@@ -2,10 +2,10 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router";
 import { findTaskApplicationsBatch } from "../api/application";
 import { findTask } from "../api/task";
-import ApplicationList from "../Components/ApplicationList";
-import NewApplication from "../Components/NewApplication";
+import ApplicationList from "../Components/Application/ApplicationList";
+import NewApplication from "../Components/Application/NewApplication";
 import Pagination from "../Components/Pagination";
-import Task from "../Components/Task";
+import Task from "../Components/Task/Task";
 import { useAuthCheck } from "../hooks/auth";
 
 export default function TaskPage() {

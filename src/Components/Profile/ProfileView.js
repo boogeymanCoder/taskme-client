@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { findAccountById } from "../api/account";
+import { findAccountById } from "../../api/account";
 
 export default function ProfileView({ id }) {
   const [profile, setProfile] = useState();

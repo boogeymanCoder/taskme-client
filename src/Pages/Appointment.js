@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import NewSchedule from "../Components/NewSchedule";
-import ScheduleList from "../Components/ScheduleList";
+import NewSchedule from "../Components/Schedule/NewSchedule";
+import ScheduleList from "../Components/Schedule/ScheduleList";
 import { useAuthCheck } from "../hooks/auth";
 
 export default function Appointment() {

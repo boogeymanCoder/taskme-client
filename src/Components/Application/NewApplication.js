@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
-import { createApplication } from "../api/application";
+import { createApplication } from "../../api/application";
 
 export default function NewApplication({
   task,

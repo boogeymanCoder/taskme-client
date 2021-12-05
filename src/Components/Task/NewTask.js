@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
-import { createConversation } from "../api/conversation";
-import { createMessage } from "../api/message";
-import { createTask } from "../api/task";
+import { createConversation } from "../../api/conversation";
+import { createMessage } from "../../api/message";
+import { createTask } from "../../api/task";
 
 export default function NewTask({ tasks, setTasks }) {
   const account = useSelector((state) => state.accountLog.account);

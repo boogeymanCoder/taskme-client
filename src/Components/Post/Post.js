@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import { upTogglePost } from "../api/post";
+import { upTogglePost } from "../../api/post";
 
 export default function Post({ postData }) {
   const account = useSelector((state) => state.accountLog.account);

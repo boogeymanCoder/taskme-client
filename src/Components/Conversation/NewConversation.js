@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { findAccountByUsername } from "../api/account";
-import { createConversation } from "../api/conversation";
-import { createMessage } from "../api/message";
-import { fetchInbox } from "../redux/reducers/inbox";
+import { findAccountByUsername } from "../../api/account";
+import { createConversation } from "../../api/conversation";
+import { createMessage } from "../../api/message";
+import { fetchInbox } from "../../redux/reducers/inbox";
 
 export default function NewConversation() {
   const account = useSelector((state) => state.accountLog.account);

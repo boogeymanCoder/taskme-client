@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import { toggleOpenTask, upToggleTask } from "../api/task";
+import { toggleOpenTask, upToggleTask } from "../../api/task";
 
 export default function Task({ taskData }) {
   const account = useSelector((state) => state.accountLog.account);
