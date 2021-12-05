@@ -1,21 +1,17 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import Comment from "./Comment";
 
-export default function CommentList({ post }) {
-  const [comments, setComments] = useState(post.comments);
-  console.log(post.comments);
-
-  useEffect(() => {
-    setComments(post.comments);
-  }, [post]);
+export default function CommentList({ comments }) {
+  if (!comments) return <h2>No Comments Found</h2>;
+  else if (comments.length < 1) return <h2>Loading...</h2>;
 
   return (
     <div>
       <p>Comment List</p>
       {comments.map((comment, index) => {
         return (
-          <div key={comment}>
-            <Comment commentId={comment} />
+          <div key={comment._id}>
+            <Comment comment={comment} />
             <br />
           </div>
         );

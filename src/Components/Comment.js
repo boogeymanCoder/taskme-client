@@ -1,32 +1,33 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { findComment } from "../api/comment";
+import { findAccountById } from "../api/account";
 
-export default function Comment({ commentId }) {
-  const [comment, setComment] = useState();
+export default function Comment({ comment }) {
+  const [owner, setOwner] = useState();
 
   useEffect(() => {
     var cancel = false;
-    findComment(commentId)
+    findAccountById(comment.owner)
       .then((response) => {
         if (cancel) return;
-        setComment(response.data);
+        setOwner(response.data);
       })
-      .catch((error) => console.log(error));
+      .catch((error) => {
+        console.log(error);
+      });
+
     return () => {
       cancel = true;
     };
-  }, [commentId]);
+  }, [comment]);
 
-  if (!comment) return <h2>Loading...</h2>;
+  if (!comment || !owner) return <h2>Loading...</h2>;
 
   return (
     <div>
       <span>
-        <Link to={`/profile/${comment.owner._id}`}>
-          {comment.owner.username}
-        </Link>
-        : {comment.body}
+        <Link to={`/profile/${owner._id}`}>{owner.username}</Link>:{" "}
+        {comment.body}
       </span>
       <br />
       <span>{`date: ${new Date(comment.date).toLocaleString()}`}</span>
