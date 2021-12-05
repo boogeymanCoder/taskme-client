@@ -19,6 +19,13 @@ export async function findTaskApplications(task) {
   );
 }
 
+export async function findTaskApplicationsBatch(batchLimit, batchNum, taskId) {
+  return axios.get(
+    `${process.env.REACT_APP_API_HOST}/api/application/batch/${batchLimit}/${batchNum}/${taskId}`,
+    { withCredentials: true }
+  );
+}
+
 export async function editApplicationMessage(application, message) {
   return axios.patch(
     `${process.env.REACT_APP_API_HOST}/api/application/${application}`,

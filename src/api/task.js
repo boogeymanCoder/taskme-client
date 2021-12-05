@@ -6,7 +6,6 @@ export async function createTask(body) {
   });
 }
 
-// TODO find n documents at a time
 export async function findTaskBatch(batchLimit, batchNum) {
   return axios.get(
     `${process.env.REACT_APP_API_HOST}/api/task/batch/${batchLimit}/${batchNum}`,
