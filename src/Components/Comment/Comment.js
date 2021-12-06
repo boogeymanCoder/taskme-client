@@ -4,9 +4,11 @@ import { findAccountById } from "../../api/account";
 
 export default function Comment({ comment }) {
   const [owner, setOwner] = useState();
+  console.log("Comment:", comment);
 
   useEffect(() => {
     var cancel = false;
+
     findAccountById(comment.owner)
       .then((response) => {
         if (cancel) return;

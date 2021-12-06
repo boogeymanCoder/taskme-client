@@ -14,11 +14,25 @@ export async function createComment(body) {
 /**
  *
  * @param {string} commentId Comment._id
- * @returns
+ * @returns axios Promise
  */
 export async function findComment(commentId) {
   return axios.get(
     `${process.env.REACT_APP_API_HOST}/api/comment/${commentId}`,
+    {
+      withCredentials: true,
+    }
+  );
+}
+
+/**
+ *
+ * @param {string} commentId Comment._id
+ * @returns axios Promise
+ */
+export async function deletePostComments(postId) {
+  return axios.delete(
+    `${process.env.REACT_APP_API_HOST}/api/comment/post/${postId}`,
     {
       withCredentials: true,
     }

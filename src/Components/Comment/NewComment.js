@@ -8,6 +8,7 @@ export default function NewComment({ post, setPost }) {
   const [body, setBody] = useState("");
 
   console.log("New Comment Received:", post);
+  console.log("Account:", account);
 
   function commentHandler(e) {
     e.preventDefault();

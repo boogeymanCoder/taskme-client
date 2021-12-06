@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Comment from "./Comment";
 
 export default function CommentList({ comments }) {
@@ -8,7 +8,7 @@ export default function CommentList({ comments }) {
   return (
     <div>
       <p>Comment List</p>
-      {comments.map((comment, index) => {
+      {comments.map((comment) => {
         return (
           <div key={comment._id}>
             <Comment comment={comment} />

@@ -25,6 +25,7 @@ export default function PostPage() {
     findPost(postId)
       .then((response) => {
         if (cancel) return;
+        console.log("Post Received:", response.data);
         setPost(response.data);
       })
       .catch((error) => console.log(error));
@@ -40,6 +41,7 @@ export default function PostPage() {
       var updatedComments = [...post.comments];
 
       console.log("Before slice:", updatedComments);
+      updatedComments.sort((a, b) => new Date(b.date) - new Date(a.date));
       updatedComments = updatedComments.slice(
         (commentBatch - 1) * 20,
         commentBatch * 20
@@ -52,7 +54,7 @@ export default function PostPage() {
       if (commentBatch <= 1) setEnablePrevious(false);
       else setEnablePrevious(true);
 
-      return updatedComments;
+      return updatedComments.length > 0 ? updatedComments : null;
     });
   }, [post, commentBatch]);
 

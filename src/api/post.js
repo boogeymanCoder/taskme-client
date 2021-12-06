@@ -57,7 +57,8 @@ export async function upTogglePost(taskId, userId) {
  * @returns axios Promise
  */
 export async function findPost(postId) {
-  return axios.get(`${process.env.REACT_APP_API_HOST}/api/post/${postId}`, {
+  console.log("post to find:", postId);
+  return axios.get(`${process.env.REACT_APP_API_HOST}/api/post/id/${postId}`, {
     withCredentials: true,
   });
 }
@@ -91,4 +92,15 @@ export async function updatePost(postId, body) {
       withCredentials: true,
     }
   );
+}
+
+/**
+ *
+ * @param {string} postId Post._id
+ * @returns axios Promise
+ */
+export async function deletePost(postId) {
+  return axios.delete(`${process.env.REACT_APP_API_HOST}/api/post/${postId}`, {
+    withCredentials: true,
+  });
 }
