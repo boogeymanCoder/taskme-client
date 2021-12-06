@@ -1,14 +1,17 @@
 import React, { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
 import { useParams } from "react-router";
 import { findPost } from "../api/post";
 import CommentList from "../Components/Comment/CommentList";
 import NewComment from "../Components/Comment/NewComment";
 import Pagination from "../Components/Pagination";
 import Post from "../Components/Post/Post";
+import UpdatePost from "../Components/Post/UpdatePost";
 import { useAuthCheck } from "../hooks/auth";
 
 export default function PostPage() {
   const { postId } = useParams();
+  const account = useSelector((state) => state.accountLog.account);
   const [post, setPost] = useState();
   const [comments, setComments] = useState();
   const [commentBatch, setCommentBatch] = useState(1);
@@ -55,10 +58,17 @@ export default function PostPage() {
 
   if (!post) return <h2>Loading...</h2>;
 
+  function renderPost() {
+    if (post.owner._id === account._id) {
+      return <UpdatePost post={post} />;
+    }
+    return <Post postData={post} />;
+  }
+
   return (
     <div>
       <h1>Post Page</h1>
-      <Post postData={post} />
+      {renderPost()}
       <NewComment post={post} setPost={setPost} />
       <CommentList comments={comments} />
       <Pagination

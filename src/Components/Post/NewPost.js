@@ -51,6 +51,7 @@ export default function NewPost({ posts, setPosts }) {
       ></textarea>
       <br />
       <ArrayInput array={tags} setArray={setTags} placeholder="tag1 tag2 ..." />
+      <br />
       <input type="submit" value="Post" />
     </form>
   );

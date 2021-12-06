@@ -7,7 +7,7 @@ export default function ArrayInput({
   placeholder,
   title,
 }) {
-  const [element, setElement] = useState("");
+  const [element, setElement] = useState(array.length > 0 ? " " : "");
 
   function addMember() {
     const newElement = element.trim();

@@ -76,3 +76,19 @@ export async function addPostComment(id, comment) {
     { withCredentials: true }
   );
 }
+
+/**
+ *
+ * @param {string} postId Post._id
+ * @param {object} body {?body: string, ?comments: [Comment._id], ?date: Date, ?owner: Account._id, ?tags: [string], ?title: string, ?ups: [Account._id]}
+ * @returns axios Promise
+ */
+export async function updatePost(postId, body) {
+  return axios.patch(
+    `${process.env.REACT_APP_API_HOST}/api/post/${postId}`,
+    body,
+    {
+      withCredentials: true,
+    }
+  );
+}
