@@ -35,12 +35,21 @@ export default function Application({
   }, [application, account._id, task.employer._id]);
 
   function editHandler(e) {
+    if (application.accepted) return alert("Cannot Edit Accepted Application");
+
     const newMessage = prompt("New Message", application.message);
     if (!newMessage) return;
 
     e.target.disabled = true;
     editApplicationMessage(application._id, newMessage)
       .then((response) => {
+        setApplications((lastState) => {
+          var updatedApplications = [...lastState];
+          updatedApplications.splice(lastState.indexOf(application), 1);
+          updatedApplications = [response.data, ...updatedApplications];
+
+          return updatedApplications;
+        });
         setApplication(response.data);
         e.target.disabled = false;
       })
@@ -48,14 +57,18 @@ export default function Application({
   }
 
   function cancelHandler(e) {
+    if (application.accepted)
+      return alert("Cannot Cancel Accepted Application");
     if (window.confirm("Are you sure?")) {
       e.target.disabled = true;
       deleteApplication(application._id)
         .then((response) => {
           console.log("Application Cancelled");
-          setApplications((lastState) =>
-            lastState.splice(lastState.indexOf(application), 1)
-          );
+          setApplications((lastState) => {
+            const updatedApplications = [...lastState];
+            updatedApplications.splice(lastState.indexOf(application), 1);
+            return updatedApplications;
+          });
         })
         .catch((error) => console.log("Application Cancellation Failed"))
         .finally(() => {
@@ -74,6 +87,8 @@ export default function Application({
       }
       return alert("Only Employers Accept");
     } else {
+      if (!window.confirm("This action cannot be undone, are you sure?"))
+        return;
       if (account._id === application.employee._id) {
         e.target.disabled = true;
         acceptToggle(false);

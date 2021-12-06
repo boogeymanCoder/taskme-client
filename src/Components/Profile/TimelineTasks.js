@@ -34,7 +34,7 @@ export default function TimelineTasks() {
     return () => {
       cancel = true;
     };
-  }, [taskBatch, account._id]);
+  }, [taskBatch, account]);
 
   return (
     <span>

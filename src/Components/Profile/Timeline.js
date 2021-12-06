@@ -1,10 +1,13 @@
 import React, { useState } from "react";
+import { useSelector } from "react-redux";
+import { useAuthCheck } from "../../hooks/auth";
 import TimelineApplications from "./TimelineApplications";
 import TimelinePosts from "./TimelinePosts";
 import TimelineServices from "./TimelineServices";
 import TimelineTasks from "./TimelineTasks";
 
 export default function Timeline() {
+  const account = useSelector((state) => state.accountLog.account);
   const [display, setDisplay] = useState("task");
   const timeline = {
     task: "task",
@@ -13,7 +16,10 @@ export default function Timeline() {
     service: "service",
   };
 
+  useAuthCheck("/login");
+
   function renderTimeline() {
+    if (!account) return;
     switch (display) {
       case timeline.task:
         return <TimelineTasks />;

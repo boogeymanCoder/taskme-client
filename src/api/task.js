@@ -76,3 +76,14 @@ export async function toggleOpenTask(task, open) {
     { withCredentials: true }
   );
 }
+
+/**
+ *
+ * @param {string} taskId Task._id
+ * @returns axios Promise
+ */
+export async function deleteTask(taskId) {
+  return axios.delete(`${process.env.REACT_APP_API_HOST}/api/task/${taskId}`, {
+    withCredentials: true,
+  });
+}

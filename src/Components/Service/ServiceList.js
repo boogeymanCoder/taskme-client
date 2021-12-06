@@ -17,10 +17,5 @@ export default function ServiceList({ services }) {
     });
   }
 
-  return (
-    <div>
-      <h2>Service List</h2>
-      {renderList()}
-    </div>
-  );
+  return <div>{renderList()}</div>;
 }

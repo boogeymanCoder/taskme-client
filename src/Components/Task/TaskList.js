@@ -18,7 +18,7 @@ export default function TaskList({ taskList }) {
         console.log(task);
         return (
           <div key={task._id}>
-            <Task taskData={task} />
+            <Task taskData={task} setTasks={setTasks} />
             <br />
           </div>
         );

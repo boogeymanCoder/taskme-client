@@ -25,6 +25,18 @@ export async function findTaskApplications(taskId) {
 
 /**
  *
+ * @param {string} taskId Task._id
+ * @returns axios Promise
+ */
+export async function countAcceptedApplication(taskId) {
+  return axios.get(
+    `${process.env.REACT_APP_API_HOST}/api/application/accepted_count/${taskId}`,
+    { withCredentials: true }
+  );
+}
+
+/**
+ *
  * @param {int} batchLimit how many documents to return
  * @param {int} batchNum nth batch of (batchLimit) documents
  * @param {string} taskId Task._id

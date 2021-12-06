@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
-import { Link } from "react-router-dom";
-import { toggleOpenTask, upToggleTask } from "../../api/task";
+import { Link, useNavigate } from "react-router-dom";
+import { countAcceptedApplication } from "../../api/application";
+import { deleteTask, toggleOpenTask, upToggleTask } from "../../api/task";
 
-export default function Task({ taskData }) {
+export default function Task({ taskData, setTasks }) {
   const account = useSelector((state) => state.accountLog.account);
   const [task, setTask] = useState(taskData);
+  const navigate = useNavigate();
 
   useEffect(() => {
     for (var property in task) {
@@ -26,6 +28,35 @@ export default function Task({ taskData }) {
   function handleOpen(e) {
     toggleOpenTask(task._id, !task.open)
       .then((response) => setTask(response.data))
+      .catch((error) => console.log(error));
+  }
+
+  function handleDelete(e) {
+    console.log("delete");
+    countAcceptedApplication(task._id)
+      .then((response) => {
+        console.log("response to delete:", response);
+        if (response.data > 0) {
+          console.log("has accepted");
+          return alert("Cannot Delete Task with Accepted Applications");
+        }
+        console.log("no accepted");
+        if (!window.confirm("This action cannot be undone, are you sure?"))
+          return;
+        deleteTask(task._id)
+          .then((response) => {
+            if (setTasks) {
+              setTasks((lastState) => {
+                var updatedTasks = [...lastState];
+                console.log(updatedTasks.indexOf(taskData));
+                updatedTasks.splice(updatedTasks.indexOf(taskData), 1);
+                return updatedTasks;
+              });
+              navigate("/");
+            }
+          })
+          .catch((error) => console.log(error));
+      })
       .catch((error) => console.log(error));
   }
 
@@ -71,6 +102,8 @@ export default function Task({ taskData }) {
         <>
           <span>open: </span>
           <input type="checkbox" checked={task.open} onChange={handleOpen} />
+          <br />
+          <input type="button" value="Delete" onClick={handleDelete} />
         </>
       )}
     </div>
