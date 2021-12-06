@@ -102,3 +102,14 @@ export async function deleteApplication(applicationId) {
     `${process.env.REACT_APP_API_HOST}/api/application/${applicationId}`
   );
 }
+
+/**
+ *
+ * @param {string} applicationId Application._id
+ * @returns axios Promise
+ */
+export async function deleteTaskApplications(applicationId) {
+  return axios.delete(
+    `${process.env.REACT_APP_API_HOST}/api/application/task/${applicationId}`
+  );
+}

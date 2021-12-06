@@ -1,7 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
-import { countAcceptedApplication } from "../../api/application";
+import {
+  countAcceptedApplication,
+  deleteTaskApplications,
+} from "../../api/application";
 import { deleteTask, toggleOpenTask, upToggleTask } from "../../api/task";
 
 export default function Task({ taskData, setTasks }) {
@@ -52,7 +55,13 @@ export default function Task({ taskData, setTasks }) {
                 updatedTasks.splice(updatedTasks.indexOf(taskData), 1);
                 return updatedTasks;
               });
-              navigate("/");
+
+              deleteTaskApplications(task._id)
+                .then((response) => {
+                  console.log("Deleted Applications");
+                  navigate("/");
+                })
+                .catch((error) => console.log(error));
             }
           })
           .catch((error) => console.log(error));
