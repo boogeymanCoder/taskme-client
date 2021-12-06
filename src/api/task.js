@@ -26,6 +26,20 @@ export async function findTaskBatch(batchLimit, batchNum) {
 
 /**
  *
+ * @param {int} batchLimit number of documents to return
+ * @param {int} batchNum nth batch of (batchLimit) documents
+ * @param {string} userId Account._id
+ * @returns axios Promise
+ */
+export async function findUserTaskBatch(batchLimit, batchNum, userId) {
+  return axios.get(
+    `${process.env.REACT_APP_API_HOST}/api/task/batch/${batchLimit}/${batchNum}/${userId}`,
+    { withCredentials: true }
+  );
+}
+
+/**
+ *
  * @param {string} taskId Task._id
  * @returns axios Promise
  */

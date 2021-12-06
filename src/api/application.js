@@ -32,7 +32,21 @@ export async function findTaskApplications(taskId) {
  */
 export async function findTaskApplicationsBatch(batchLimit, batchNum, taskId) {
   return axios.get(
-    `${process.env.REACT_APP_API_HOST}/api/application/batch/${batchLimit}/${batchNum}/${taskId}`,
+    `${process.env.REACT_APP_API_HOST}/api/application/batch/${batchLimit}/${batchNum}/task/${taskId}`,
+    { withCredentials: true }
+  );
+}
+
+/**
+ *
+ * @param {int} batchLimit number of documents to return
+ * @param {int} batchNum nth batch of (batchLimit) documents
+ * @param {string} userId Account._id
+ * @returns axios Promise
+ */
+export async function findUserApplicationBatch(batchLimit, batchNum, userId) {
+  return axios.get(
+    `${process.env.REACT_APP_API_HOST}/api/application/batch/${batchLimit}/${batchNum}/employee/${userId}`,
     { withCredentials: true }
   );
 }

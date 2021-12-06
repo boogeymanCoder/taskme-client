@@ -26,6 +26,20 @@ export async function findServiceBatch(batchLimit, batchNum) {
 
 /**
  *
+ * @param {int} batchLimit number of documents to return per
+ * @param {int} batchNum nth batch o (batchLimit) documents
+ * @param {string} userId Account._id
+ * @returns axios Promise
+ */
+export async function findUserServiceBatch(batchLimit, batchNum, userId) {
+  return axios.get(
+    `${process.env.REACT_APP_API_HOST}/api/service/batch/${batchLimit}/${batchNum}/owner/${userId}`,
+    { withCredentials: true }
+  );
+}
+
+/**
+ *
  * @param {string} serviceId Service._id
  * @returns axios Promise
  */
