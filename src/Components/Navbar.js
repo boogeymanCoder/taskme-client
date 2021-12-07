@@ -30,9 +30,9 @@ export default function Navbar() {
         <li>
           <Link to="/appointment">Appointment</Link>
         </li>
-        <li>
+        {/* <li>
           <Link to="/notification">Notification</Link>
-        </li>
+        </li> */}
         <li>
           <Link to="/services">Services</Link>
         </li>

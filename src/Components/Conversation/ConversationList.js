@@ -11,7 +11,7 @@ export default function ConversationList() {
   const [enablePrevious, setEnablePrevious] = useState(false);
 
   useEffect(() => {
-    if (!inbox) return null;
+    if (!inbox) return setConversations([]);
     setConversations((lastState) => {
       const updatedConversations = inbox.slice(
         (conversationBatch - 1) * 20,
