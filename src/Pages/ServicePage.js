@@ -1,14 +1,17 @@
 import React, { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
 import { useParams } from "react-router";
 import { findServiceOffersBatch } from "../api/offer";
 import { findService } from "../api/service";
 import OfferList from "../Components/Offer/OfferList";
 import Pagination from "../Components/Pagination";
 import Service from "../Components/Service/Service";
+import UpdateService from "../Components/Service/UpdateService";
 import { useAuthCheck } from "../hooks/auth";
 
 export default function ServicePage() {
   const { serviceId } = useParams();
+  const account = useSelector((state) => state.accountLog.account);
   const [offerBatch, setOfferBatch] = useState(1);
   const [service, setService] = useState();
   const [offers, setOffers] = useState();
@@ -52,12 +55,18 @@ export default function ServicePage() {
     };
   }, [service, offerBatch]);
 
-  if (!service) return <h2>Loading...</h2>;
+  function renderService() {
+    if (account._id === service.owner._id)
+      return <UpdateService service={service} />;
+    else return <Service service={service} setOffers={setOffers} />;
+  }
+
+  if (!service || !offers) return <h2>Loading...</h2>;
 
   return (
     <div>
       <h1>Service Page</h1>
-      <Service service={service} setOffers={setOffers} />
+      {renderService()}
       <OfferList offers={offers} setOffers={setOffers} />
       <Pagination
         setPage={setOffers}

@@ -36,7 +36,12 @@ export default function Offer({ offer, setOffers }) {
       <span>Date: {new Date(offer.date).toLocaleString()}</span>
       <br />
       <span>
-        Task: <Link to={`/task/${offer.task._id}`}>{offer.task.name}</Link>
+        Task:{" "}
+        {offer.task ? (
+          <Link to={`/task/${offer.task._id}`}>{offer.task.name}</Link>
+        ) : (
+          "Deleted"
+        )}{" "}
       </span>
       <br />
       {account._id === offer.receiver._id && (

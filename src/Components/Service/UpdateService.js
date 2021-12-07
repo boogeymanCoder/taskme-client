@@ -1,19 +1,22 @@
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
-import { createService } from "../../api/service";
+import { useNavigate } from "react-router";
+import { deleteServiceOffers } from "../../api/offer";
+import { deleteService, updateService } from "../../api/service";
 import ArrayInput from "../ArrayInput";
 
-export default function NewService({ services, setServices }) {
+export default function UpdateService({ service }) {
   const account = useSelector((state) => state.accountLog.account);
-  const [name, setName] = useState("");
-  const [details, setDetails] = useState("");
-  const [tags, setTags] = useState([]);
-  const [currency, setCurrency] = useState("");
-  const [price, setPrice] = useState(0);
+  const [name, setName] = useState(service.name);
+  const [details, setDetails] = useState(service.details);
+  const [tags, setTags] = useState(service.tags);
+  const [currency, setCurrency] = useState(service.currency);
+  const [price, setPrice] = useState(service.price);
+  const navigate = useNavigate();
 
-  function submitHandler(e) {
+  function updateHandler(e) {
     e.preventDefault();
-    createService({
+    updateService(service._id, {
       owner: account._id,
       name: name,
       details: details,
@@ -22,16 +25,30 @@ export default function NewService({ services, setServices }) {
       tags: tags,
     })
       .then((response) => {
-        const updatedServices = [...services, response.data];
-        updatedServices.sort((a, b) => a.name.localeCompare(b.name));
-        setServices(updatedServices);
+        for (var attribute in response.data) {
+          service[attribute] = response.data[attribute];
+        }
+      })
+      .catch((error) => console.log(error));
+  }
+
+  function deleteHandler(e) {
+    deleteService(service._id)
+      .then((response) => {
+        console.log("deleted service");
+        deleteServiceOffers(service._id)
+          .then((response) => {
+            console.log("deleted service offers");
+            navigate("/services");
+          })
+          .catch((error) => console.log(error));
       })
       .catch((error) => console.log(error));
   }
 
   return (
     <div>
-      <form onSubmit={submitHandler}>
+      <form onSubmit={updateHandler}>
         <input
           type="text"
           value={name}
@@ -72,8 +89,9 @@ export default function NewService({ services, setServices }) {
           required
         />
         <br />
-        <input type="submit" value="Submit" required />
+        <input type="submit" value="Update" required />
         <br />
+        <input type="button" value="Delete" onClick={deleteHandler} />
       </form>
     </div>
   );

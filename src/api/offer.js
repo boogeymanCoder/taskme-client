@@ -63,3 +63,17 @@ export async function deleteOffer(offerId) {
     }
   );
 }
+
+/**
+ *
+ * @param {string} serviceId Service._id
+ * @returns axios Promise
+ */
+export async function deleteServiceOffers(serviceId) {
+  return axios.delete(
+    `${process.env.REACT_APP_API_HOST}/api/offer/service/${serviceId}`,
+    {
+      withCredentials: true,
+    }
+  );
+}
