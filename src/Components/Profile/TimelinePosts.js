@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { findUserPostBatch } from "../../api/post";
+import TimelinePostsView from "../../views/Profile/TimelinePostsView";
 import Pagination from "../Pagination";
-import PostList from "../Post/PostList";
 
 export default function TimelinePosts() {
   const account = useSelector((state) => state.accountLog.account);
@@ -37,16 +37,18 @@ export default function TimelinePosts() {
   }, [postBatch, account._id]);
 
   return (
-    <span>
-      <PostList posts={posts} />
-      <Pagination
-        setPageBatch={setPostBatch}
-        setPage={setPosts}
-        enableNext={enableNext}
-        setEnableNext={setEnableNext}
-        enablePrevious={enablePrevious}
-        setEnablePrevious={setEnablePrevious}
-      />
-    </span>
+    <TimelinePostsView
+      pagination={
+        <Pagination
+          setPageBatch={setPostBatch}
+          setPage={setPosts}
+          enableNext={enableNext}
+          setEnableNext={setEnableNext}
+          enablePrevious={enablePrevious}
+          setEnablePrevious={setEnablePrevious}
+        />
+      }
+      posts={posts}
+    />
   );
 }

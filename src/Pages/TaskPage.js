@@ -2,11 +2,9 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router";
 import { findTaskApplicationsBatch } from "../api/application";
 import { findTask } from "../api/task";
-import ApplicationList from "../Components/Application/ApplicationList";
-import NewApplication from "../Components/Application/NewApplication";
 import Pagination from "../Components/Pagination";
-import Task from "../Components/Task/Task";
 import { useAuthCheck } from "../hooks/auth";
+import TaskPageView from "../views/Pages/TaskPageView";
 
 export default function TaskPage() {
   const { taskId } = useParams();
@@ -60,26 +58,20 @@ export default function TaskPage() {
   if (!task) return <h2>Loading...</h2>;
 
   return (
-    <div>
-      <Task taskData={task} />
-      <NewApplication
-        task={task}
-        applications={applications}
-        setApplications={setApplications}
-      />
-      <ApplicationList
-        task={task}
-        applications={applications}
-        setApplications={setApplications}
-      />
-      <Pagination
-        setPage={setApplications}
-        setPageBatch={setApplicationBatch}
-        enablePrevious={enablePrevious}
-        setEnablePrevious={setEnablePrevious}
-        enableNext={enableNext}
-        setEnableNext={setEnableNext}
-      />
-    </div>
+    <TaskPageView
+      pagination={
+        <Pagination
+          setPage={setApplications}
+          setPageBatch={setApplicationBatch}
+          enablePrevious={enablePrevious}
+          setEnablePrevious={setEnablePrevious}
+          enableNext={enableNext}
+          setEnableNext={setEnableNext}
+        />
+      }
+      task={task}
+      applications={applications}
+      setApplications={setApplications}
+    />
   );
 }

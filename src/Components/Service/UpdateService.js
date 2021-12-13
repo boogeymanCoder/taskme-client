@@ -3,7 +3,7 @@ import { useSelector } from "react-redux";
 import { useNavigate } from "react-router";
 import { deleteServiceOffers } from "../../api/offer";
 import { deleteService, updateService } from "../../api/service";
-import ArrayInput from "../ArrayInput";
+import UpdateServiceView from "../../views/Service/UpdateServiceView";
 
 export default function UpdateService({ service }) {
   const account = useSelector((state) => state.accountLog.account);
@@ -47,52 +47,19 @@ export default function UpdateService({ service }) {
   }
 
   return (
-    <div>
-      <form onSubmit={updateHandler}>
-        <input
-          type="text"
-          value={name}
-          placeholder="Service"
-          onChange={(e) => setName(e.target.value)}
-          required
-        />
-        <br />
-        <textarea
-          value={details}
-          placeholder="Details"
-          onChange={(e) => setDetails(e.target.value)}
-          required
-        ></textarea>
-        <br />
-        <ArrayInput
-          array={tags}
-          setArray={setTags}
-          placeholder="tag1 tag2 ..."
-          required
-        />
-        <br />
-        <select
-          value={currency}
-          onChange={(e) => setCurrency(e.target.value)}
-          required
-        >
-          <option value="" defaultValue>
-            Currency
-          </option>
-          <option value="USD">$</option>
-          <option value="PHP">₱</option>
-        </select>
-        <input
-          value={price}
-          type="number"
-          onChange={(e) => setPrice(e.target.value)}
-          required
-        />
-        <br />
-        <input type="submit" value="Update" required />
-        <br />
-        <input type="button" value="Delete" onClick={deleteHandler} />
-      </form>
-    </div>
+    <UpdateServiceView
+      updateHandler={updateHandler}
+      name={name}
+      setName={setName}
+      details={details}
+      setDetails={setDetails}
+      tags={tags}
+      setTags={setTags}
+      currency={currency}
+      setCurrency={setCurrency}
+      price={price}
+      setPrice={setPrice}
+      deleteHandler={deleteHandler}
+    />
   );
 }

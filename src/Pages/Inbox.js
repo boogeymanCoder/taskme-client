@@ -1,10 +1,9 @@
 import React, { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
-import ConversationList from "../Components/Conversation/ConversationList";
-import NewConversation from "../Components/Conversation/NewConversation";
 import { useAuthCheck } from "../hooks/auth";
 import { fetchInbox } from "../redux/reducers/inbox";
+import InboxView from "../views/Pages/InboxView";
 
 export default function Inbox() {
   const account = useSelector((state) => state.accountLog.account);
@@ -20,11 +19,5 @@ export default function Inbox() {
 
   // TODO search message
 
-  return (
-    <>
-      <h1>Inbox</h1>
-      <NewConversation />
-      <ConversationList />
-    </>
-  );
+  return <InboxView />;
 }

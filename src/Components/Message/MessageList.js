@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import MessageListView from "../../views/Message/MessageListView";
 
 export default function MessageList({ members, messages }) {
   console.log(messages);
@@ -20,5 +21,5 @@ export default function MessageList({ members, messages }) {
     });
   }
 
-  return <span>{renderConversation()}</span>;
+  return <MessageListView renderConversation={renderConversation} />;
 }

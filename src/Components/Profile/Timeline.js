@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import { useAuthCheck } from "../../hooks/auth";
+import TimelineView from "../../views/Profile/TimelineView";
 import TimelineApplications from "./TimelineApplications";
 import TimelinePosts from "./TimelinePosts";
 import TimelineServices from "./TimelineServices";
@@ -35,17 +36,10 @@ export default function Timeline() {
   }
 
   return (
-    <div>
-      <h2>Timeline</h2>
-      <select onChange={(e) => setDisplay(e.target.value)}>
-        <option value={timeline.task} defaultValue>
-          Tasks
-        </option>
-        <option value={timeline.application}>Applications</option>
-        <option value={timeline.post}>Posts</option>
-        <option value={timeline.service}>Services</option>
-      </select>
-      {renderTimeline()}
-    </div>
+    <TimelineView
+      setDisplay={setDisplay}
+      timeline={timeline}
+      renderTimeline={renderTimeline}
+    />
   );
 }

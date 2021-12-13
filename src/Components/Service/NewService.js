@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import { createService } from "../../api/service";
-import ArrayInput from "../ArrayInput";
+import NewServiceView from "../../views/Service/NewServiceView";
 
 export default function NewService({ services, setServices }) {
   const account = useSelector((state) => state.accountLog.account);
@@ -30,51 +30,18 @@ export default function NewService({ services, setServices }) {
   }
 
   return (
-    <div>
-      <form onSubmit={submitHandler}>
-        <input
-          type="text"
-          value={name}
-          placeholder="Service"
-          onChange={(e) => setName(e.target.value)}
-          required
-        />
-        <br />
-        <textarea
-          value={details}
-          placeholder="Details"
-          onChange={(e) => setDetails(e.target.value)}
-          required
-        ></textarea>
-        <br />
-        <ArrayInput
-          array={tags}
-          setArray={setTags}
-          placeholder="tag1 tag2 ..."
-          required
-        />
-        <br />
-        <select
-          value={currency}
-          onChange={(e) => setCurrency(e.target.value)}
-          required
-        >
-          <option value="" defaultValue>
-            Currency
-          </option>
-          <option value="USD">$</option>
-          <option value="PHP">₱</option>
-        </select>
-        <input
-          value={price}
-          type="number"
-          onChange={(e) => setPrice(e.target.value)}
-          required
-        />
-        <br />
-        <input type="submit" value="Submit" required />
-        <br />
-      </form>
-    </div>
+    <NewServiceView
+      submitHandler={submitHandler}
+      name={name}
+      setName={setName}
+      details={details}
+      setDetails={setDetails}
+      tags={tags}
+      setTags={setTags}
+      currency={currency}
+      setCurrency={setCurrency}
+      price={price}
+      setPrice={setPrice}
+    />
   );
 }

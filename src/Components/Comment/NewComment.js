@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import { createComment } from "../../api/comment";
 import { addPostComment } from "../../api/post";
+import NewCommentView from "../../views/Comment/NewCommentView";
 
 export default function NewComment({ post, setPost }) {
   const account = useSelector((state) => state.accountLog.account);
@@ -34,18 +35,10 @@ export default function NewComment({ post, setPost }) {
   }
 
   return (
-    <div>
-      <h2>New Comment</h2>
-      <form onSubmit={commentHandler}>
-        <textarea
-          type="text"
-          value={body}
-          placeholder="New Comment"
-          onChange={(e) => setBody(e.target.value)}
-        ></textarea>
-        <br />
-        <input type="submit" value="Submit" />
-      </form>
-    </div>
+    <NewCommentView
+      commentHandler={commentHandler}
+      body={body}
+      setBody={setBody}
+    />
   );
 }

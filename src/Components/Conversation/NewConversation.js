@@ -4,6 +4,7 @@ import { findAccountByUsername } from "../../api/account";
 import { createConversation } from "../../api/conversation";
 import { createMessage } from "../../api/message";
 import { fetchInbox } from "../../redux/reducers/inbox";
+import NewConversationView from "../../views/Conversation/NewConversationView";
 
 export default function NewConversation() {
   const account = useSelector((state) => state.accountLog.account);
@@ -105,40 +106,16 @@ export default function NewConversation() {
   }
 
   return (
-    <form onSubmit={sendMessage}>
-      <span>To: {members.length > 0 ? members.toString() : "None"}</span>
-      <br />
-      <input
-        type="text"
-        name="members"
-        value={member}
-        onInput={handleMembersInput}
-        onBlur={handleMembersBlur}
-        placeholder="Recipient1 Recipient2 ..."
-        required
-      />
-      <br />
-      <span>Conversation Name:</span>
-      <br />
-      <input
-        type="text"
-        name="name"
-        value={name}
-        onChange={(e) => setName(e.target.value)}
-        placeholder="Recipient by default"
-      />
-      <br />
-      <span>Message:</span>
-      <br />
-      <textarea
-        name="message"
-        value={message}
-        onChange={(e) => setMessage(e.target.value)}
-        placeholder="Message"
-        required
-      ></textarea>
-      <br />
-      <input type="submit" value="New Message" />
-    </form>
+    <NewConversationView
+      sendMessage={sendMessage}
+      members={members}
+      member={member}
+      name={name}
+      setName={setName}
+      handleMembersInput={handleMembersInput}
+      handleMembersBlur={handleMembersBlur}
+      message={message}
+      setMessage={setMessage}
+    />
   );
 }

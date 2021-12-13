@@ -1,9 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { findPostBatch } from "../api/post";
-import NewPost from "../Components/Post/NewPost";
 import Pagination from "../Components/Pagination";
-import PostList from "../Components/Post/PostList";
 import { useAuthCheck } from "../hooks/auth";
+import ForumView from "../views/Pages/ForumView";
 
 export default function Forum() {
   const [postBatch, setPostBatch] = useState(1);
@@ -32,19 +31,19 @@ export default function Forum() {
   }, [postBatch]);
 
   return (
-    <div>
-      <h1>Forum</h1>
-      <NewPost posts={posts} setPosts={setPosts} />
-      <br />
-      <PostList posts={posts} />
-      <Pagination
-        setPage={setPosts}
-        setPageBatch={setPostBatch}
-        enablePrevious={enablePrevious}
-        setEnablePrevious={setEnablePrevious}
-        enableNext={enableNext}
-        setEnableNext={setEnableNext}
-      />
-    </div>
+    <ForumView
+      pagination={
+        <Pagination
+          setPage={setPosts}
+          setPageBatch={setPostBatch}
+          enablePrevious={enablePrevious}
+          setEnablePrevious={setEnablePrevious}
+          enableNext={enableNext}
+          setEnableNext={setEnableNext}
+        />
+      }
+      posts={posts}
+      setPosts={setPosts}
+    />
   );
 }

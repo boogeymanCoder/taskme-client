@@ -1,7 +1,7 @@
 import React from "react";
 import { useSelector } from "react-redux";
-import { Link } from "react-router-dom";
 import { deleteOffer } from "../../api/offer";
+import OfferView from "../../views/Offer/OfferView";
 
 export default function Offer({ offer, setOffers }) {
   const account = useSelector((state) => state.accountLog.account);
@@ -27,26 +27,6 @@ export default function Offer({ offer, setOffers }) {
   }
 
   return (
-    <div>
-      <span>
-        Sender:{" "}
-        <Link to={`/profile/${offer.sender._id}`}>{offer.sender.username}</Link>
-      </span>
-      <br />
-      <span>Date: {new Date(offer.date).toLocaleString()}</span>
-      <br />
-      <span>
-        Task:{" "}
-        {offer.task ? (
-          <Link to={`/task/${offer.task._id}`}>{offer.task.name}</Link>
-        ) : (
-          "Deleted"
-        )}{" "}
-      </span>
-      <br />
-      {account._id === offer.receiver._id && (
-        <input type="button" value="Delete" onClick={deleteHandler} />
-      )}
-    </div>
+    <OfferView offer={offer} account={account} deleteHandler={deleteHandler} />
   );
 }

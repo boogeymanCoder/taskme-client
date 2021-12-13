@@ -2,12 +2,11 @@ import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { useParams } from "react-router";
 import { findPost } from "../api/post";
-import CommentList from "../Components/Comment/CommentList";
-import NewComment from "../Components/Comment/NewComment";
 import Pagination from "../Components/Pagination";
 import Post from "../Components/Post/Post";
 import UpdatePost from "../Components/Post/UpdatePost";
 import { useAuthCheck } from "../hooks/auth";
+import PostPageView from "../views/Pages/PostPageView";
 
 export default function PostPage() {
   const { postId } = useParams();
@@ -68,19 +67,21 @@ export default function PostPage() {
   }
 
   return (
-    <div>
-      <h1>Post Page</h1>
-      {renderPost()}
-      <NewComment post={post} setPost={setPost} />
-      <CommentList comments={comments} />
-      <Pagination
-        setPage={setComments}
-        setPageBatch={setCommentBatch}
-        enablePrevious={enablePrevious}
-        setEnablePrevious={setEnablePrevious}
-        enableNext={enableNext}
-        setEnableNext={setEnableNext}
-      />
-    </div>
+    <PostPageView
+      pagination={
+        <Pagination
+          setPage={setComments}
+          setPageBatch={setCommentBatch}
+          enablePrevious={enablePrevious}
+          setEnablePrevious={setEnablePrevious}
+          enableNext={enableNext}
+          setEnableNext={setEnableNext}
+        />
+      }
+      renderPost={renderPost}
+      post={post}
+      setPost={setPost}
+      comments={comments}
+    />
   );
 }

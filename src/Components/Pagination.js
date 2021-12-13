@@ -1,4 +1,5 @@
 import React from "react";
+import PaginationView from "../views/PaginationView";
 
 export default function Pagination({
   setPageBatch,
@@ -10,35 +11,14 @@ export default function Pagination({
   reverse,
 }) {
   return (
-    <span>
-      <input
-        type="button"
-        value="Previous"
-        onClick={(e) => {
-          setPageBatch((lastState) => {
-            if (!reverse) return lastState > 1 ? lastState - 1 : lastState;
-            else return lastState + 1;
-          });
-          setPage();
-          setEnableNext(false);
-          setEnablePrevious(false);
-        }}
-        disabled={!enablePrevious}
-      />
-      <input
-        type="button"
-        value="Next"
-        onClick={(e) => {
-          setPageBatch((lastState) => {
-            if (!reverse) return lastState + 1;
-            else return lastState > 1 ? lastState - 1 : lastState;
-          });
-          setPage();
-          setEnableNext(false);
-          setEnablePrevious(false);
-        }}
-        disabled={!enableNext}
-      />
-    </span>
+    <PaginationView
+      setPageBatch={setPageBatch}
+      reverse={reverse}
+      setPage={setPage}
+      setEnableNext={setEnableNext}
+      setEnablePrevious={setEnablePrevious}
+      enablePrevious={enablePrevious}
+      enableNext={enableNext}
+    />
   );
 }

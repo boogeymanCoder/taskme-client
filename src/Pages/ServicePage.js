@@ -3,11 +3,11 @@ import { useSelector } from "react-redux";
 import { useParams } from "react-router";
 import { findServiceOffersBatch } from "../api/offer";
 import { findService } from "../api/service";
-import OfferList from "../Components/Offer/OfferList";
 import Pagination from "../Components/Pagination";
 import Service from "../Components/Service/Service";
 import UpdateService from "../Components/Service/UpdateService";
 import { useAuthCheck } from "../hooks/auth";
+import ServicePageView from "../views/Pages/ServicePageView";
 
 export default function ServicePage() {
   const { serviceId } = useParams();
@@ -64,18 +64,20 @@ export default function ServicePage() {
   if (!service || !offers) return <h2>Loading...</h2>;
 
   return (
-    <div>
-      <h1>Service Page</h1>
-      {renderService()}
-      <OfferList offers={offers} setOffers={setOffers} />
-      <Pagination
-        setPage={setOffers}
-        setPageBatch={setOfferBatch}
-        enablePrevious={enablePrevious}
-        setEnablePrevious={setEnablePrevious}
-        enableNext={enableNext}
-        setEnableNext={setEnableNext}
-      />
-    </div>
+    <ServicePageView
+      pagination={
+        <Pagination
+          setPage={setOffers}
+          setPageBatch={setOfferBatch}
+          enablePrevious={enablePrevious}
+          setEnablePrevious={setEnablePrevious}
+          enableNext={enableNext}
+          setEnableNext={setEnableNext}
+        />
+      }
+      renderService={renderService}
+      offers={offers}
+      setOffers={setOffers}
+    />
   );
 }

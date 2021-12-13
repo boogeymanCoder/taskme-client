@@ -1,9 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { findServiceBatch } from "../api/service";
-import NewService from "../Components/Service/NewService";
 import Pagination from "../Components/Pagination";
-import ServiceList from "../Components/Service/ServiceList";
 import { useAuthCheck } from "../hooks/auth";
+import ServicesPageView from "../views/Pages/ServicesPageView";
 
 export default function ServicesPage() {
   const [serviceBatch, setServiceBatch] = useState(1);
@@ -34,18 +33,19 @@ export default function ServicesPage() {
   }, [serviceBatch]);
 
   return (
-    <div>
-      <h1>Service</h1>
-      <NewService services={services} setServices={setServices} />
-      <ServiceList services={services} />
-      <Pagination
-        setPage={setServices}
-        setPageBatch={setServiceBatch}
-        enablePrevious={enablePrevious}
-        setEnablePrevious={setEnablePrevious}
-        enableNext={enableNext}
-        setEnableNext={setEnableNext}
-      />
-    </div>
+    <ServicesPageView
+      pagination={
+        <Pagination
+          setPage={setServices}
+          setPageBatch={setServiceBatch}
+          enablePrevious={enablePrevious}
+          setEnablePrevious={setEnablePrevious}
+          enableNext={enableNext}
+          setEnableNext={setEnableNext}
+        />
+      }
+      services={services}
+      setServices={setServices}
+    />
   );
 }

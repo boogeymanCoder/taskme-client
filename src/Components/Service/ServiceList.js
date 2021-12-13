@@ -1,4 +1,5 @@
 import React from "react";
+import ServiceListView from "../../views/Service/ServiceListView";
 import Service from "./Service";
 
 export default function ServiceList({ services }) {
@@ -17,5 +18,5 @@ export default function ServiceList({ services }) {
     });
   }
 
-  return <div>{renderList()}</div>;
+  return <ServiceListView renderList={renderList} />;
 }

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
 import { findAccountById } from "../../api/account";
+import CommentView from "../../views/Comment/CommentView";
 
 export default function Comment({ comment }) {
   const [owner, setOwner] = useState();
@@ -25,14 +25,5 @@ export default function Comment({ comment }) {
 
   if (!comment || !owner) return <h2>Loading...</h2>;
 
-  return (
-    <div>
-      <span>
-        <Link to={`/profile/${owner._id}`}>{owner.username}</Link>:{" "}
-        {comment.body}
-      </span>
-      <br />
-      <span>{`date: ${new Date(comment.date).toLocaleString()}`}</span>
-    </div>
-  );
+  return <CommentView owner={owner} comment={comment} />;
 }

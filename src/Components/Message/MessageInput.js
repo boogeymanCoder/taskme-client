@@ -1,6 +1,7 @@
 import axios from "axios";
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
+import MessageInputView from "../../views/Message/MessageInputView";
 
 export default function MessageInput({ conversation, setConversation }) {
   const account = useSelector((state) => state.accountLog.account);
@@ -43,16 +44,10 @@ export default function MessageInput({ conversation, setConversation }) {
   }
 
   return (
-    <>
-      <form onSubmit={sendHandler}>
-        <input
-          type="text"
-          placeholder="Message"
-          onChange={(e) => setMessage(e.target.value)}
-          value={message}
-        />
-        <input type="submit" value="Send" />
-      </form>
-    </>
+    <MessageInputView
+      sendHandler={sendHandler}
+      setMessage={setMessage}
+      message={message}
+    />
   );
 }

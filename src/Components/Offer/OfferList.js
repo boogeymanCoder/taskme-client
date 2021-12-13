@@ -1,4 +1,5 @@
 import React from "react";
+import OfferListView from "../../views/Offer/OfferListView";
 import Offer from "./Offer";
 
 export default function OfferList({ offers, setOffers }) {
@@ -17,10 +18,5 @@ export default function OfferList({ offers, setOffers }) {
   if (!offers) return <h2>Loading....</h2>;
   if (offers.length < 1) return <h2>No Offers Yet...</h2>;
 
-  return (
-    <div>
-      <h2>Offer List</h2>
-      {renderList()}
-    </div>
-  );
+  return <OfferListView renderList={renderList} />;
 }

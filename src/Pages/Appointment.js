@@ -1,7 +1,6 @@
 import React, { useState } from "react";
-import NewSchedule from "../Components/Schedule/NewSchedule";
-import ScheduleList from "../Components/Schedule/ScheduleList";
 import { useAuthCheck } from "../hooks/auth";
+import AppointmentView from "../views/Pages/AppointmentView";
 
 export default function Appointment() {
   const [from, setFrom] = useState("");
@@ -10,17 +9,6 @@ export default function Appointment() {
   useAuthCheck("/login");
 
   return (
-    <div>
-      <h1>Appointment</h1>
-      <NewSchedule />
-      <br />
-      <span>From:</span> <br />
-      <input type="date" onChange={(e) => setFrom(e.target.value)} />
-      <br />
-      <span>to:</span> <br />
-      <input type="date" onChange={(e) => setTo(e.target.value)} /> <br />
-      <br />
-      <ScheduleList from={from} to={to} />
-    </div>
+    <AppointmentView setFrom={setFrom} setTo={setTo} from={from} to={to} />
   );
 }

@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import { createSchedule } from "../../api/schedule";
+import NewScheduleView from "../../views/Schedule.js/NewScheduleView";
 
 export default function NewSchedule() {
   const account = useSelector((state) => state.accountLog.account);
@@ -17,34 +18,14 @@ export default function NewSchedule() {
   }
 
   return (
-    <form onSubmit={addHandler}>
-      <span>Start:</span>
-      <br />
-      <input
-        type="datetime-local"
-        value={start}
-        onChange={(e) => setStart(e.target.value)}
-        required
-      />
-      <br />
-      <span>End:</span>
-      <br />
-      <input
-        type="datetime-local"
-        value={end}
-        onChange={(e) => setEnd(e.target.value)}
-        required
-      />
-      <br />
-      <input
-        type="text"
-        placeholder="Label"
-        value={label}
-        onChange={(e) => setLabel(e.target.value)}
-        required
-      />
-      <br />
-      <input type="submit" value="Add Schedule" />
-    </form>
+    <NewScheduleView
+      addHandler={addHandler}
+      start={start}
+      setStart={setStart}
+      end={end}
+      setEnd={setEnd}
+      label={label}
+      setLabel={setLabel}
+    />
   );
 }

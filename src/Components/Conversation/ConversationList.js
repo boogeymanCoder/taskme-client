@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
+import ConversationListView from "../../views/Conversation/ConversationListView";
 import Pagination from "../Pagination";
 
 export default function ConversationList() {
@@ -39,17 +40,18 @@ export default function ConversationList() {
   }
 
   return (
-    <div>
-      {renderConversations()}
-
-      <Pagination
-        setPage={setConversations}
-        setPageBatch={setConversationBatch}
-        enablePrevious={enablePrevious}
-        setEnablePrevious={setEnablePrevious}
-        enableNext={enableNext}
-        setEnableNext={setEnableNext}
-      />
-    </div>
+    <ConversationListView
+      renderConversations={renderConversations}
+      pagination={
+        <Pagination
+          setPage={setConversations}
+          setPageBatch={setConversationBatch}
+          enablePrevious={enablePrevious}
+          setEnablePrevious={setEnablePrevious}
+          enableNext={enableNext}
+          setEnableNext={setEnableNext}
+        />
+      }
+    />
   );
 }

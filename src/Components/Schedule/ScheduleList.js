@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { findScheduleBatch } from "../../api/schedule";
-import Schedule from "./Schedule";
+import ScheduleListView from "../../views/Schedule.js/ScheduleListView";
 
 export default function ScheduleList({ from, to }) {
   const [scheduleBatch, setScheduleBatch] = useState(1);
@@ -44,34 +44,11 @@ export default function ScheduleList({ from, to }) {
   console.log("Schedules:", schedules);
 
   return (
-    <div>
-      {schedules.length < 1 && <h2>No Schedule Found</h2>}
-      {schedules.map((schedule, index) => {
-        return (
-          <span key={schedule._id}>
-            <Schedule schedule={schedule} />
-            <br />
-          </span>
-        );
-      })}
-
-      <input
-        type="button"
-        value="<Previous"
-        onClick={(e) =>
-          setScheduleBatch((lastBatch) =>
-            lastBatch > 1 ? lastBatch - 1 : lastBatch
-          )
-        }
-        disabled={!enablePrevious}
-      />
-
-      <input
-        type="button"
-        value="Next>"
-        onClick={(e) => setScheduleBatch((lastBatch) => lastBatch + 1)}
-        disabled={!enableNext}
-      />
-    </div>
+    <ScheduleListView
+      schedules={schedules}
+      setScheduleBatch={setScheduleBatch}
+      enablePrevious={enablePrevious}
+      enableNext={enableNext}
+    />
   );
 }

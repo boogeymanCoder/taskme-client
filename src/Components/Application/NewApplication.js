@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import { createApplication } from "../../api/application";
+import NewApplicationView from "../../views/Application/NewApplicationView";
 
 export default function NewApplication({
   task,
@@ -42,17 +43,10 @@ export default function NewApplication({
   }
 
   return (
-    <>
-      <h2>New Application</h2>
-      <form onSubmit={applicationHandler}>
-        <textarea
-          placeholder="Message"
-          value={message}
-          onChange={(e) => setMessage(e.target.value)}
-        ></textarea>
-        <br />
-        <input type="submit" value="Apply" />
-      </form>
-    </>
+    <NewApplicationView
+      applicationHandler={applicationHandler}
+      message={message}
+      setMessage={setMessage}
+    />
   );
 }

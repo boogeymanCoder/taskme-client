@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import { createPost } from "../../api/post";
-import ArrayInput from "../ArrayInput";
+import NewPostView from "../../views/Post/NewPostView";
 
 export default function NewPost({ posts, setPosts }) {
   const [title, setTitle] = useState("");
@@ -34,25 +34,14 @@ export default function NewPost({ posts, setPosts }) {
   }
 
   return (
-    <form onSubmit={postHandler}>
-      <input
-        type="text"
-        placeholder="Title"
-        value={title}
-        onChange={(e) => setTitle(e.target.value)}
-        required
-      />
-      <br />
-      <textarea
-        placeholder="Body"
-        value={body}
-        onChange={(e) => setBody(e.target.value)}
-        required
-      ></textarea>
-      <br />
-      <ArrayInput array={tags} setArray={setTags} placeholder="tag1 tag2 ..." />
-      <br />
-      <input type="submit" value="Post" />
-    </form>
+    <NewPostView
+      postHandler={postHandler}
+      title={title}
+      setTitle={setTitle}
+      body={body}
+      setBody={setBody}
+      tags={tags}
+      setTags={setTags}
+    />
   );
 }

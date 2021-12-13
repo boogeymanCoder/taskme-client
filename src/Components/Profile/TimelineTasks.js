@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { findUserTaskBatch } from "../../api/task";
+import TimelineTasksView from "../../views/Profile/TimelineTasksView";
 import Pagination from "../Pagination";
-import TaskList from "../Task/TaskList";
 
 export default function TimelineTasks() {
   const account = useSelector((state) => state.accountLog.account);
@@ -37,16 +37,18 @@ export default function TimelineTasks() {
   }, [taskBatch, account]);
 
   return (
-    <span>
-      <TaskList taskList={tasks} />
-      <Pagination
-        setPageBatch={setTaskBatch}
-        setPage={setTasks}
-        enableNext={enableNext}
-        setEnableNext={setEnableNext}
-        enablePrevious={enablePrevious}
-        setEnablePrevious={setEnablePrevious}
-      />
-    </span>
+    <TimelineTasksView
+      pagination={
+        <Pagination
+          setPageBatch={setTaskBatch}
+          setPage={setTasks}
+          enableNext={enableNext}
+          setEnableNext={setEnableNext}
+          enablePrevious={enablePrevious}
+          setEnablePrevious={setEnablePrevious}
+        />
+      }
+      tasks={tasks}
+    />
   );
 }

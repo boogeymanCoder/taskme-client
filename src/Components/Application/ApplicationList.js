@@ -1,4 +1,5 @@
 import React from "react";
+import ApplicationListView from "../../views/Application/ApplicationListView";
 import Application from "./Application";
 
 export default function ApplicationList({
@@ -25,10 +26,5 @@ export default function ApplicationList({
 
   if (!applications) return <h2>Loading...</h2>;
 
-  return (
-    <div>
-      <h2>ApplicationList</h2>
-      {renderApplications()}
-    </div>
-  );
+  return <ApplicationListView renderApplications={renderApplications} />;
 }

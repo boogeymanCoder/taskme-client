@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router";
 import { deletePostComments } from "../../api/comment";
 import { deletePost, updatePost } from "../../api/post";
-import ArrayInput from "../ArrayInput";
+import UpdatePostView from "../../views/Post/UpdatePostView";
 
 export default function UpdatePost({ post }) {
   const [title, setTitle] = useState(post ? post.title : undefined);
@@ -44,27 +44,15 @@ export default function UpdatePost({ post }) {
   if (!post) return <h2>Loading...</h2>;
 
   return (
-    <form onSubmit={updateHandler}>
-      <input
-        type="text"
-        placeholder="Title"
-        value={title}
-        onChange={(e) => setTitle(e.target.value)}
-        required
-      />
-      <br />
-      <textarea
-        placeholder="Body"
-        value={body}
-        onChange={(e) => setBody(e.target.value)}
-        required
-      ></textarea>
-      <br />
-      <ArrayInput array={tags} setArray={setTags} placeholder="tag1 tag2 ..." />
-      <br />
-      <input type="submit" value="Update" />
-      <br />
-      <input type="button" value="Delete" onClick={deleteHandler} />
-    </form>
+    <UpdatePostView
+      updateHandler={updateHandler}
+      title={title}
+      setTitle={setTitle}
+      body={body}
+      setBody={setBody}
+      tags={tags}
+      setTags={setTags}
+      deleteHandler={deleteHandler}
+    />
   );
 }

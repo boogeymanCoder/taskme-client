@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import ArrayInputView from "../views/ArrayInputView";
 
 export default function ArrayInput({
   array,
@@ -43,20 +44,13 @@ export default function ArrayInput({
   }
 
   return (
-    <span>
-      <span>
-        {title}: {array.length > 0 ? array.toString() : "None"}
-      </span>
-      <br />
-      <input
-        type="text"
-        name="array"
-        value={element}
-        onInput={handleMembersInput}
-        onBlur={handleMembersBlur}
-        placeholder={placeholder}
-        required
-      />
-    </span>
+    <ArrayInputView
+      title={title}
+      array={array}
+      element={element}
+      handleMembersInput={handleMembersInput}
+      handleMembersBlur={handleMembersBlur}
+      placeholder={placeholder}
+    />
   );
 }

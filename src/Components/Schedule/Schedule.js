@@ -1,5 +1,6 @@
 import React from "react";
 import { deleteSchedule } from "../../api/schedule";
+import ScheduleView from "../../views/Schedule.js/ScheduleView";
 
 export default function Schedule({ schedule }) {
   function deleteHandler(e) {
@@ -13,15 +14,5 @@ export default function Schedule({ schedule }) {
         .catch((error) => console.log(error));
   }
 
-  return (
-    <div>
-      <span>{`label: ${schedule.label}`}</span>
-      <br />
-      <span>{`start: ${new Date(schedule.start).toUTCString()}`}</span>
-      <br />
-      <span>{`end: ${new Date(schedule.end).toUTCString()}`}</span>
-      <br />
-      <input type="button" value="Delete" onClick={deleteHandler} />
-    </div>
-  );
+  return <ScheduleView schedule={schedule} deleteHandler={deleteHandler} />;
 }

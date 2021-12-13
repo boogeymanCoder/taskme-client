@@ -1,10 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router";
-import MessageInput from "../Components/Message/MessageInput";
 import { useAuthCheck } from "../hooks/auth";
 import { findConversation } from "../api/conversation";
 import Pagination from "../Components/Pagination";
-import MessageList from "../Components/Message/MessageList";
+import ConversationView from "../views/Pages/ConversationView";
 
 export default function Conversation() {
   const { conversationId } = useParams();
@@ -63,27 +62,21 @@ export default function Conversation() {
   }, [conversation, messageBatch]);
 
   return (
-    <>
-      <div>Conversation</div>
-
-      <Pagination
-        setPage={setMessages}
-        setPageBatch={setMessageBatch}
-        enablePrevious={enablePrevious}
-        setEnablePrevious={setEnablePrevious}
-        enableNext={enableNext}
-        setEnableNext={setEnableNext}
-        reverse={true}
-      />
-      <br />
-      <MessageList
-        members={conversation ? conversation.members : undefined}
-        messages={messages}
-      />
-      <MessageInput
-        conversation={conversation}
-        setConversation={setConversation}
-      />
-    </>
+    <ConversationView
+      pagination={
+        <Pagination
+          setPage={setMessages}
+          setPageBatch={setMessageBatch}
+          enablePrevious={enablePrevious}
+          setEnablePrevious={setEnablePrevious}
+          enableNext={enableNext}
+          setEnableNext={setEnableNext}
+          reverse={true}
+        />
+      }
+      conversation={conversation}
+      messages={messages}
+      setConversation={setConversation}
+    />
   );
 }

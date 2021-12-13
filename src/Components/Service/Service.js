@@ -1,8 +1,8 @@
 import React from "react";
 import { useSelector } from "react-redux";
-import { Link } from "react-router-dom";
 import { createOffer } from "../../api/offer";
 import { findTask } from "../../api/task";
+import ServiceView from "../../views/Service/ServiceView";
 
 // TODO add ups
 
@@ -44,30 +44,10 @@ export default function Service({ service, setOffers }) {
   }
 
   return (
-    <div>
-      <Link to={`/service/${service._id}`}>{service.name}</Link>
-      <br />
-      <span>
-        employee:{" "}
-        <Link to={`/profile/${service.owner._id}`}>
-          {service.owner.username}
-        </Link>
-      </span>
-      <br />
-      <span>{`details: ${service.details}`}</span>
-      <br />
-      <span>{`tags: ${service.tags.toString()}`}</span>
-      <br />
-      <span>{`currency: ${service.currency}`}</span>
-      <br />
-      <span>{`price: ${service.price}`}</span>
-      <br />
-      {account._id !== service.owner._id && (
-        <>
-          <input type="button" value="Send Offer" onClick={offerHandler} />
-          <br />
-        </>
-      )}
-    </div>
+    <ServiceView
+      service={service}
+      offerHandler={offerHandler}
+      account={account}
+    />
   );
 }

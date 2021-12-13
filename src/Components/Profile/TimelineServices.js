@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { findUserServiceBatch } from "../../api/service";
+import TimelineServicesView from "../../views/Profile/TimelineServicesView";
 import Pagination from "../Pagination";
-import ServiceList from "../Service/ServiceList";
 
 export default function TimelineServices() {
   const account = useSelector((state) => state.accountLog.account);
@@ -40,16 +40,18 @@ export default function TimelineServices() {
   }, [serviceBatch, account._id]);
 
   return (
-    <span>
-      <ServiceList services={services} />
-      <Pagination
-        setPageBatch={setServiceBatch}
-        setPage={setServices}
-        enableNext={enableNext}
-        setEnableNext={setEnableNext}
-        enablePrevious={enablePrevious}
-        setEnablePrevious={setEnablePrevious}
-      />
-    </span>
+    <TimelineServicesView
+      pagination={
+        <Pagination
+          setPageBatch={setServiceBatch}
+          setPage={setServices}
+          enableNext={enableNext}
+          setEnableNext={setEnableNext}
+          enablePrevious={enablePrevious}
+          setEnablePrevious={setEnablePrevious}
+        />
+      }
+      services={services}
+    />
   );
 }

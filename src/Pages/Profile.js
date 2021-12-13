@@ -2,9 +2,9 @@ import React from "react";
 import { useSelector } from "react-redux";
 import { useParams } from "react-router";
 import ProfileUpdate from "../Components/Profile/ProfileUpdate";
-import ProfileView from "../Components/Profile/ProfileView";
-import Timeline from "../Components/Profile/Timeline";
+import ProfileViewer from "../Components/Profile/ProfileViewer";
 import { useAuthCheck } from "../hooks/auth";
+import ProfileView from "../views/Pages/ProfileView";
 
 export default function Profile() {
   const { id } = useParams();
@@ -15,17 +15,11 @@ export default function Profile() {
   function renderProfile() {
     if (!account) return;
     if (id !== account._id) {
-      return <ProfileView id={id} />;
+      return <ProfileViewer id={id} />;
     } else {
       return <ProfileUpdate />;
     }
   }
 
-  return (
-    <div>
-      <h1>Profile</h1>
-      {renderProfile()}
-      <Timeline />
-    </div>
-  );
+  return <ProfileView renderProfile={renderProfile} />;
 }

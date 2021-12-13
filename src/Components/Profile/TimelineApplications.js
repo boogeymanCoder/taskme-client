@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { findUserApplicationBatch } from "../../api/application";
-import TimelineApplicationList from "../Application/TimelineApplicationList";
+import TimelineApplicationsView from "../../views/Profile/TimelineApplicationsView";
 import Pagination from "../Pagination";
 
 export default function TimelineApplications() {
@@ -38,16 +38,18 @@ export default function TimelineApplications() {
   }, [applicationBatch, account._id]);
 
   return (
-    <span>
-      <TimelineApplicationList applications={applications} />
-      <Pagination
-        setPageBatch={setApplicationBatch}
-        setPage={setApplications}
-        enableNext={enableNext}
-        setEnableNext={setEnableNext}
-        enablePrevious={enablePrevious}
-        setEnablePrevious={setEnablePrevious}
-      />
-    </span>
+    <TimelineApplicationsView
+      applications={applications}
+      pagination={
+        <Pagination
+          setPageBatch={setApplicationBatch}
+          setPage={setApplications}
+          enableNext={enableNext}
+          setEnableNext={setEnableNext}
+          enablePrevious={enablePrevious}
+          setEnablePrevious={setEnablePrevious}
+        />
+      }
+    />
   );
 }

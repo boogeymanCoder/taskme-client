@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
-import { Link } from "react-router-dom";
 import {
   deleteApplication,
   editApplicationMessage,
@@ -10,6 +9,7 @@ import {
   addConversationMember,
   deleteConversationMember,
 } from "../../api/conversation";
+import ApplicationView from "../../views/Application/ApplicationView";
 
 export default function Application({
   task,
@@ -132,33 +132,13 @@ export default function Application({
   }
 
   return (
-    <div>
-      <span>
-        Employee:{" "}
-        <Link to={`/profile/${application.employee._id}`}>
-          {application.employee.username}
-        </Link>
-      </span>
-      <br />
-      <span>{`Message: ${application.message}`}</span> <br />
-      <span>{`Date: ${new Date(application.date).toLocaleString()}`}</span>{" "}
-      <br />
-      <label>Accepted: </label>
-      <input
-        type="checkbox"
-        checked={application.accepted}
-        onChange={acceptHandler}
-        disabled={disableAccept}
-      />
-      <br />
-      {account && account._id === application.employee._id && (
-        <>
-          <input type="button" value="edit" onClick={editHandler} />
-          <input type="button" value="cancel" onClick={cancelHandler} />
-          <br />
-        </>
-      )}
-      <br />
-    </div>
+    <ApplicationView
+      application={application}
+      acceptHandler={acceptHandler}
+      disableAccept={disableAccept}
+      account={account}
+      editHandler={editHandler}
+      cancelHandler={cancelHandler}
+    />
   );
 }

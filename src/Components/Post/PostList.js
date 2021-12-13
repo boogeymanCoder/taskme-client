@@ -1,5 +1,5 @@
 import React from "react";
-import Post from "./Post";
+import PostListView from "../../views/Post/PostListView";
 
 export default function PostList({ posts }) {
   console.log("PostList rendered");
@@ -9,16 +9,5 @@ export default function PostList({ posts }) {
   if (!posts) return <h2>Loading...</h2>;
   else if (posts.length < 1) return <h2>No Posts Found</h2>;
 
-  return (
-    <>
-      {posts.map((post, index) => {
-        return (
-          <div key={post._id}>
-            <Post postData={post} />
-            <br />
-          </div>
-        );
-      })}
-    </>
-  );
+  return <PostListView posts={posts} />;
 }
