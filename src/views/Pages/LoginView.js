@@ -9,35 +9,42 @@ export default function LoginView({
   setShowPassword,
 }) {
   return (
-    <div>
-      <h1>Login</h1>
-      <p>
-        New to this site? <Link to="/register">Register</Link>
-      </p>
-      <form onSubmit={loginHandler}>
-        <input
-          type="text"
-          onChange={(e) => setUsernameOrEmail(e.target.value)}
-          placeholder="Username/Email"
-          required
-        />
-        <br />
-        <input
-          type={showPassword ? "text" : "password"}
-          onChange={(e) => setPassword(e.target.value)}
-          placeholder="Password"
-          required
-        />
-        <br />
-        <input
-          type="checkbox"
-          onChange={(e) => setShowPassword(e.target.checked)}
-          checked={showPassword}
-        />
-        <span>Show Password</span>
-        <br />
-        <input type="submit" value="Login" />
-      </form>
+    <div className="row justify-content-center pt-5">
+      <div className="col-4">
+        <h1 className="text-center">Login</h1>
+        <p className="text-center">
+          New to this site? <Link to="/register">Register</Link>
+        </p>
+        <form onSubmit={loginHandler}>
+          <input
+            type="text"
+            className="form-control mb-1"
+            onChange={(e) => setUsernameOrEmail(e.target.value)}
+            placeholder="Username/Email"
+            required
+          />
+          <input
+            type={showPassword ? "text" : "password"}
+            className="form-control mb-1"
+            onChange={(e) => setPassword(e.target.value)}
+            placeholder="Password"
+            required
+          />
+          <input
+            type="checkbox"
+            className="form-check-input"
+            onChange={(e) => setShowPassword(e.target.checked)}
+            checked={showPassword}
+          />
+          <span> Show Password</span>
+          <br />
+          <input
+            className="btn btn-dark float-end"
+            type="submit"
+            value="Login"
+          />
+        </form>
+      </div>
     </div>
   );
 }

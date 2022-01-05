@@ -19,25 +19,27 @@ function App() {
   return (
     <Router>
       <Navbar />
-      <Routes>
-        <Route path="/" element={<Main />} />
-        <Route path="/register" element={<Register />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/profile/:id" element={<Profile />} />
-        <Route path="/inbox">
-          <Route index element={<Inbox />} />
-          <Route path="conversation">
-            <Route path=":conversationId" element={<Conversation />} />
+      <div className="container">
+        <Routes>
+          <Route path="/" element={<Main />} />
+          <Route path="/register" element={<Register />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/profile/:id" element={<Profile />} />
+          <Route path="/inbox">
+            <Route index element={<Inbox />} />
+            <Route path="conversation">
+              <Route path=":conversationId" element={<Conversation />} />
+            </Route>
           </Route>
-        </Route>
-        <Route path="/forum" element={<Forum />} />
-        <Route path="/appointment" element={<Appointment />} />
-        <Route path="/notification" element={<Notification />} />
-        <Route path="/task/:taskId" element={<TaskPage />} />
-        <Route path="/post/:postId" element={<PostPage />} />
-        <Route path="/services" element={<ServicesPage />} />
-        <Route path="/service/:serviceId" element={<ServicePage />} />
-      </Routes>
+          <Route path="/forum" element={<Forum />} />
+          <Route path="/appointment" element={<Appointment />} />
+          <Route path="/notification" element={<Notification />} />
+          <Route path="/task/:taskId" element={<TaskPage />} />
+          <Route path="/post/:postId" element={<PostPage />} />
+          <Route path="/services" element={<ServicesPage />} />
+          <Route path="/service/:serviceId" element={<ServicePage />} />
+        </Routes>
+      </div>
     </Router>
   );
 }
