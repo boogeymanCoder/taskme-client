@@ -20,6 +20,7 @@ export default function ScheduleListView({
       })}
 
       <input
+        className="btn btn-dark me-1"
         type="button"
         value="<Previous"
         onClick={(e) =>
@@ -31,6 +32,7 @@ export default function ScheduleListView({
       />
 
       <input
+        className="btn btn-dark"
         type="button"
         value="Next>"
         onClick={(e) => setScheduleBatch((lastBatch) => lastBatch + 1)}

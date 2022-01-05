@@ -14,27 +14,27 @@ export default function NewPostView({
     <div>
       <form onSubmit={postHandler}>
         <input
+          className="form-control mb-1"
           type="text"
           placeholder="Title"
           value={title}
           onChange={(e) => setTitle(e.target.value)}
           required
         />
-        <br />
         <textarea
+          className="form-control mb-1"
           placeholder="Body"
           value={body}
           onChange={(e) => setBody(e.target.value)}
           required
         ></textarea>
-        <br />
         <ArrayInput
           array={tags}
           setArray={setTags}
           placeholder="tag1 tag2 ..."
         />
+        <input className="btn btn-dark float-end" type="submit" value="Post" />
         <br />
-        <input type="submit" value="Post" />
       </form>
     </div>
   );

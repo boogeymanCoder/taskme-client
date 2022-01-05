@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 export default function NavbarView({ account }) {
   return (
-    <nav className="navbar navbar-expand-md navbar-dark bg-dark">
+    <nav className="navbar navbar-expand-md navbar-dark bg-dark sticky-top">
       <div className="container-fluid">
         <a className="navbar-brand" href="#">
           Navbar

@@ -6,16 +6,18 @@ export default function NewApplicationView({
   setMessage,
 }) {
   return (
-    <div>
+    <div className="mt-2">
       <h2>New Application</h2>
       <form onSubmit={applicationHandler}>
         <textarea
+          className="form-control"
           placeholder="Message"
           value={message}
           onChange={(e) => setMessage(e.target.value)}
+          rows="5"
         ></textarea>
         <br />
-        <input type="submit" value="Apply" />
+        <input className="btn btn-dark float-end" type="submit" value="Apply" />
       </form>
     </div>
   );

@@ -10,7 +10,7 @@ export default function LoginView({
 }) {
   return (
     <div className="row justify-content-center pt-5">
-      <div className="col-4">
+      <div className="col-lg-5 col-md-5">
         <h1 className="text-center">Login</h1>
         <p className="text-center">
           New to this site? <Link to="/register">Register</Link>

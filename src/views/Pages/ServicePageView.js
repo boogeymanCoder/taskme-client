@@ -8,11 +8,12 @@ export default function ServicePageView({
   setOffers,
 }) {
   return (
-    <div>
-      <h1>Service Page</h1>
-      {renderService()}
-      <OfferList offers={offers} setOffers={setOffers} />
-      {pagination}
+    <div className="row justify-content-center pt-5">
+      <div className="col-md-8">
+        {renderService()}
+        <OfferList offers={offers} setOffers={setOffers} />
+        {pagination}
+      </div>
     </div>
   );
 }

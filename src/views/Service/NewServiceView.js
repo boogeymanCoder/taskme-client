@@ -18,46 +18,60 @@ export default function NewServiceView({
     <div>
       <form onSubmit={submitHandler}>
         <input
+          className="form-control mb-1"
           type="text"
           value={name}
           placeholder="Service"
           onChange={(e) => setName(e.target.value)}
           required
         />
-        <br />
         <textarea
+          className="form-control mb-1"
           value={details}
           placeholder="Details"
           onChange={(e) => setDetails(e.target.value)}
           required
+          rows="5"
         ></textarea>
-        <br />
         <ArrayInput
           array={tags}
           setArray={setTags}
           placeholder="tag1 tag2 ..."
           required
         />
-        <br />
-        <select
-          value={currency}
-          onChange={(e) => setCurrency(e.target.value)}
-          required
-        >
-          <option value="" defaultValue>
-            Currency
-          </option>
-          <option value="USD">$</option>
-          <option value="PHP">₱</option>
-        </select>
+        <div className="row justify-content-center mb-2">
+          <div className="col-sm-3 me-0">
+            <select
+              className="form-select"
+              value={currency}
+              onChange={(e) => setCurrency(e.target.value)}
+              required
+            >
+              <option value="" defaultValue>
+                Currency
+              </option>
+              <option value="USD">$</option>
+              <option value="PHP">₱</option>
+            </select>
+          </div>
+
+          <div className="col-sm-9">
+            <input
+              className="form-control"
+              value={price}
+              type="number"
+              onChange={(e) => setPrice(e.target.value)}
+              required
+            />
+          </div>
+        </div>
         <input
-          value={price}
-          type="number"
-          onChange={(e) => setPrice(e.target.value)}
+          className="btn btn-dark float-end"
+          type="submit"
+          value="Submit"
           required
         />
         <br />
-        <input type="submit" value="Submit" required />
         <br />
       </form>
     </div>

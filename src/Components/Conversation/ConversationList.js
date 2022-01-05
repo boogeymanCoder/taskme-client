@@ -34,7 +34,12 @@ export default function ConversationList() {
     else if (conversations.length < 1) return <h2>No Conversations Yet</h2>;
     return conversations.map((conversation) => (
       <div key={conversation._id}>
-        <Link to={`conversation/${conversation._id}`}>{conversation.name}</Link>
+        <Link
+          className="d-block border p-2 mb-1 rounded-3"
+          to={`conversation/${conversation._id}`}
+        >
+          {conversation.name}
+        </Link>
       </div>
     ));
   }

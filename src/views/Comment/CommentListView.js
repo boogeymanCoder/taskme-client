@@ -4,7 +4,6 @@ import Comment from "../../Components/Comment/Comment";
 export default function CommentListView({ comments }) {
   return (
     <div>
-      <p>Comment List</p>
       {comments.map((comment) => {
         return (
           <div key={comment._id}>

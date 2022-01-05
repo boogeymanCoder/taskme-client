@@ -9,7 +9,12 @@ export default function ScheduleView({ schedule, deleteHandler }) {
       <br />
       <span>{`end: ${new Date(schedule.end).toUTCString()}`}</span>
       <br />
-      <input type="button" value="Delete" onClick={deleteHandler} />
+      <input
+        className="btn btn-dark"
+        type="button"
+        value="Delete"
+        onClick={deleteHandler}
+      />
     </div>
   );
 }

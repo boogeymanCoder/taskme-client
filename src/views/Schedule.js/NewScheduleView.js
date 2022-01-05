@@ -15,30 +15,33 @@ export default function NewScheduleView({
         <span>Start:</span>
         <br />
         <input
+          className="form-control mb-1"
           type="datetime-local"
           value={start}
           onChange={(e) => setStart(e.target.value)}
           required
         />
-        <br />
         <span>End:</span>
-        <br />
         <input
+          className="form-control mb-1"
           type="datetime-local"
           value={end}
           onChange={(e) => setEnd(e.target.value)}
           required
         />
-        <br />
         <input
+          className="form-control mb-1"
           type="text"
           placeholder="Label"
           value={label}
           onChange={(e) => setLabel(e.target.value)}
           required
         />
-        <br />
-        <input type="submit" value="Add Schedule" />
+        <input
+          className="btn btn-dark float-end"
+          type="submit"
+          value="Add Schedule"
+        />
       </form>
     </div>
   );

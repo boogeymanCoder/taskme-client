@@ -15,6 +15,7 @@ export default function ArrayInputView({
       </span>
       <br />
       <input
+        className="form-control mb-1"
         type="text"
         name="array"
         value={element}

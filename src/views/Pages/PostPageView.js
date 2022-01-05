@@ -10,12 +10,13 @@ export default function PostPageView({
   comments,
 }) {
   return (
-    <div>
-      <h1>Post Page</h1>
-      {renderPost()}
-      <NewComment post={post} setPost={setPost} />
-      <CommentList comments={comments} />
-      {pagination}
+    <div className="row justify-content-center pt-5">
+      <div className="col-md-8">
+        {renderPost()}
+        <NewComment post={post} setPost={setPost} />
+        <CommentList comments={comments} />
+        {pagination}
+      </div>
     </div>
   );
 }

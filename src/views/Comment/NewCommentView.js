@@ -3,16 +3,22 @@ import React from "react";
 export default function NewCommentView({ commentHandler, body, setBody }) {
   return (
     <div>
-      <h2>New Comment</h2>
       <form onSubmit={commentHandler}>
         <textarea
+          className="form-control mb-1"
           type="text"
           value={body}
           placeholder="New Comment"
           onChange={(e) => setBody(e.target.value)}
+          rows="5"
         ></textarea>
+        <input
+          className="btn btn-dark float-end"
+          type="submit"
+          value="Submit"
+        />
         <br />
-        <input type="submit" value="Submit" />
+        <br />
       </form>
     </div>
   );
